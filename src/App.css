@@ -495,3 +495,25 @@ textarea:focus {
   cursor: pointer;
   margin: 0;
 }
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-size: 18px;
+  color: #666;
+}
+
+.user-info {
+  margin-right: 15px;
+  color: white;
+  font-size: 14px;
+}
+
+.btn-logout {
+  background: #e74c3c;
+}
+
+.btn-logout:hover {
+  background: #c0392b;
+}

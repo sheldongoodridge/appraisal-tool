@@ -1,7 +1,19 @@
 import { useState, useEffect } from 'react';
 import './App.css';
+import Login from './components/Login';
+import { 
+  isAuthenticated, 
+  clearAuthToken,
+  getInspections,
+  createInspection,
+  updateInspection,
+  deleteInspection as deleteInspectionAPI
+} from './services/api';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [inspections, setInspections] = useState([]);
   const [currentInspection, setCurrentInspection] = useState(null);
   
@@ -173,20 +185,48 @@ function App() {
     site: false
   });
 
-  useEffect(() => {
-    const saved = localStorage.getItem('inspections');
-    if (saved) {
-      setInspections(JSON.parse(saved));
+// Check authentication on mount
+useEffect(() => {
+  const checkAuth = async () => {
+    if (isAuthenticated()) {
+      const user = JSON.parse(localStorage.getItem('user'));
+      setCurrentUser(user);
+      setIsLoggedIn(true);
+      await loadInspectionsFromCloud();
     }
-  }, []);
+    setLoading(false);
+  };
 
-  useEffect(() => {
-    if (inspections.length > 0) {
-      localStorage.setItem('inspections', JSON.stringify(inspections));
-    }
-  }, [inspections]);
+  checkAuth();
+}, []);
 
-  const handleChange = (e) => {
+  const loadInspectionsFromCloud = async () => {
+  try {
+    const cloudInspections = await getInspections();
+    setInspections(cloudInspections);
+  } catch (error) {
+    console.error('Error loading inspections:', error);
+    alert('Failed to load inspections from cloud');
+  }
+};
+
+const handleLoginSuccess = (user) => {
+  setCurrentUser(user);
+  setIsLoggedIn(true);
+  loadInspectionsFromCloud();
+};
+
+const handleLogout = () => {
+  clearAuthToken();
+  localStorage.removeItem('user');
+  setIsLoggedIn(false);
+  setCurrentUser(null);
+  setInspections([]);
+  setCurrentInspection(null);
+  newInspection();
+};
+
+const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setPropertyData({
       ...propertyData,
@@ -269,9 +309,9 @@ function App() {
     ));
   };
 
-  const saveInspection = () => {
-    const inspection = {
-      id: currentInspection || Date.now(),
+const saveInspection = async () => {
+  try {
+    const inspectionData = {
       property: propertyData,
       roomAllocation: roomAllocation,
       photos: photos.map(p => ({
@@ -279,35 +319,40 @@ function App() {
         filename: p.filename,
         room: p.room,
         notes: p.notes
-      })),
-      savedAt: new Date().toISOString()
+      }))
     };
 
-    if (currentInspection) {
-      setInspections(inspections.map(i => 
-        i.id === currentInspection ? inspection : i
-      ));
-    } else {
-      setInspections([...inspections, inspection]);
-      setCurrentInspection(inspection.id);
-    }
-
-    alert('Inspection saved!');
-  };
+if (currentInspection) {
+  // Update existing
+  const updated = await updateInspection(currentInspection, inspectionData);
+  // Reload all inspections from cloud to ensure consistency
+  await loadInspectionsFromCloud();
+  alert('Inspection updated successfully!');
+} else {
+  // Create new
+  const created = await createInspection(inspectionData);
+  setCurrentInspection(created.id);
+  // Reload all inspections from cloud
+  await loadInspectionsFromCloud();
+  alert('Inspection saved to cloud!');
+}
+  } catch (error) {
+    console.error('Save error:', error);
+    alert('Failed to save inspection. Please try again.');
+  }
+};
 
   const loadInspection = (inspection) => {
     setCurrentInspection(inspection.id);
-    setPropertyData(inspection.property);
+    setPropertyData(inspection.property_data);
     setRoomAllocation(inspection.roomAllocation || {
       main: { entrance: 0, living: 0, dining: 0, kitchen: 0, family: 0, bedrooms: 0, den: 0, fullBath: 0, partBath: 0, laundry: 0, other: 0, sqft: '' },
       second: { entrance: 0, living: 0, dining: 0, kitchen: 0, family: 0, bedrooms: 0, den: 0, fullBath: 0, partBath: 0, laundry: 0, other: 0, sqft: '' },
       third: { entrance: 0, living: 0, dining: 0, kitchen: 0, family: 0, bedrooms: 0, den: 0, fullBath: 0, partBath: 0, laundry: 0, other: 0, sqft: '' },
       basement: { entrance: 0, living: 0, dining: 0, kitchen: 0, family: 0, bedrooms: 0, den: 0, fullBath: 0, partBath: 0, laundry: 0, other: 0, sqft: '' }
     });
-    setPhotos(inspection.photos.map(p => ({
-      ...p,
-      url: ''
-    })));
+    setPhotos([]); // Photos not loaded from cloud yet.
+
   };
 
   const newInspection = () => {
@@ -405,14 +450,21 @@ function App() {
     setPhotos([]);
   };
 
-  const deleteInspection = (id) => {
-    if (window.confirm('Delete this inspection?')) {
+const deleteInspection = async (id) => {
+  if (window.confirm('Delete this inspection?')) {
+    try {
+      await deleteInspectionAPI(id);
       setInspections(inspections.filter(i => i.id !== id));
       if (currentInspection === id) {
         newInspection();
       }
+      alert('Inspection deleted successfully');
+    } catch (error) {
+      console.error('Delete error:', error);
+      alert('Failed to delete inspection');
     }
-  };
+  }
+};
 
   const generateReport = () => {
     const totals = calculateGrandTotals();
@@ -472,18 +524,31 @@ function App() {
   const drivewayTypes = ['Private', 'Shared', 'Mutual', 'None', 'Other'];
   const zoningTypes = ['Residential', 'Industrial', 'Agricultural', 'Multi-Residential', 'Other'];
 
-  const totals = calculateGrandTotals();
+ const totals = calculateGrandTotals();
 
-  return (
-    <div className="App">
-      <header className="app-header">
-        <h1>Appraisal Inspection Tool</h1>
-        <div className="header-actions">
-          <button className="btn btn-small" onClick={newInspection}>
-            + New Inspection
-          </button>
-        </div>
-      </header>
+// Show login screen if not authenticated
+if (loading) {
+  return <div className="loading">Loading...</div>;
+}
+
+if (!isLoggedIn) {
+  return <Login onLoginSuccess={handleLoginSuccess} />;
+}
+
+return (
+  <div className="App">
+  <header className="app-header">
+    <h1>Spoke - Appraisal Inspection Tool</h1>
+   <div className="header-actions">
+    <span className="user-info">👤 {currentUser?.full_name || currentUser?.email}</span>
+    <button className="btn btn-small" onClick={newInspection}>
+      + New Inspection
+    </button>
+    <button className="btn btn-small btn-logout" onClick={handleLogout}>
+      Logout
+    </button>
+  </div>
+</header>
 
       <div className="main-layout">
         <aside className="sidebar">
@@ -498,9 +563,9 @@ function App() {
                   className={`inspection-item ${currentInspection === inspection.id ? 'active' : ''}`}
                 >
                   <div onClick={() => loadInspection(inspection)} className="inspection-content">
-                    <strong>{inspection.property.address || 'Untitled'}</strong>
-                    <small>{inspection.photos.length} photos</small>
-                    <small>{new Date(inspection.savedAt).toLocaleDateString()}</small>
+                    <strong>{inspection.property_data?.address || 'Untitled'}</strong>
+                  
+                    <small>{new Date(inspection.created_at).toLocaleDateString()}</small>
                   </div>
                   <button 
                     className="delete-btn"
