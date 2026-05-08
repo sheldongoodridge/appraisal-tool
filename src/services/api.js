@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.NODE_ENV === 'production' 
-  ? 'http://142.93.151.194:3000/api'
-  : 'http://142.93.151.194:3000/api';
+const API_URL = 'https://spokeappraisal.com/api';
 
 // Get stored token
 const getToken = () => localStorage.getItem('authToken');
