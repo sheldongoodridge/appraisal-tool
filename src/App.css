@@ -517,3 +517,159 @@ textarea:focus {
 .btn-logout:hover {
   background: #c0392b;
 }
+/* ========================================
+   MOBILE RESPONSIVE STYLES
+   ======================================== */
+
+@media (max-width: 768px) {
+  /* Hide sidebar on mobile by default */
+  .sidebar {
+    position: fixed;
+    left: -280px;
+    top: 0;
+    height: 100vh;
+    width: 280px;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  /* Full width main content on mobile */
+  .main-layout {
+    display: block;
+  }
+
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+    padding: 15px;
+  }
+
+  /* Mobile header */
+  .app-header {
+    flex-direction: column;
+    padding: 10px 15px;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .app-header h1 {
+    font-size: 18px;
+  }
+
+  .header-actions {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-between;
+  }
+
+  .user-info {
+    font-size: 12px;
+    width: 100%;
+    margin: 0;
+  }
+
+  .btn-small {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  /* Form sections */
+  .form-section {
+    margin-bottom: 15px;
+  }
+
+  .section-header h2 {
+    font-size: 16px;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+
+  /* Radio buttons stack on mobile */
+  .radio-group {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* Checkbox grid to single column */
+  .checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Room table scrollable */
+  .room-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .room-table {
+    min-width: 800px;
+  }
+
+  /* Actions buttons full width */
+  .actions {
+    flex-direction: column;
+  }
+
+  .actions .btn {
+    width: 100%;
+  }
+
+  /* Photo gallery */
+  .photo-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Hamburger menu button */
+.mobile-menu-btn {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1001;
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+}
+
+/* Overlay for sidebar on mobile */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+}
+
+@media (max-width: 768px) {
+  .sidebar-overlay.active {
+    display: block;
+  }
+}

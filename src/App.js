@@ -16,7 +16,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [inspections, setInspections] = useState([]);
   const [currentInspection, setCurrentInspection] = useState(null);
-  
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [propertyData, setPropertyData] = useState({
     address: '',
     clientName: '',
@@ -537,6 +537,19 @@ if (!isLoggedIn) {
 
 return (
   <div className="App">
+    <button 
+      className="mobile-menu-btn"
+      onClick={() => setSidebarOpen(!sidebarOpen)}
+    >
+      ☰
+    </button>
+    
+    <div 
+      className={`sidebar-overlay ${sidebarOpen ? 'active' : ''}`}
+      onClick={() => setSidebarOpen(false)}
+    />
+    
+    <header className="app-header">
   <header className="app-header">
     <h1>Spoke - Appraisal Inspection Tool</h1>
    <div className="header-actions">
@@ -551,7 +564,7 @@ return (
 </header>
 
       <div className="main-layout">
-        <aside className="sidebar">
+        <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
           <h3>My Inspections ({inspections.length})</h3>
           <div className="inspection-list">
             {inspections.length === 0 ? (
