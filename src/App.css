@@ -673,3 +673,33 @@ textarea:focus {
     display: block;
   }
 }
+/* Appraisal Type Badge */
+.inspection-type-badge {
+  display: inline-block;
+  background: #3498db;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  margin: 3px 0;
+}
+
+/* Appraisal Type Select */
+.appraisal-type-select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2c3e50;
+  background: #eaf4fb;
+  cursor: pointer;
+}
+
+.appraisal-type-select:focus {
+  outline: none;
+  border-color: #2980b9;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}

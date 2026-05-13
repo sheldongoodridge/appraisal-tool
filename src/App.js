@@ -18,6 +18,7 @@ function App() {
   const [currentInspection, setCurrentInspection] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [propertyData, setPropertyData] = useState({
+    appraisalType: '',
     address: '',
     clientName: '',
     inspectionDate: '',
@@ -363,6 +364,7 @@ if (currentInspection) {
     }
     setCurrentInspection(null);
     setPropertyData({
+      appraisalType: '',
       address: '',
       clientName: '',
       inspectionDate: '',
@@ -537,19 +539,12 @@ if (!isLoggedIn) {
 
 return (
   <div className="App">
-    <button 
-      className="mobile-menu-btn"
-      onClick={() => setSidebarOpen(!sidebarOpen)}
-    >
+    <button className="mobile-menu-btn" onClick={() => setSidebarOpen(!sidebarOpen)}>
       ☰
     </button>
     
-    <div 
-      className={`sidebar-overlay ${sidebarOpen ? 'active' : ''}`}
-      onClick={() => setSidebarOpen(false)}
-    />
+    <div className={`sidebar-overlay ${sidebarOpen ? 'active' : ''}`} onClick={() => setSidebarOpen(false)}></div>
     
-    <header className="app-header">
   <header className="app-header">
     <h1>Spoke - Appraisal Inspection Tool</h1>
    <div className="header-actions">
@@ -576,9 +571,11 @@ return (
                   className={`inspection-item ${currentInspection === inspection.id ? 'active' : ''}`}
                 >
                   <div onClick={() => loadInspection(inspection)} className="inspection-content">
-                    <strong>{inspection.property_data?.address || 'Untitled'}</strong>
-                  
-                    <small>{new Date(inspection.created_at).toLocaleDateString()}</small>
+                   <strong>{inspection.property_data?.address || 'Untitled'}</strong>
+                  <small className="inspection-type-badge">
+                  {inspection.property_data?.appraisalType || 'Type Not Set'}
+                </small>
+                <small>{new Date(inspection.created_at).toLocaleDateString()}</small>
                   </div>
                   <button 
                     className="delete-btn"
@@ -600,6 +597,23 @@ return (
               <span className="toggle-icon">{expandedSections.property ? '▼' : '▶'}</span>
             </div>
             
+            <div className="form-group">
+              <label>Appraisal Type:</label>
+              <select
+                name="appraisalType"
+                value={propertyData.appraisalType}
+                onChange={handleChange}
+                className="appraisal-type-select"
+              >
+                <option value="">-- Select Appraisal Type --</option>
+                <option value="Full Appraisal">Full Appraisal</option>
+                <option value="Drive-By">Drive-By</option>
+                <option value="Desktop">Desktop</option>
+                <option value="Market Rent">Market Rent</option>
+                <option value="Progress Inspection">Progress Inspection</option>
+              </select>
+            </div>
+
             {expandedSections.property && (
               <div className="section-content">
                 <div className="form-group">
