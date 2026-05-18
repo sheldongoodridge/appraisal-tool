@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/appraisal-tool/static/css/main.a9fb1a01.css",
-    "main.js": "/appraisal-tool/static/js/main.970f3116.js",
+    "main.css": "/appraisal-tool/static/css/main.326a852a.css",
+    "main.js": "/appraisal-tool/static/js/main.7120796f.js",
     "static/js/453.a5f86340.chunk.js": "/appraisal-tool/static/js/453.a5f86340.chunk.js",
     "index.html": "/appraisal-tool/index.html",
-    "main.a9fb1a01.css.map": "/appraisal-tool/static/css/main.a9fb1a01.css.map",
-    "main.970f3116.js.map": "/appraisal-tool/static/js/main.970f3116.js.map",
+    "main.326a852a.css.map": "/appraisal-tool/static/css/main.326a852a.css.map",
+    "main.7120796f.js.map": "/appraisal-tool/static/js/main.7120796f.js.map",
     "453.a5f86340.chunk.js.map": "/appraisal-tool/static/js/453.a5f86340.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a9fb1a01.css",
-    "static/js/main.970f3116.js"
+    "static/css/main.326a852a.css",
+    "static/js/main.7120796f.js"
   ]
 }
