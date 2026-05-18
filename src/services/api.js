@@ -80,3 +80,36 @@ export const deleteInspection = async (id) => {
   const response = await apiClient.delete(`/inspections/${id}`);
   return response.data;
 };
+
+// Photo endpoints
+export const uploadPhoto = async (inspectionId, file, room, onProgress) => {
+  const formData = new FormData();
+  formData.append('photo', file);
+  formData.append('inspectionId', inspectionId);
+  formData.append('room', room || 'untagged');
+
+  const response = await apiClient.post('/photos/upload', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+    onUploadProgress: (e) => {
+      if (onProgress && e.total) {
+        onProgress(Math.round((e.loaded * 100) / e.total));
+      }
+    },
+  });
+  return response.data;
+};
+
+export const getPhotos = async (inspectionId) => {
+  const response = await apiClient.get(`/photos/inspection/${inspectionId}`);
+  return response.data;
+};
+
+export const updatePhoto = async (id, fields) => {
+  const response = await apiClient.patch(`/photos/${id}`, fields);
+  return response.data;
+};
+
+export const deletePhoto = async (id) => {
+  const response = await apiClient.delete(`/photos/${id}`);
+  return response.data;
+};

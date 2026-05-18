@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import Login from './components/Login';
 import { 
@@ -7,7 +7,11 @@ import {
   getInspections,
   createInspection,
   updateInspection,
-  deleteInspection as deleteInspectionAPI
+  deleteInspection as deleteInspectionAPI,
+  uploadPhoto,
+  getPhotos,
+  deletePhoto as deletePhotoAPI,
+  updatePhoto as updatePhotoAPI
 } from './services/api';
 
 function App() {
@@ -174,6 +178,8 @@ function App() {
   });
 
   const [photos, setPhotos] = useState([]);
+  const [uploadingPhotos, setUploadingPhotos] = useState([]);
+  const photoNoteTimers = useRef({});
   const [expandedSections, setExpandedSections] = useState({
     property: true,
     building: true,
@@ -280,34 +286,72 @@ const handleChange = (e) => {
     });
   };
 
-  const handlePhotoUpload = (e) => {
+  const handlePhotoUpload = async (e) => {
+    if (!currentInspection) return;
     const files = Array.from(e.target.files);
-    
-    files.forEach(file => {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setPhotos(prev => [...prev, {
-          id: Date.now() + Math.random(),
-          url: event.target.result,
-          filename: file.name,
-          room: 'untagged',
-          notes: ''
-        }]);
-      };
-      reader.readAsDataURL(file);
-    });
+    e.target.value = '';
+
+    for (const file of files) {
+      const tempId = `uploading-${Date.now()}-${Math.random()}`;
+      setUploadingPhotos(prev => [...prev, { tempId, filename: file.name, progress: 0 }]);
+
+      try {
+        const saved = await uploadPhoto(currentInspection, file, 'untagged', (pct) => {
+          setUploadingPhotos(prev =>
+            prev.map(u => u.tempId === tempId ? { ...u, progress: pct } : u)
+          );
+        });
+        setPhotos(prev => [...prev, saved]);
+      } catch (err) {
+        console.error('Photo upload failed:', err);
+        alert(`Failed to upload ${file.name}`);
+      } finally {
+        setUploadingPhotos(prev => prev.filter(u => u.tempId !== tempId));
+      }
+    }
   };
 
-  const updatePhotoRoom = (photoId, room) => {
-    setPhotos(photos.map(photo => 
-      photo.id === photoId ? { ...photo, room } : photo
+ const updatePhoto = async (photoId, updates) => {
+  try {
+    await updatePhotoAPI(photoId, updates);
+    setPhotos(photos.map(photo =>
+      photo.id === photoId ? { ...photo, ...updates } : photo
     ));
-  };
+  } catch (error) {
+    console.error('Failed to update photo:', error);
+  }
+};
+
+const updatePhotoRoom = async (photoId, room) => {
+  setPhotos(photos.map(photo => photo.id === photoId ? { ...photo, room } : photo));
+  try {
+    await updatePhoto(photoId, { room });
+  } catch (err) {
+    console.error('Failed to update photo room:', err);
+  }
+};
 
   const updatePhotoNotes = (photoId, notes) => {
-    setPhotos(photos.map(photo => 
-      photo.id === photoId ? { ...photo, notes } : photo
-    ));
+    setPhotos(photos.map(photo => photo.id === photoId ? { ...photo, notes } : photo));
+    clearTimeout(photoNoteTimers.current[photoId]);
+    photoNoteTimers.current[photoId] = setTimeout(async () => {
+      try {
+        await updatePhoto(photoId, { notes });
+      } catch (err) {
+        console.error('Failed to update photo notes:', err);
+      }
+    }, 800);
+  };
+
+  const handleDeletePhoto = async (photoId) => {
+    if (!window.confirm('Delete this photo?')) return;
+    try {
+      await deletePhotoAPI(photoId);
+      setPhotos(photos.filter(p => p.id !== photoId));
+    } catch (err) {
+      console.error('Failed to delete photo:', err);
+      alert('Failed to delete photo');
+    }
   };
 
 const saveInspection = async () => {
@@ -343,17 +387,22 @@ if (currentInspection) {
   }
 };
 
-  const loadInspection = (inspection) => {
+  const loadInspection = async (inspection) => {
     setCurrentInspection(inspection.id);
     setPropertyData(inspection.property_data);
-    setRoomAllocation(inspection.roomAllocation || {
+    setRoomAllocation(inspection.room_allocation || {
       main: { entrance: 0, living: 0, dining: 0, kitchen: 0, family: 0, bedrooms: 0, den: 0, fullBath: 0, partBath: 0, laundry: 0, other: 0, sqft: '' },
       second: { entrance: 0, living: 0, dining: 0, kitchen: 0, family: 0, bedrooms: 0, den: 0, fullBath: 0, partBath: 0, laundry: 0, other: 0, sqft: '' },
       third: { entrance: 0, living: 0, dining: 0, kitchen: 0, family: 0, bedrooms: 0, den: 0, fullBath: 0, partBath: 0, laundry: 0, other: 0, sqft: '' },
       basement: { entrance: 0, living: 0, dining: 0, kitchen: 0, family: 0, bedrooms: 0, den: 0, fullBath: 0, partBath: 0, laundry: 0, other: 0, sqft: '' }
     });
-    setPhotos([]); // Photos not loaded from cloud yet.
-
+    setPhotos([]);
+    try {
+      const cloudPhotos = await getPhotos(inspection.id);
+      setPhotos(cloudPhotos);
+    } catch (err) {
+      console.error('Failed to load photos:', err);
+    }
   };
 
   const newInspection = () => {
@@ -1295,23 +1344,58 @@ return (
           {/* Photos Section */}
           <div className="photo-section">
             <h2>Inspection Photos ({photos.length})</h2>
-            
-            <div className="form-group">
-              <label>Upload Photos:</label>
-              <input type="file" accept="image/*" multiple onChange={handlePhotoUpload} />
-            </div>
+
+            {!currentInspection ? (
+              <p className="photo-gate-msg">Save the inspection first to upload photos.</p>
+            ) : (
+              <div className="form-group">
+                <label>Upload Photos:</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={handlePhotoUpload}
+                  disabled={uploadingPhotos.length > 0}
+                />
+              </div>
+            )}
+
+            {uploadingPhotos.length > 0 && (
+              <div className="upload-progress-list">
+                {uploadingPhotos.map(u => (
+                  <div key={u.tempId} className="upload-progress-item">
+                    <span className="upload-filename">{u.filename}</span>
+                    <div className="progress-bar">
+                      <div className="progress-fill" style={{ width: `${u.progress}%` }} />
+                    </div>
+                    <span className="progress-pct">{u.progress}%</span>
+                  </div>
+                ))}
+              </div>
+            )}
 
             <div className="photo-gallery">
               {photos.map(photo => (
                 <div key={photo.id} className="photo-card">
-                  <img src={photo.url} alt={photo.filename} />
+                  <img src={photo.file_path} alt={photo.filename} />
                   <div className="photo-info">
                     <p className="filename">{photo.filename}</p>
                     <select value={photo.room} onChange={(e) => updatePhotoRoom(photo.id, e.target.value)}>
                       <option value="untagged">Select Room...</option>
                       {roomTypes.map(room => <option key={room} value={room}>{room}</option>)}
                     </select>
-                    <textarea placeholder="Notes about this photo..." value={photo.notes} onChange={(e) => updatePhotoNotes(photo.id, e.target.value)} rows="2" />
+                    <textarea
+                      placeholder="Notes about this photo..."
+                      value={photo.notes|| ''}
+                      onChange={(e) => updatePhotoNotes(photo.id, e.target.value)}
+                      rows="2"
+                    />
+                    <button
+                      className="delete-photo-btn"
+                      onClick={() => handleDeletePhoto(photo.id)}
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               ))}

@@ -703,3 +703,72 @@ textarea:focus {
   border-color: #2980b9;
   box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
 }
+/* Photo upload gate message */
+.photo-gate-msg {
+  color: #7f8c8d;
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+/* Upload progress */
+.upload-progress-list {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.upload-progress-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.upload-filename {
+  flex: 0 0 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #2c3e50;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background: #ecf0f1;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #27ae60;
+  border-radius: 4px;
+  transition: width 0.2s ease;
+}
+
+.progress-pct {
+  flex: 0 0 36px;
+  text-align: right;
+  color: #7f8c8d;
+  font-size: 12px;
+}
+
+/* Photo delete button */
+.delete-photo-btn {
+  margin-top: 6px;
+  padding: 4px 10px;
+  background: transparent;
+  border: 1px solid #e74c3c;
+  color: #e74c3c;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.delete-photo-btn:hover {
+  background: #e74c3c;
+  color: white;
+}
