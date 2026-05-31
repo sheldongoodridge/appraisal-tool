@@ -1,0 +1,19 @@
+<svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Spoke icon">
+  <!-- Outer wheel ring -->
+  <circle cx="22" cy="22" r="18" stroke="#D6A319" stroke-width="1.8" fill="none"/>
+  <!-- 6 spokes radiating from center -->
+  <!-- Top (270°) -->
+  <line x1="22" y1="22" x2="22" y2="4" stroke="#D6A319" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Upper-right (330°) -->
+  <line x1="22" y1="22" x2="37.6" y2="13" stroke="#D6A319" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Lower-right (30°) -->
+  <line x1="22" y1="22" x2="37.6" y2="31" stroke="#D6A319" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Bottom (90°) -->
+  <line x1="22" y1="22" x2="22" y2="40" stroke="#D6A319" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Lower-left (150°) -->
+  <line x1="22" y1="22" x2="6.4" y2="31" stroke="#D6A319" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Upper-left (210°) -->
+  <line x1="22" y1="22" x2="6.4" y2="13" stroke="#D6A319" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Central hub -->
+  <circle cx="22" cy="22" r="3.5" fill="#D6A319"/>
+</svg>

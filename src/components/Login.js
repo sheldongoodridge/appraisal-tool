@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { login, signup, setAuthToken } from '../services/api';
+import logoWhite from '../assets/logo-white.svg';
 import './Login.css';
 
 function Login({ onLoginSuccess }) {
@@ -14,10 +15,8 @@ function Login({ onLoginSuccess }) {
     e.preventDefault();
     setError('');
     setLoading(true);
-
     try {
       let response;
-      
       if (isSignup) {
         if (!fullName.trim()) {
           setError('Please enter your full name');
@@ -28,12 +27,8 @@ function Login({ onLoginSuccess }) {
       } else {
         response = await login(email, password);
       }
-
-      // Store token and user info
       setAuthToken(response.token);
       localStorage.setItem('user', JSON.stringify(response.user));
-
-      // Call success callback
       onLoginSuccess(response.user);
     } catch (err) {
       setError(err.response?.data?.error || 'Authentication failed. Please try again.');
@@ -42,70 +37,93 @@ function Login({ onLoginSuccess }) {
     }
   };
 
+  const switchMode = () => { setIsSignup(s => !s); setError(''); };
+
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <h1>Spoke Appraisal</h1>
-        <h2>{isSignup ? 'Create Account' : 'Sign In'}</h2>
+    <div className="login-page">
 
-        {error && <div className="error-message">{error}</div>}
-
-        <form onSubmit={handleSubmit}>
-          {isSignup && (
-            <div className="form-group">
-              <label>Full Name:</label>
-              <input
-                type="text"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                placeholder="John Smith"
-                required={isSignup}
-              />
-            </div>
-          )}
-
-          <div className="form-group">
-            <label>Email:</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Password:</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-              minLength="8"
-            />
-          </div>
-
-          <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? 'Please wait...' : (isSignup ? 'Sign Up' : 'Sign In')}
-          </button>
-        </form>
-
-        <div className="toggle-mode">
-          {isSignup ? 'Already have an account?' : "Don't have an account?"}{' '}
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => {
-              setIsSignup(!isSignup);
-              setError('');
-            }}
-          >
-            {isSignup ? 'Sign In' : 'Sign Up'}
-          </button>
+      {/* ── Left panel: brand ── */}
+      <div className="login-left">
+        <div className="login-left-inner">
+          <img src={logoWhite} alt="Spoke" className="login-logo" />
+          <p className="login-tagline">
+            Modern appraisal software,<br />built by an appraiser.
+          </p>
+          <ul className="login-features">
+            <li>Cloud-based &amp; mobile-first</li>
+            <li>Built for Canadian appraisers</li>
+            <li>Your data, always portable</li>
+          </ul>
         </div>
       </div>
+
+      {/* ── Right panel: form ── */}
+      <div className="login-right">
+        <div className="login-form-wrap">
+          <div className="login-form-header">
+            <h1>{isSignup ? 'Create account' : 'Welcome back'}</h1>
+            <p>{isSignup ? 'Start your free trial today.' : 'Sign in to your workspace.'}</p>
+          </div>
+
+          {error && <div className="login-error">{error}</div>}
+
+          <form onSubmit={handleSubmit} className="login-form">
+            {isSignup && (
+              <div className="login-field">
+                <label htmlFor="login-name">Full Name</label>
+                <input
+                  id="login-name"
+                  type="text"
+                  value={fullName}
+                  onChange={e => setFullName(e.target.value)}
+                  placeholder="Jane Smith"
+                  required={isSignup}
+                  autoComplete="name"
+                />
+              </div>
+            )}
+
+            <div className="login-field">
+              <label htmlFor="login-email">Email</label>
+              <input
+                id="login-email"
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                required
+                autoComplete="email"
+              />
+            </div>
+
+            <div className="login-field">
+              <label htmlFor="login-password">Password</label>
+              <input
+                id="login-password"
+                type="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+                minLength="8"
+                autoComplete={isSignup ? 'new-password' : 'current-password'}
+              />
+            </div>
+
+            <button type="submit" className="login-submit" disabled={loading}>
+              {loading ? 'Please wait…' : (isSignup ? 'Create Account' : 'Sign In')}
+            </button>
+          </form>
+
+          <p className="login-toggle">
+            {isSignup ? 'Already have an account?' : "Don't have an account?"}{' '}
+            <button type="button" className="login-toggle-btn" onClick={switchMode}>
+              {isSignup ? 'Sign In' : 'Sign Up'}
+            </button>
+          </p>
+        </div>
+      </div>
+
     </div>
   );
 }

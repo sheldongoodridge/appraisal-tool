@@ -1,110 +1,279 @@
-.login-container {
+/* ── Spoke/wheel tile used as a subtle background pattern ── */
+/* 80×80 SVG tile: a wheel in navy-on-navy at very low contrast */
+.login-page {
   min-height: 100vh;
+  display: flex;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ════════════════════════════════
+   LEFT PANEL — navy brand side
+   ════════════════════════════════ */
+.login-left {
+  flex: 0 0 58%;
+  background-color: #13294B;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='26' stroke='%231a3a6b' stroke-width='1.5' fill='none'/%3E%3Cline x1='40' y1='40' x2='40' y2='14' stroke='%231a3a6b' stroke-width='1'/%3E%3Cline x1='40' y1='40' x2='62.5' y2='27' stroke='%231a3a6b' stroke-width='1'/%3E%3Cline x1='40' y1='40' x2='62.5' y2='53' stroke='%231a3a6b' stroke-width='1'/%3E%3Cline x1='40' y1='40' x2='40' y2='66' stroke='%231a3a6b' stroke-width='1'/%3E%3Cline x1='40' y1='40' x2='17.5' y2='53' stroke='%231a3a6b' stroke-width='1'/%3E%3Cline x1='40' y1='40' x2='17.5' y2='27' stroke='%231a3a6b' stroke-width='1'/%3E%3Ccircle cx='40' cy='40' r='2.5' fill='%231a3a6b'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 80px 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 60px 48px;
+  position: relative;
 }
 
-.login-box {
-  background: white;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+/* Gold bottom accent stripe on left panel */
+.login-left::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #D6A319;
+  display: none; /* visible only on mobile stacked layout */
+}
+
+.login-left-inner {
+  max-width: 380px;
   width: 100%;
-  max-width: 400px;
 }
 
-.login-box h1 {
-  margin: 0 0 10px 0;
-  color: #2c3e50;
-  font-size: 28px;
-  text-align: center;
-}
-
-.login-box h2 {
-  margin: 0 0 30px 0;
-  color: #7f8c8d;
-  font-size: 18px;
-  font-weight: normal;
-  text-align: center;
-}
-
-.login-box .form-group {
-  margin-bottom: 20px;
-}
-
-.login-box .form-group label {
+.login-logo {
+  height: 48px;
   display: block;
-  margin-bottom: 5px;
-  color: #2c3e50;
-  font-weight: 600;
+  margin-bottom: 40px;
 }
 
-.login-box .form-group input {
+.login-tagline {
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.35;
+  margin: 0 0 32px;
+  letter-spacing: -0.3px;
+}
+
+.login-features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.login-features li {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.72);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.login-features li::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  background: #D6A319;
+  border-radius: 50%;
+  /* Gold checkmark using SVG mask trick: */
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+/* ════════════════════════════════
+   RIGHT PANEL — white form side
+   ════════════════════════════════ */
+.login-right {
+  flex: 1;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 40px;
+}
+
+.login-form-wrap {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 14px;
+  max-width: 360px;
+}
+
+.login-form-header {
+  margin-bottom: 32px;
+}
+
+.login-form-header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #13294B;
+  margin: 0 0 6px;
+  letter-spacing: -0.3px;
+}
+
+.login-form-header p {
+  font-size: 15px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Form fields */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.login-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #13294B;
+  letter-spacing: 0.1px;
+}
+
+.login-field input {
+  padding: 11px 14px;
+  border: 1.5px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #1a2b40;
+  background: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
   box-sizing: border-box;
 }
 
-.login-box .form-group input:focus {
+.login-field input::placeholder {
+  color: #c1c8d0;
+}
+
+.login-field input:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #D6A319;
+  box-shadow: 0 0 0 3px rgba(214, 163, 25, 0.18);
 }
 
-.login-box .btn-primary {
+/* Submit button — gold */
+.login-submit {
   width: 100%;
-  padding: 12px;
-  background: #667eea;
-  color: white;
+  padding: 13px;
+  background: #D6A319;
+  color: #13294B;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: 600;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  margin-top: 4px;
+  letter-spacing: 0.1px;
 }
 
-.login-box .btn-primary:hover:not(:disabled) {
-  background: #5568d3;
+.login-submit:hover:not(:disabled) {
+  background: #e8b420;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(214, 163, 25, 0.35);
 }
 
-.login-box .btn-primary:disabled {
-  background: #ccc;
-  cursor: not allowed;
+.login-submit:disabled {
+  background: #e5c96e;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
-.error-message {
-  background: #fee;
-  color: #c33;
-  padding: 12px;
-  border-radius: 5px;
+/* Error banner */
+.login-error {
+  background: #fff5f5;
+  color: #c0392b;
+  padding: 12px 14px;
+  border-radius: 6px;
   margin-bottom: 20px;
   font-size: 14px;
-  border: 1px solid #fcc;
+  border: 1px solid #fcd5d5;
 }
 
-.toggle-mode {
-  margin-top: 20px;
+/* Toggle sign in / sign up */
+.login-toggle {
+  margin-top: 24px;
   text-align: center;
-  color: #7f8c8d;
+  color: #6b7280;
   font-size: 14px;
 }
 
-.link-button {
+.login-toggle-btn {
   background: none;
   border: none;
-  color: #667eea;
-  font-weight: 600;
+  color: #D6A319;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: inherit;
   cursor: pointer;
   padding: 0;
-  font-size: 14px;
 }
 
-.link-button:hover {
+.login-toggle-btn:hover {
+  color: #e8b420;
   text-decoration: underline;
+}
+
+/* ════════════════════════════════
+   MOBILE — stacked layout
+   ════════════════════════════════ */
+@media (max-width: 768px) {
+  .login-page {
+    flex-direction: column;
+  }
+
+  .login-left {
+    flex: none;
+    padding: 36px 28px 32px;
+    background-size: 60px 60px;
+  }
+
+  .login-left::after {
+    display: block; /* show gold stripe divider on mobile */
+  }
+
+  .login-logo {
+    height: 36px;
+    margin-bottom: 24px;
+  }
+
+  .login-tagline {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .login-features {
+    gap: 10px;
+  }
+
+  .login-features li {
+    font-size: 14px;
+  }
+
+  .login-right {
+    padding: 32px 24px 40px;
+  }
+
+  .login-form-wrap {
+    max-width: 100%;
+  }
 }
