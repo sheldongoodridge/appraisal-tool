@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import Login from './components/Login';
 import logoWhite from './assets/logo-white.svg';
-import { 
-  isAuthenticated, 
+import {
+  isAuthenticated,
   clearAuthToken,
   getInspections,
   createInspection,
@@ -12,8 +12,15 @@ import {
   uploadPhoto,
   getPhotos,
   deletePhoto as deletePhotoAPI,
-  updatePhoto as updatePhotoAPI
+  updatePhoto as updatePhotoAPI,
+  searchProperties,
 } from './services/api';
+import ImportData from './components/ImportData';
+import ResponseLibrary from './components/ResponseLibrary';
+import PropertyDetail from './components/PropertyDetail';
+import Directory from './components/Directory';
+import AccountSettings from './components/AccountSettings';
+import AcceptInvite from './components/AcceptInvite';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,6 +29,11 @@ function App() {
   const [inspections, setInspections] = useState([]);
   const [currentInspection, setCurrentInspection] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [currentView, setCurrentView] = useState('inspection');
+  const [inviteToken, setInviteToken] = useState(null);
+  const [propertySearchQuery, setPropertySearchQuery] = useState('');
+  const [propertySearchResults, setPropertySearchResults] = useState([]);
+  const [propertyDetailId, setPropertyDetailId] = useState(null);
   const [propertyData, setPropertyData] = useState({
     appraisalType: '',
     address: '',
@@ -196,6 +208,11 @@ function App() {
 // Check authentication on mount
 useEffect(() => {
   const checkAuth = async () => {
+    const hashMatch = window.location.hash.match(/^#\/invite\/([a-zA-Z0-9]+)$/);
+    const searchInvite = new URLSearchParams(window.location.search).get('invite');
+    const token = (hashMatch && hashMatch[1]) || searchInvite;
+    if (token) { setInviteToken(token); setLoading(false); return; }
+
     if (isAuthenticated()) {
       const user = JSON.parse(localStorage.getItem('user'));
       setCurrentUser(user);
@@ -204,11 +221,10 @@ useEffect(() => {
     }
     setLoading(false);
   };
-
   checkAuth();
 }, []);
 
-  const loadInspectionsFromCloud = async () => {
+const loadInspectionsFromCloud = async () => {
   try {
     const cloudInspections = await getInspections();
     setInspections(cloudInspections);
@@ -582,6 +598,19 @@ if (loading) {
   return <div className="loading">Loading...</div>;
 }
 
+if (inviteToken) {
+  return (
+    <AcceptInvite
+      token={inviteToken}
+      onSuccess={(user) => {
+        setInviteToken(null);
+        window.history.replaceState(null, '', window.location.pathname);
+        handleLoginSuccess(user);
+      }}
+    />
+  );
+}
+
 if (!isLoggedIn) {
   return <Login onLoginSuccess={handleLoginSuccess} />;
 }
@@ -609,6 +638,16 @@ return (
 
       <div className="main-layout">
         <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
+          <nav className="sidebar-nav">
+            <button className={`nav-link ${currentView === 'inspection' ? 'active' : ''}`} onClick={() => { setCurrentView('inspection'); setSidebarOpen(false); }}>Inspections</button>
+            <button className={`nav-link ${currentView === 'properties' ? 'active' : ''}`} onClick={() => { setCurrentView('properties'); setSidebarOpen(false); }}>Properties</button>
+            <button className={`nav-link ${currentView === 'directory' ? 'active' : ''}`} onClick={() => { setCurrentView('directory'); setSidebarOpen(false); }}>📋 Directory</button>
+            {currentUser?.role !== 'assistant' && (
+              <button className={`nav-link ${currentView === 'import' ? 'active' : ''}`} onClick={() => { setCurrentView('import'); setSidebarOpen(false); }}>Import Data</button>
+            )}
+            <button className={`nav-link ${currentView === 'responses' ? 'active' : ''}`} onClick={() => { setCurrentView('responses'); setSidebarOpen(false); }}>Response Library</button>
+            <button className={`nav-link ${currentView === 'account' ? 'active' : ''}`} onClick={() => { setCurrentView('account'); setSidebarOpen(false); }}>⚙️ Account</button>
+          </nav>
           <h3>My Inspections ({inspections.length})</h3>
           <div className="inspection-list">
             {inspections.length === 0 ? (
@@ -645,6 +684,53 @@ return (
         </aside>
 
         <main className="main-content">
+          {currentView === 'import' && <ImportData onClose={() => setCurrentView('inspection')} />}
+          {currentView === 'responses' && <ResponseLibrary onClose={() => setCurrentView('inspection')} userRole={currentUser?.role} />}
+          {currentView === 'directory' && <Directory userRole={currentUser?.role} />}
+          {currentView === 'account' && <AccountSettings currentUser={currentUser} onUserUpdate={setCurrentUser} />}
+          {currentView === 'properties' && (
+            <div className="properties-view">
+              <div className="properties-search-bar">
+                <input
+                  type="text"
+                  placeholder="Search by address…"
+                  value={propertySearchQuery}
+                  onChange={async (e) => {
+                    const q = e.target.value;
+                    setPropertySearchQuery(q);
+                    if (q.length >= 3) {
+                      try { setPropertySearchResults(await searchProperties(q)); }
+                      catch { /* silent */ }
+                    } else {
+                      setPropertySearchResults([]);
+                    }
+                  }}
+                />
+              </div>
+              {propertySearchResults.length === 0 && propertySearchQuery.length >= 3 && (
+                <p className="empty-state">No properties found.</p>
+              )}
+              {propertySearchResults.length === 0 && propertySearchQuery.length < 3 && (
+                <p className="empty-state">Type at least 3 characters to search your property database.</p>
+              )}
+              <div className="property-results-list">
+                {propertySearchResults.map(p => (
+                  <div key={p.id} className="property-result-item" onClick={() => setPropertyDetailId(p.id)}>
+                    <div className="property-result-address">{p.address}</div>
+                    <div className="property-result-meta">
+                      {[p.property_type, p.year_built && `Built ${p.year_built}`, p.bedrooms && `${p.bedrooms} bed`, p.city].filter(Boolean).join(' · ')}
+                    </div>
+                    {p.last_order_date && (
+                      <div className="property-result-last">
+                        Last activity: {new Date(p.last_order_date).toLocaleDateString()} · {p.last_client || '—'}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          {currentView === 'inspection' && <>
           {/* Property Information */}
           <div className="form-section">
             <div className="section-header" onClick={() => toggleSection('property')}>
@@ -1431,8 +1517,12 @@ return (
               Generate Report
             </button>
           </div>
+          </>}
         </main>
       </div>
+      {propertyDetailId && (
+        <PropertyDetail propertyId={propertyDetailId} onClose={() => setPropertyDetailId(null)} />
+      )}
     </div>
   );
 }
