@@ -801,6 +801,33 @@ textarea:focus {
   border-color: #D6A319;
   box-shadow: 0 0 0 3px rgba(214, 163, 25, 0.2);
 }
+/* Import drop zone */
+.drop-zone {
+  border: 2px dashed #D6A319;
+  border-radius: 8px;
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  pointer-events: auto;
+  background: rgba(214, 163, 25, 0.04);
+  color: #6b7280;
+  font-size: 14px;
+  transition: background 0.2s, border-color 0.2s;
+  margin-bottom: 16px;
+}
+.drop-zone:hover {
+  background: rgba(214, 163, 25, 0.09);
+  border-color: #c49516;
+}
+.drop-zone.dragging {
+  background: rgba(214, 163, 25, 0.14);
+  border-color: #c49516;
+}
+.drop-zone-file {
+  color: #13294B;
+  font-weight: 600;
+}
+
 /* Photo upload gate message */
 .photo-gate-msg {
   color: #7f8c8d;

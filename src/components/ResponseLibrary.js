@@ -116,7 +116,6 @@ export default function ResponseLibrary({ onClose, userRole }) {
             <div key={r.id} className="response-card">
               <div className="response-card-header">
                 <div className="response-card-title">
-                  <span className="response-category-badge">{r.category}</span>
                   <span className="response-title">{r.title}</span>
                 </div>
                 <div className="response-card-actions">

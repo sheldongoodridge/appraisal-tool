@@ -519,8 +519,8 @@
 
     .pricing-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
       align-items: start;
     }
 
@@ -741,11 +741,15 @@
        RESPONSIVE
        ════════════════════════════════ */
     @media (max-width: 900px) {
-      .features-grid,
-      .pricing-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
       .pricing-card.popular { transform: none; }
       .ps-grid { grid-template-columns: 1fr; }
       .mockup-sidebar { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .pricing-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 640px) {
@@ -784,8 +788,8 @@
         </a>
 
         <div class="nav-actions">
-          <a href="https://spokeappraisal.com/appraisal-tool/" class="nav-signin">Sign In</a>
-          <a href="https://spokeappraisal.com/appraisal-tool/" class="btn btn-gold nav-cta">Get Started</a>
+          <a href="https://sheldongoodridge.github.io/appraisal-tool" class="nav-signin">Sign In</a>
+          <a href="https://sheldongoodridge.github.io/appraisal-tool" class="btn btn-gold nav-cta">Get Started</a>
         </div>
 
       </div>
@@ -802,7 +806,7 @@
         actually work. Your data, your workflow, on any device.
       </p>
       <div class="hero-ctas">
-        <a href="https://spokeappraisal.com/appraisal-tool/" class="btn btn-gold">
+        <a href="https://sheldongoodridge.github.io/appraisal-tool" class="btn btn-gold">
           Get Started Free
         </a>
         <a href="#features" class="btn btn-outline-white">
@@ -969,7 +973,7 @@
           <div class="pricing-plan">Solo</div>
           <div class="pricing-price">
             <span class="pricing-currency">$</span>
-            <span class="pricing-amount">49</span>
+            <span class="pricing-amount">29</span>
             <span class="pricing-period">/mo</span>
           </div>
           <p class="pricing-tagline">Everything you need to work solo.</p>
@@ -977,12 +981,10 @@
           <ul class="pricing-features">
             <li>1 appraiser</li>
             <li>Unlimited workfiles</li>
-            <li>Cloud sync across devices</li>
-            <li>10 GB photo storage</li>
-            <li>Property database</li>
-            <li>Response library</li>
+            <li>Cloud sync</li>
+            <li>10 GB storage</li>
           </ul>
-          <a href="https://spokeappraisal.com/appraisal-tool/" class="pricing-btn">Get Started</a>
+          <a href="https://sheldongoodridge.github.io/appraisal-tool" class="pricing-btn">Get Started</a>
         </div>
 
         <!-- Solo+ (popular) -->
@@ -991,7 +993,7 @@
           <div class="pricing-plan">Solo+</div>
           <div class="pricing-price">
             <span class="pricing-currency">$</span>
-            <span class="pricing-amount">69</span>
+            <span class="pricing-amount">49</span>
             <span class="pricing-period">/mo</span>
           </div>
           <p class="pricing-tagline">Add an assistant to your workflow.</p>
@@ -999,11 +1001,9 @@
           <ul class="pricing-features">
             <li>1 appraiser + 1 assistant</li>
             <li>Everything in Solo</li>
-            <li>25 GB photo storage</li>
             <li>Assistant access controls</li>
-            <li>Priority support</li>
           </ul>
-          <a href="https://spokeappraisal.com/appraisal-tool/" class="pricing-btn">Get Started</a>
+          <a href="https://sheldongoodridge.github.io/appraisal-tool" class="pricing-btn">Get Started</a>
         </div>
 
         <!-- Team -->
@@ -1017,13 +1017,30 @@
           <p class="pricing-tagline">For growing appraisal practices.</p>
           <hr class="pricing-divider" />
           <ul class="pricing-features">
-            <li>Up to 3 appraisers</li>
-            <li>Shared property database</li>
+            <li>Up to 5 appraisers</li>
+            <li>Shared database</li>
             <li>Admin dashboard</li>
-            <li>50 GB photo storage</li>
-            <li>Priority support</li>
+            <li>Per-seat assistant add-ons</li>
           </ul>
-          <a href="mailto:hello@spokeappraisal.com" class="pricing-btn">Contact Us</a>
+          <a href="https://sheldongoodridge.github.io/appraisal-tool" class="pricing-btn">Get Started</a>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="pricing-card">
+          <div class="pricing-plan">Enterprise</div>
+          <div class="pricing-price">
+            <span class="pricing-amount" style="font-size: 32px;">Custom</span>
+          </div>
+          <p class="pricing-tagline">For larger firms &amp; custom needs.</p>
+          <hr class="pricing-divider" />
+          <ul class="pricing-features">
+            <li>5+ appraisers</li>
+            <li>Dedicated support</li>
+            <li>Custom integrations</li>
+            <li>White-label options</li>
+            <li>API access</li>
+          </ul>
+          <a href="mailto:sgoodridge@independentappraisal.net" class="pricing-btn">Contact Us</a>
         </div>
 
       </div>
@@ -1057,7 +1074,7 @@
           <a href="/privacy">Privacy Policy</a>
           <a href="/terms">Terms of Service</a>
           <a href="mailto:hello@spokeappraisal.com">Contact</a>
-          <a href="https://spokeappraisal.com/appraisal-tool/" class="btn btn-gold" style="padding: 8px 18px; font-size: 13px;">Sign In</a>
+          <a href="https://sheldongoodridge.github.io/appraisal-tool" class="btn btn-gold" style="padding: 8px 18px; font-size: 13px;">Sign In</a>
         </div>
 
       </div>
