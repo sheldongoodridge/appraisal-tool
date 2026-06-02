@@ -34,6 +34,8 @@ function App() {
   const [propertySearchQuery, setPropertySearchQuery] = useState('');
   const [propertySearchResults, setPropertySearchResults] = useState([]);
   const [propertyDetailId, setPropertyDetailId] = useState(null);
+  const [workfileSearch, setWorkfileSearch] = useState('');
+  const [workfileFilter, setWorkfileFilter] = useState('active');
   const [propertyData, setPropertyData] = useState({
     appraisalType: '',
     address: '',
@@ -390,18 +392,18 @@ if (currentInspection) {
   // Update existing
   await updateInspection(currentInspection, inspectionData);
   await loadInspectionsFromCloud();
-  alert('Inspection updated successfully!');
+  alert('Workfile updated successfully!');
 } else {
   // Create new
   const created = await createInspection(inspectionData);
   setCurrentInspection(created.id);
   // Reload all inspections from cloud
   await loadInspectionsFromCloud();
-  alert('Inspection saved to cloud!');
+  alert('Workfile saved to cloud!');
 }
   } catch (error) {
     console.error('Save error:', error);
-    alert('Failed to save inspection. Please try again.');
+    alert('Failed to save workfile. Please try again.');
   }
 };
 
@@ -425,7 +427,7 @@ if (currentInspection) {
 
   const newInspection = () => {
     if (photos.length > 0 || propertyData.address) {
-      if (!window.confirm('Start new inspection? Unsaved changes will be lost.')) {
+      if (!window.confirm('Start new workfile? Unsaved changes will be lost.')) {
         return;
       }
     }
@@ -517,20 +519,21 @@ if (currentInspection) {
       basement: { entrance: 0, living: 0, dining: 0, kitchen: 0, family: 0, bedrooms: 0, den: 0, fullBath: 0, partBath: 0, laundry: 0, other: 0, sqft: '' }
     });
     setPhotos([]);
+    setCurrentView('inspection');
   };
 
 const deleteInspection = async (id) => {
-  if (window.confirm('Delete this inspection?')) {
+  if (window.confirm('Delete this workfile?')) {
     try {
       await deleteInspectionAPI(id);
       setInspections(inspections.filter(i => i.id !== id));
       if (currentInspection === id) {
         newInspection();
       }
-      alert('Inspection deleted successfully');
+      alert('Workfile deleted successfully');
     } catch (error) {
       console.error('Delete error:', error);
-      alert('Failed to delete inspection');
+      alert('Failed to delete workfile');
     }
   }
 };
@@ -595,6 +598,19 @@ const deleteInspection = async (id) => {
 
  const totals = calculateGrandTotals();
 
+const filteredWorkfiles = inspections.filter(w => {
+  const isClosed = w.property_data?.workflowStatus === 'closed';
+  if (workfileFilter === 'active' && isClosed) return false;
+  if (workfileFilter === 'complete' && !isClosed) return false;
+  if (!workfileSearch.trim()) return true;
+  const q = workfileSearch.toLowerCase();
+  return (
+    (w.property_data?.address || '').toLowerCase().includes(q) ||
+    (w.property_data?.fileNumber || '').toLowerCase().includes(q) ||
+    (w.property_data?.clientName || '').toLowerCase().includes(q)
+  );
+});
+
 // Show login screen if not authenticated
 if (loading) {
   return <div className="loading">Loading...</div>;
@@ -630,7 +646,7 @@ return (
     <div className="header-actions">
       <span className="user-info">{currentUser?.full_name || currentUser?.email}</span>
       <button className="btn btn-small btn-gold" onClick={newInspection}>
-        + New Inspection
+        + New Workfile
       </button>
       <button className="btn btn-small btn-logout" onClick={handleLogout}>
         Logout
@@ -641,7 +657,7 @@ return (
       <div className="main-layout">
         <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
           <nav className="sidebar-nav">
-            <button className={`nav-link ${currentView === 'inspection' ? 'active' : ''}`} onClick={() => { setCurrentView('inspection'); setSidebarOpen(false); }}>Inspections</button>
+            <button className={`nav-link ${currentView === 'workfiles' ? 'active' : ''}`} onClick={() => { setCurrentView('workfiles'); setSidebarOpen(false); }}>My Workfiles</button>
             <button className={`nav-link ${currentView === 'properties' ? 'active' : ''}`} onClick={() => { setCurrentView('properties'); setSidebarOpen(false); }}>Properties</button>
             <button className={`nav-link ${currentView === 'directory' ? 'active' : ''}`} onClick={() => { setCurrentView('directory'); setSidebarOpen(false); }}>📋 Directory</button>
             {currentUser?.role !== 'assistant' && (
@@ -650,17 +666,17 @@ return (
             <button className={`nav-link ${currentView === 'responses' ? 'active' : ''}`} onClick={() => { setCurrentView('responses'); setSidebarOpen(false); }}>Response Library</button>
             <button className={`nav-link ${currentView === 'account' ? 'active' : ''}`} onClick={() => { setCurrentView('account'); setSidebarOpen(false); }}>⚙️ Account</button>
           </nav>
-          <h3>My Inspections ({inspections.length})</h3>
+          <h3>My Workfiles ({inspections.length})</h3>
           <div className="inspection-list">
             {inspections.length === 0 ? (
-              <p className="empty-state">No saved inspections</p>
+              <p className="empty-state">No saved workfiles</p>
             ) : (
               inspections.map(inspection => (
-                <div 
+                <div
                   key={inspection.id}
                   className={`inspection-item ${currentInspection === inspection.id ? 'active' : ''}`}
                 >
-                  <div onClick={() => loadInspection(inspection)} className="inspection-content">
+                  <div onClick={() => { loadInspection(inspection); setCurrentView('inspection'); setSidebarOpen(false); }} className="inspection-content">
                     <strong>{inspection.property_data?.address || 'Untitled'}</strong>
                     <div className="inspection-card-meta">
                       {inspection.property_data?.appraisalType && (
@@ -686,8 +702,73 @@ return (
         </aside>
 
         <main className="main-content">
-          {currentView === 'import' && <ImportData onClose={() => setCurrentView('inspection')} />}
-          {currentView === 'responses' && <ResponseLibrary onClose={() => setCurrentView('inspection')} userRole={currentUser?.role} />}
+          {currentView === 'workfiles' && (
+            <div className="workfiles-list-view">
+              <div className="workfiles-list-header">
+                <h2>My Workfiles</h2>
+                <button className="btn btn-primary btn-small" onClick={newInspection}>+ New Workfile</button>
+              </div>
+              <div className="workfiles-toolbar">
+                <input
+                  className="workfiles-search"
+                  placeholder="Search by address, file #, or client…"
+                  value={workfileSearch}
+                  onChange={e => setWorkfileSearch(e.target.value)}
+                />
+                <div className="workfiles-filter-tabs">
+                  {[['active', 'Active'], ['complete', 'Complete'], ['all', 'All']].map(([val, label]) => (
+                    <button
+                      key={val}
+                      className={`filter-tab ${workfileFilter === val ? 'active' : ''}`}
+                      onClick={() => setWorkfileFilter(val)}
+                    >{label}</button>
+                  ))}
+                </div>
+              </div>
+              {filteredWorkfiles.length === 0 ? (
+                <p className="empty-state">No workfiles found.</p>
+              ) : (
+                <table className="workfiles-table">
+                  <thead>
+                    <tr>
+                      <th>File #</th>
+                      <th>Address</th>
+                      <th>Type</th>
+                      <th>Status</th>
+                      <th>Client</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredWorkfiles.map(w => (
+                      <tr
+                        key={w.id}
+                        className="workfile-row"
+                        onClick={() => { loadInspection(w); setCurrentView('inspection'); setSidebarOpen(false); }}
+                      >
+                        <td>{w.property_data?.fileNumber || '—'}</td>
+                        <td className="wf-address">{w.property_data?.address || 'Untitled'}</td>
+                        <td>
+                          {w.property_data?.appraisalType
+                            ? <span className="inspection-type-badge">{w.property_data.appraisalType}</span>
+                            : '—'}
+                        </td>
+                        <td>
+                          <span className={`wf-status-badge ${w.property_data?.workflowStatus === 'closed' ? 'wf-status-complete' : 'wf-status-active'}`}>
+                            {w.property_data?.workflowStatus || 'Active'}
+                          </span>
+                        </td>
+                        <td>{w.property_data?.clientName || '—'}</td>
+                        <td>{new Date(w.created_at).toLocaleDateString()}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </div>
+          )}
+          {currentView === 'import' && <ImportData onClose={() => setCurrentView('workfiles')} />}
+          {currentView === 'responses' && <ResponseLibrary onClose={() => setCurrentView('workfiles')} userRole={currentUser?.role} />}
           {currentView === 'directory' && <Directory userRole={currentUser?.role} />}
           {currentView === 'account' && <AccountSettings currentUser={currentUser} onUserUpdate={setCurrentUser} />}
           {currentView === 'properties' && (
@@ -1440,7 +1521,7 @@ return (
             <h2>Inspection Photos ({photos.length})</h2>
 
             {!currentInspection ? (
-              <p className="photo-gate-msg">Save the inspection first to upload photos.</p>
+              <p className="photo-gate-msg">Save the workfile first to upload photos.</p>
             ) : (
               <div className="photo-upload-actions">
                 <button
@@ -1537,7 +1618,7 @@ return (
 
           <div className="actions">
             <button className="btn btn-primary" onClick={saveInspection} disabled={!propertyData.address}>
-              Save Inspection
+              Save Workfile
             </button>
             <button className="btn btn-primary" onClick={generateReport} disabled={!propertyData.address || photos.length === 0}>
               Generate Report
