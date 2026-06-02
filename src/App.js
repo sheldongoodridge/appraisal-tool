@@ -193,6 +193,8 @@ function App() {
   const [photos, setPhotos] = useState([]);
   const [uploadingPhotos, setUploadingPhotos] = useState([]);
   const photoNoteTimers = useRef({});
+  const cameraInputRef = useRef(null);
+  const fileInputRef = useRef(null);
   const [expandedSections, setExpandedSections] = useState({
     property: true,
     building: true,
@@ -1440,14 +1442,38 @@ return (
             {!currentInspection ? (
               <p className="photo-gate-msg">Save the inspection first to upload photos.</p>
             ) : (
-              <div className="form-group">
-                <label>Upload Photos:</label>
+              <div className="photo-upload-actions">
+                <button
+                  className="btn btn-primary btn-small"
+                  onClick={() => cameraInputRef.current.click()}
+                  disabled={uploadingPhotos.length > 0}
+                >
+                  📷 Take Photo
+                </button>
+                <button
+                  className="btn btn-small"
+                  onClick={() => fileInputRef.current.click()}
+                  disabled={uploadingPhotos.length > 0}
+                >
+                  📁 Upload File
+                </button>
+                {/* Camera input — opens rear camera on mobile, file picker on desktop */}
                 <input
+                  ref={cameraInputRef}
+                  type="file"
+                  accept="image/*"
+                  capture="environment"
+                  style={{ display: 'none' }}
+                  onChange={handlePhotoUpload}
+                />
+                {/* File input — multi-select, no camera capture */}
+                <input
+                  ref={fileInputRef}
                   type="file"
                   accept="image/*"
                   multiple
+                  style={{ display: 'none' }}
                   onChange={handlePhotoUpload}
-                  disabled={uploadingPhotos.length > 0}
                 />
               </div>
             )}

@@ -801,6 +801,14 @@ textarea:focus {
   border-color: #D6A319;
   box-shadow: 0 0 0 3px rgba(214, 163, 25, 0.2);
 }
+/* Photo upload buttons */
+.photo-upload-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
 /* Import drop zone */
 .drop-zone {
   border: 2px dashed #D6A319;
