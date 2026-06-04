@@ -21,6 +21,7 @@ import PropertyDetail from './components/PropertyDetail';
 import Directory from './components/Directory';
 import AccountSettings from './components/AccountSettings';
 import AcceptInvite from './components/AcceptInvite';
+import WorkfileHub from './components/WorkfileHub';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -597,6 +598,9 @@ const deleteInspection = async (id) => {
   const zoningTypes = ['Residential', 'Industrial', 'Agricultural', 'Multi-Residential', 'Other'];
 
  const totals = calculateGrandTotals();
+  const activeInspection = currentInspection
+    ? inspections.find(i => i.id === currentInspection) ?? null
+    : null;
 
 const filteredWorkfiles = inspections.filter(w => {
   const isClosed = w.property_data?.workflowStatus === 'closed';
@@ -676,7 +680,12 @@ return (
                   key={inspection.id}
                   className={`inspection-item ${currentInspection === inspection.id ? 'active' : ''}`}
                 >
-                  <div onClick={() => { loadInspection(inspection); setCurrentView('inspection'); setSidebarOpen(false); }} className="inspection-content">
+                  <div onClick={() => {
+                    const hasHub = inspection.workfile_data && Object.keys(inspection.workfile_data).length > 0;
+                    loadInspection(inspection);
+                    setCurrentView(hasHub ? 'workfile-hub' : 'inspection');
+                    setSidebarOpen(false);
+                  }} className="inspection-content">
                     <strong>{inspection.property_data?.address || 'Untitled'}</strong>
                     <div className="inspection-card-meta">
                       {inspection.property_data?.appraisalType && (
@@ -744,7 +753,12 @@ return (
                       <tr
                         key={w.id}
                         className="workfile-row"
-                        onClick={() => { loadInspection(w); setCurrentView('inspection'); setSidebarOpen(false); }}
+                        onClick={() => {
+                          const hasHub = w.workfile_data && Object.keys(w.workfile_data).length > 0;
+                          loadInspection(w);
+                          setCurrentView(hasHub ? 'workfile-hub' : 'inspection');
+                          setSidebarOpen(false);
+                        }}
                       >
                         <td>{w.property_data?.fileNumber || '—'}</td>
                         <td className="wf-address">{w.property_data?.address || 'Untitled'}</td>
@@ -812,6 +826,13 @@ return (
                 ))}
               </div>
             </div>
+          )}
+          {currentView === 'workfile-hub' && activeInspection && (
+            <WorkfileHub
+              inspection={activeInspection}
+              onInspectionUpdate={loadInspectionsFromCloud}
+              onNavigate={() => { setCurrentView('inspection'); setSidebarOpen(false); }}
+            />
           )}
           {currentView === 'inspection' && <>
           {/* Property Information */}
