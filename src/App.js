@@ -22,6 +22,7 @@ import Directory from './components/Directory';
 import AccountSettings from './components/AccountSettings';
 import AcceptInvite from './components/AcceptInvite';
 import WorkfileHub from './components/WorkfileHub';
+import NewWorkfileModal from './components/NewWorkfileModal';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -30,6 +31,7 @@ function App() {
   const [inspections, setInspections] = useState([]);
   const [currentInspection, setCurrentInspection] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showNewWorkfileModal, setShowNewWorkfileModal] = useState(false);
   const [currentView, setCurrentView] = useState('inspection');
   const [inviteToken, setInviteToken] = useState(null);
   const [propertySearchQuery, setPropertySearchQuery] = useState('');
@@ -243,6 +245,13 @@ const handleLoginSuccess = (user) => {
   setCurrentUser(user);
   setIsLoggedIn(true);
   loadInspectionsFromCloud();
+};
+
+const handleWorkfileCreated = async (newInspection) => {
+  setShowNewWorkfileModal(false);
+  setCurrentInspection(newInspection.id);
+  await loadInspectionsFromCloud();
+  setCurrentView('workfile-hub');
 };
 
 const handleLogout = () => {
@@ -649,7 +658,7 @@ return (
     <img src={logoWhite} alt="Spoke" className="header-logo" />
     <div className="header-actions">
       <span className="user-info">{currentUser?.full_name || currentUser?.email}</span>
-      <button className="btn btn-small btn-gold" onClick={newInspection}>
+      <button className="btn btn-small btn-gold" onClick={() => setShowNewWorkfileModal(true)}>
         + New Workfile
       </button>
       <button className="btn btn-small btn-logout" onClick={handleLogout}>
@@ -715,7 +724,7 @@ return (
             <div className="workfiles-list-view">
               <div className="workfiles-list-header">
                 <h2>My Workfiles</h2>
-                <button className="btn btn-primary btn-small" onClick={newInspection}>+ New Workfile</button>
+                <button className="btn btn-primary btn-small" onClick={() => setShowNewWorkfileModal(true)}>+ New Workfile</button>
               </div>
               <div className="workfiles-toolbar">
                 <input
@@ -1650,6 +1659,12 @@ return (
       </div>
       {propertyDetailId && (
         <PropertyDetail propertyId={propertyDetailId} onClose={() => setPropertyDetailId(null)} />
+      )}
+      {showNewWorkfileModal && (
+        <NewWorkfileModal
+          onCreated={handleWorkfileCreated}
+          onCancel={() => setShowNewWorkfileModal(false)}
+        />
       )}
     </div>
   );
