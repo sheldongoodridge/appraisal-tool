@@ -284,9 +284,10 @@ const handleChange = (e) => {
 
   const calculateTotalRooms = (level) => {
     const rooms = roomAllocation[level];
-    return (rooms.entrance || 0) + (rooms.living || 0) + (rooms.dining || 0) + 
-           (rooms.kitchen || 0) + (rooms.family || 0) + (rooms.bedrooms || 0) + 
-           (rooms.den || 0) + (rooms.fullBath || 0) + (rooms.partBath || 0) + 
+    if (!rooms) return 0;
+    return (rooms.entrance || 0) + (rooms.living || 0) + (rooms.dining || 0) +
+           (rooms.kitchen || 0) + (rooms.family || 0) + (rooms.bedrooms || 0) +
+           (rooms.den || 0) + (rooms.fullBath || 0) + (rooms.partBath || 0) +
            (rooms.laundry || 0) + (rooms.other || 0);
   };
 
@@ -299,10 +300,10 @@ const handleChange = (e) => {
     let totalRooms = 0;
 
     levels.forEach(level => {
-      totalBedrooms += roomAllocation[level].bedrooms || 0;
-      totalFullBath += roomAllocation[level].fullBath || 0;
-      totalPartBath += roomAllocation[level].partBath || 0;
-      const sqft = parseInt(roomAllocation[level].sqft) || 0;
+      totalBedrooms += roomAllocation?.[level]?.bedrooms || 0;
+      totalFullBath += roomAllocation?.[level]?.fullBath || 0;
+      totalPartBath += roomAllocation?.[level]?.partBath || 0;
+      const sqft = parseInt(roomAllocation?.[level]?.sqft) || 0;
       totalSqft += sqft;
       totalRooms += calculateTotalRooms(level);
     });
@@ -606,7 +607,7 @@ const deleteInspection = async (id) => {
   const drivewayTypes = ['Private', 'Shared', 'Mutual', 'None', 'Other'];
   const zoningTypes = ['Residential', 'Industrial', 'Agricultural', 'Multi-Residential', 'Other'];
 
- const totals = calculateGrandTotals();
+ const totals = currentView === 'inspection' ? calculateGrandTotals() : {};
   const activeInspection = currentInspection
     ? inspections.find(i => i.id === currentInspection) ?? null
     : null;
