@@ -691,7 +691,7 @@ return (
                   className={`inspection-item ${currentInspection === inspection.id ? 'active' : ''}`}
                 >
                   <div onClick={() => {
-                    const hasHub = inspection.workfile_data && Object.keys(inspection.workfile_data).length > 0;
+                    const hasHub = inspection.workfile_data?.order?.version === 2;
                     loadInspection(inspection);
                     setCurrentView(hasHub ? 'workfile-hub' : 'inspection');
                     setSidebarOpen(false);
@@ -764,7 +764,7 @@ return (
                         key={w.id}
                         className="workfile-row"
                         onClick={() => {
-                          const hasHub = w.workfile_data && Object.keys(w.workfile_data).length > 0;
+                          const hasHub = w.workfile_data?.order?.version === 2;
                           loadInspection(w);
                           setCurrentView(hasHub ? 'workfile-hub' : 'inspection');
                           setSidebarOpen(false);

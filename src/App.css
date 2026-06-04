@@ -1043,11 +1043,6 @@ textarea:focus {
 
 /* ── WorkfileHub ── */
 .wfh-container {
-  padding-bottom: 88px;
-}
-
-.wfh-last-section {
-  margin-bottom: 0;
 }
 
 /* Top bar */
@@ -1354,18 +1349,15 @@ textarea:focus {
   margin: 0 0 14px;
 }
 
-/* Fixed action bar */
+/* Inline action bar (below top bar) */
 .wfh-action-bar {
-  position: fixed;
-  bottom: 0;
-  left: 300px;
-  right: 0;
-  height: 68px;
-  background: #13294B;
-  border-top: 2px solid #D6A319;
   display: flex;
-  align-items: stretch;
-  z-index: 100;
+  background: #13294B;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  height: 56px;
+  border: 1px solid rgba(214,163,25,0.35);
 }
 
 .wfh-action-btn {
@@ -1374,7 +1366,7 @@ textarea:focus {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 3px;
   background: none;
   border: none;
   border-right: 1px solid rgba(255,255,255,0.1);
@@ -1386,14 +1378,12 @@ textarea:focus {
 }
 
 .wfh-action-btn:last-child { border-right: none; }
-.wfh-action-btn:hover { background: rgba(255,255,255,0.08); color: #D6A319; }
+.wfh-action-btn:hover { background: rgba(255,255,255,0.1); color: #D6A319; }
 
-.wfh-action-icon  { font-size: 20px; line-height: 1; }
+.wfh-action-icon  { font-size: 18px; line-height: 1; }
 .wfh-action-label { font-size: 11px; font-weight: 600; letter-spacing: 0.3px; }
 
 @media (max-width: 768px) {
-  .wfh-action-bar { left: 0; }
-
   .wfh-topbar-field {
     flex: 1 1 calc(50% - 10px);
     min-width: calc(50% - 10px);

@@ -106,6 +106,7 @@ export default function NewWorkfileModal({ onCreated, onCancel }) {
       await Promise.all([
         patchSection(inspection.id, 'order', {
           ...DEFAULT_SECTIONS.order,
+          version:       2,
           orderer_id:    clientId ? Number(clientId) : null,
           intended_user: lenderId ? String(lenderId) : '',
         }),

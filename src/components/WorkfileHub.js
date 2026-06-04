@@ -266,6 +266,25 @@ export default function WorkfileHub({ inspection, onInspectionUpdate, onNavigate
         </div>
       </div>
 
+      {/* ── ACTION BAR ── */}
+      <div className="wfh-action-bar">
+        {[
+          { icon: '🔍', label: 'Inspection', view: 'inspection' },
+          { icon: '📄', label: 'Report',     view: 'report'     },
+          { icon: '📷', label: 'Photos',     view: 'photos'     },
+          { icon: '📁', label: 'Documents',  view: 'documents'  },
+        ].map(({ icon, label, view }) => (
+          <button
+            key={view}
+            className="wfh-action-btn"
+            onClick={() => onNavigate && onNavigate(view)}
+          >
+            <span className="wfh-action-icon">{icon}</span>
+            <span className="wfh-action-label">{label}</span>
+          </button>
+        ))}
+      </div>
+
       {/* ── ORDER DETAILS ── */}
       <div className="form-section">
         <div className="section-header" onClick={() => toggle('order')}>
@@ -553,7 +572,7 @@ export default function WorkfileHub({ inspection, onInspectionUpdate, onNavigate
       </div>
 
       {/* ── INSPECTION ── */}
-      <div className="form-section wfh-last-section">
+      <div className="form-section">
         <div className="section-header" onClick={() => toggle('inspection')}>
           <h2>📊 Inspection</h2>
           <span className="toggle-icon">{expanded.inspection ? '▼' : '▶'}</span>
@@ -598,25 +617,6 @@ export default function WorkfileHub({ inspection, onInspectionUpdate, onNavigate
             )}
           </div>
         )}
-      </div>
-
-      {/* ── ACTION BAR ── */}
-      <div className="wfh-action-bar">
-        {[
-          { icon: '🔍', label: 'Inspection', view: 'inspection' },
-          { icon: '📄', label: 'Report',     view: 'report'     },
-          { icon: '📷', label: 'Photos',     view: 'photos'     },
-          { icon: '📁', label: 'Documents',  view: 'documents'  },
-        ].map(({ icon, label, view }) => (
-          <button
-            key={view}
-            className="wfh-action-btn"
-            onClick={() => onNavigate && onNavigate(view)}
-          >
-            <span className="wfh-action-icon">{icon}</span>
-            <span className="wfh-action-label">{label}</span>
-          </button>
-        ))}
       </div>
 
     </div>
