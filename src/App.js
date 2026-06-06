@@ -23,6 +23,7 @@ import AccountSettings from './components/AccountSettings';
 import AcceptInvite from './components/AcceptInvite';
 import WorkfileHub from './components/WorkfileHub';
 import NewWorkfileModal from './components/NewWorkfileModal';
+import InspectionTool from './components/InspectionTool';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -841,7 +842,17 @@ return (
             <WorkfileHub
               inspection={activeInspection}
               onInspectionUpdate={loadInspectionsFromCloud}
-              onNavigate={() => { setCurrentView('inspection'); setSidebarOpen(false); }}
+              onNavigate={view => {
+                setCurrentView(view === 'inspection' ? 'inspection-tool' : 'inspection');
+                setSidebarOpen(false);
+              }}
+            />
+          )}
+          {currentView === 'inspection-tool' && activeInspection && (
+            <InspectionTool
+              inspection={activeInspection}
+              onBack={() => setCurrentView('workfile-hub')}
+              onComplete={loadInspectionsFromCloud}
             />
           )}
           {currentView === 'inspection' && <>
