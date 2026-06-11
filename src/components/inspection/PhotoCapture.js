@@ -1,6 +1,12 @@
 import { useState, useRef } from 'react';
 import { uploadPhoto } from '../../services/api';
 
+const FLOORING_TYPES = [
+  'Hardwood', 'Laminate', 'Engineered Hardwood',
+  'Vinyl Plank', 'Tile', 'Carpet',
+  'Concrete', 'Cork', 'Mixed', 'Other',
+];
+
 export default function PhotoCapture({
   inspectionId,
   labels,
@@ -8,25 +14,24 @@ export default function PhotoCapture({
   onLabelModeChange,
   uploading,
   setUploading,
+  // Optional floor-screen props:
+  showFlooring      = false, // show flooring dropdown after room label
+  flooringLabels    = [],    // which labels trigger the flooring step
+  requiredNoteLabels = [],   // which labels require notes before saving
 }) {
-  const [pending,    setPending]    = useState(null);
-  const [inLabel,    setInLabel]    = useState(false);
-  const [selected,   setSelected]   = useState('');
-  const [otherText,  setOtherText]  = useState('');
-  const [notes,      setNotes]      = useState('');
+  const [pending,       setPending]      = useState(null);
+  const [inLabel,       setInLabel]      = useState(false);
+  const [selected,      setSelected]     = useState('');
+  const [otherText,     setOtherText]    = useState('');
+  const [flooring,      setFlooring]     = useState('');
+  const [flooringOther, setFlooringOther] = useState('');
+  const [notes,         setNotes]        = useState('');
 
   const cameraRef = useRef(null);
   const fileRef   = useRef(null);
 
-  const enterLabelMode = () => {
-    setInLabel(true);
-    onLabelModeChange?.(true);
-  };
-
-  const exitLabelMode = () => {
-    setInLabel(false);
-    onLabelModeChange?.(false);
-  };
+  const enterLabelMode = () => { setInLabel(true);  onLabelModeChange?.(true);  };
+  const exitLabelMode  = () => { setInLabel(false); onLabelModeChange?.(false); };
 
   const handleFile = async (file) => {
     if (!file) return;
@@ -54,13 +59,15 @@ export default function PhotoCapture({
   };
 
   const handleSave = () => {
-    const label = selected === 'Other' ? (otherText.trim() || 'Other') : selected;
+    const label        = selected === 'Other' ? (otherText.trim() || 'Other') : selected;
+    const finalFlooring = flooring === 'Other' ? (flooringOther.trim() || 'Other') : flooring;
     onPhotoAdded({
       id:        pending.tempId,
       db_id:     pending.dbId,
       url:       pending.url,
       filename:  pending.filename,
       label,
+      flooring:  finalFlooring,
       notes,
       timestamp: new Date().toISOString(),
     });
@@ -74,6 +81,7 @@ export default function PhotoCapture({
       url:       pending.url,
       filename:  pending.filename,
       label:     '',
+      flooring:  '',
       notes:     '',
       timestamp: new Date().toISOString(),
     });
@@ -84,13 +92,20 @@ export default function PhotoCapture({
     setPending(null);
     setSelected('');
     setOtherText('');
+    setFlooring('');
+    setFlooringOther('');
     setNotes('');
     exitLabelMode();
   };
 
-  const isUploading = pending && pending.progress < 100;
+  const isUploading   = pending && pending.progress < 100;
+  const needsFlooring = showFlooring && flooringLabels.includes(selected);
+  const needsNotes    = requiredNoteLabels.includes(selected);
+  const canSave       = selected &&
+    !(selected === 'Other' && !otherText.trim()) &&
+    !(needsNotes && !notes.trim());
 
-  // ── Label panel ──
+  // ── Label panel (post-upload) ──
   if (inLabel && pending) {
     return (
       <div className="it-label-panel">
@@ -105,11 +120,12 @@ export default function PhotoCapture({
             <button
               key={l}
               className={`it-label-chip ${selected === l ? 'selected' : ''}`}
-              onClick={() => setSelected(selected === l ? '' : l)}
+              onClick={() => { setSelected(selected === l ? '' : l); setFlooring(''); setFlooringOther(''); }}
             >{l}</button>
           ))}
         </div>
 
+        {/* Custom label for 'Other' */}
         {selected === 'Other' && (
           <input
             type="text"
@@ -121,9 +137,37 @@ export default function PhotoCapture({
           />
         )}
 
+        {/* Flooring dropdown for room labels */}
+        {needsFlooring && (
+          <div className="it-label-field">
+            <span className="it-label-sublabel">Flooring</span>
+            <select
+              className="it-select"
+              value={flooring}
+              onChange={e => { setFlooring(e.target.value); setFlooringOther(''); }}
+            >
+              <option value="">— Select flooring —</option>
+              {FLOORING_TYPES.map(f => <option key={f}>{f}</option>)}
+            </select>
+            {flooring === 'Other' && (
+              <input
+                type="text"
+                className="it-other-input"
+                placeholder="Describe flooring…"
+                value={flooringOther}
+                onChange={e => setFlooringOther(e.target.value)}
+              />
+            )}
+          </div>
+        )}
+
+        {/* Notes — required hint for Deficiency */}
+        {needsNotes && (
+          <p className="it-required-note-hint">↓ Notes are required for deficiencies</p>
+        )}
         <textarea
           className="it-label-notes"
-          placeholder="Notes (optional)"
+          placeholder={needsNotes ? 'Describe the deficiency…' : 'Notes (optional)'}
           rows={2}
           value={notes}
           onChange={e => setNotes(e.target.value)}
@@ -132,7 +176,7 @@ export default function PhotoCapture({
         <button
           className="it-save-photo-btn"
           onClick={handleSave}
-          disabled={!selected || (selected === 'Other' && !otherText.trim())}
+          disabled={!canSave}
         >
           ✓ Save Photo & Label
         </button>

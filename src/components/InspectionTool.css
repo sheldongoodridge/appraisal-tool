@@ -759,3 +759,451 @@
 
 .it-floor-pick-btn:hover  { background: #D6A319; color: #13294B; }
 .it-floor-pick-btn:active { transform: scale(0.97); }
+
+/* ── FloorScreen ── */
+
+/* Floor tab strip */
+.it-floor-tabs {
+  display: flex;
+  background: white;
+  border-bottom: 1px solid #e8eaed;
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+
+.it-floor-tab {
+  flex: 1;
+  min-width: 56px;
+  padding: 12px 8px 10px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #9ca3af;
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.it-floor-tab.active {
+  color: #13294B;
+  border-bottom-color: #D6A319;
+}
+
+.it-floor-tab-dot {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #27ae60;
+}
+
+/* Rooms captured list */
+.it-rooms-list {
+  margin: 16px 0;
+  border: 1.5px solid #e8eaed;
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+}
+
+.it-room-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f2f4;
+}
+
+.it-room-row:last-child { border-bottom: none; }
+
+.it-room-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #13294B;
+}
+
+.it-room-no-count {
+  font-size: 11px;
+  font-weight: 400;
+  color: #9ca3af;
+}
+
+.it-room-photo-count {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Systems summary card */
+.it-systems-summary {
+  margin: 12px 0;
+  padding: 14px 16px;
+  background: rgba(19,41,75,0.04);
+  border: 1px solid rgba(19,41,75,0.1);
+  border-radius: 10px;
+}
+
+.it-system-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 14px;
+  color: #374151;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.it-system-row:last-child { border-bottom: none; }
+.it-system-icon { font-size: 16px; flex-shrink: 0; }
+
+/* Systems secondary prompt — bottom sheet */
+.it-sys-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 600;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.it-sys-modal {
+  background: white;
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  max-width: 600px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.it-sys-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid #e8eaed;
+  flex-shrink: 0;
+}
+
+.it-sys-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #13294B;
+}
+
+.it-sys-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.it-sys-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e8eaed;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Flooring step in label panel */
+.it-label-field {
+  margin-bottom: 14px;
+}
+
+.it-label-sublabel {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 8px;
+}
+
+.it-required-note-hint {
+  font-size: 12px;
+  color: #e74c3c;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+/* ── MeasurementsScreen ── */
+
+.it-meas-card {
+  background: white;
+  border: 1.5px solid #e8eaed;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 8px;
+}
+
+.it-meas-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.it-meas-row:last-of-type { margin-bottom: 0; }
+
+.it-meas-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  min-width: 56px;
+}
+
+.it-ft-in-pair {
+  display: flex;
+  gap: 8px;
+}
+
+.it-ft-in-field {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #f5f6f8;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  padding: 6px 10px;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.it-ft-in-field:focus-within {
+  border-color: #D6A319;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(214,163,25,0.15);
+}
+
+.it-ft-in-input {
+  width: 44px;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  font-weight: 700;
+  color: #13294B;
+  font-family: inherit;
+  text-align: right;
+  padding: 0;
+  -moz-appearance: textfield;
+}
+
+.it-ft-in-input:focus { outline: none; }
+.it-ft-in-input::-webkit-inner-spin-button,
+.it-ft-in-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+.it-ft-in-unit {
+  font-size: 12px;
+  font-weight: 600;
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+.it-meas-sqft {
+  text-align: right;
+  font-size: 13px;
+  font-weight: 600;
+  color: #27ae60;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f2f4;
+}
+
+/* Garage yes/no spacing */
+.it-meas-yn-spaced { margin-bottom: 16px; }
+
+.it-meas-garage-fields { margin-top: 4px; }
+
+/* Additional floors type chips */
+.it-meas-type-chips { margin-bottom: 16px; }
+
+/* sq ft direct input */
+.it-meas-sqft-wrap { margin-top: 4px; }
+
+.it-meas-sqft-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 22px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #13294B;
+  text-align: center;
+  box-sizing: border-box;
+  -moz-appearance: textfield;
+}
+
+.it-meas-sqft-input:focus {
+  outline: none;
+  border-color: #D6A319;
+  box-shadow: 0 0 0 3px rgba(214,163,25,0.15);
+}
+
+.it-meas-sqft-input::-webkit-inner-spin-button,
+.it-meas-sqft-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* ── ReviewScreen ── */
+
+.it-review-address {
+  font-size: 16px;
+  font-weight: 700;
+  color: #13294B;
+  text-align: center;
+  margin: 0 0 20px;
+  line-height: 1.4;
+}
+
+.it-review-stats-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.it-review-stat {
+  flex: 1;
+  background: white;
+  border: 1.5px solid #e8eaed;
+  border-radius: 10px;
+  padding: 12px 8px;
+  text-align: center;
+}
+
+.it-review-stat-val {
+  display: block;
+  font-size: 24px;
+  font-weight: 800;
+  color: #13294B;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.it-review-stat-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.it-review-section {
+  background: white;
+  border: 1.5px solid #e8eaed;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.it-review-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 16px;
+  border-bottom: 1px solid #f0f2f4;
+}
+
+.it-review-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.it-review-edit-btn {
+  background: none;
+  border: none;
+  font-size: 13px;
+  font-weight: 700;
+  color: #D6A319;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 2px 0;
+}
+
+.it-review-edit-btn:hover { color: #e8b420; }
+
+.it-review-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid #f0f2f4;
+  gap: 16px;
+}
+
+.it-review-row:last-child { border-bottom: none; }
+
+.it-review-row-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.it-review-row-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: #13294B;
+  text-align: right;
+}
+
+.it-review-row-value.empty { color: #d1d5db; font-weight: 400; }
+
+.it-review-floor-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f2f4;
+}
+
+.it-review-floor-row:last-child { border-bottom: none; }
+
+.it-review-floor-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.it-review-floor-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #13294B;
+}
+
+.it-review-floor-stats {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* Complete button */
+.it-complete-btn {
+  width: 100%;
+  padding: 20px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 18px;
+  font-weight: 800;
+  font-family: inherit;
+  cursor: pointer;
+  margin-top: 8px;
+  margin-bottom: 32px;
+  transition: background 0.15s, transform 0.1s;
+  letter-spacing: 0.3px;
+}
+
+.it-complete-btn:hover  { background: #2ecc71; }
+.it-complete-btn:active { transform: scale(0.98); }
+.it-complete-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }

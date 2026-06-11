@@ -3,10 +3,9 @@ import './InspectionTool.css';
 import StartScreen    from './inspection/StartScreen';
 import ExteriorScreen      from './inspection/ExteriorScreen';
 import InsideQuestionnaire from './inspection/InsideQuestionnaire';
-// Remaining screens imported as they are built:
-// import FloorScreen         from './inspection/FloorScreen';
-// import MeasurementsScreen  from './inspection/MeasurementsScreen';
-// import ReviewScreen        from './inspection/ReviewScreen';
+import FloorScreen          from './inspection/FloorScreen';
+import MeasurementsScreen  from './inspection/MeasurementsScreen';
+import ReviewScreen        from './inspection/ReviewScreen';
 
 const API_BASE = 'https://spokeappraisal.com/api';
 
@@ -56,6 +55,7 @@ function createNewInspection() {
       main_width_ft: '',  main_width_in: '',
       garage_length_ft: '', garage_length_in: '',
       garage_width_ft: '',  garage_width_in: '',
+      has_garage: null,
       additional_floors_type: 'same', // 'same' | 'partial' | 'custom'
       additional_floors_sqft: '',
       additional_custom_length_ft: '', additional_custom_length_in: '',
@@ -108,6 +108,7 @@ export default function InspectionTool({ inspection, onBack, onComplete }) {
     inspection, data, updateData, saveNow,
     isDriveby, uploading, setUploading,
     activeFloor, setActiveFloor, setScreen,
+    onComplete,
   };
 
   return (
@@ -122,22 +123,13 @@ export default function InspectionTool({ inspection, onBack, onComplete }) {
         <InsideQuestionnaire {...sharedProps} />
       )}
       {screen === 'floor' && (
-        <div className="it-stub">
-          <button className="it-stub-back" onClick={() => setScreen('questionnaire')}>← Back</button>
-          <p>FloorScreen — coming in next phase</p>
-        </div>
+        <FloorScreen {...sharedProps} />
       )}
       {screen === 'measurements' && (
-        <div className="it-stub">
-          <button className="it-stub-back" onClick={() => setScreen('floor')}>← Back</button>
-          <p>MeasurementsScreen — coming in next phase</p>
-        </div>
+        <MeasurementsScreen {...sharedProps} />
       )}
       {screen === 'review' && (
-        <div className="it-stub">
-          <button className="it-stub-back" onClick={() => setScreen('measurements')}>← Back</button>
-          <p>ReviewScreen — coming in next phase</p>
-        </div>
+        <ReviewScreen {...sharedProps} />
       )}
     </div>
   );
