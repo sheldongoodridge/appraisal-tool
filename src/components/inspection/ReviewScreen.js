@@ -125,8 +125,12 @@ export default function ReviewScreen({
       completed_at: new Date().toISOString(),
     };
     updateData(() => updated);
-    await saveNow(updated);
-    onComplete?.(updated);
+    try {
+      await saveNow(updated);
+      onComplete?.(updated);
+    } catch {
+      setCompleting(false); // let user retry; error toast shown by InspectionTool
+    }
   };
 
   const goToFloor = (key) => {
