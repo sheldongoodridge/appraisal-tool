@@ -198,17 +198,10 @@ function InspectionToolInner({ inspection, onBack, onComplete }) {
     window.addEventListener('online',  handleOnline);
     window.addEventListener('offline', handleOffline);
 
+    // updateData cancels any pending blob-URL debounce and reschedules
+    // with Spaces URLs — avoids saveNow re-throw causing a false error toast
     syncManager.setOnPhotoSynced(({ local_id, spaces_url }) => {
-      setData(prev => {
-        const updated = replacePhotoUrl(prev, local_id, spaces_url);
-        // Persist the new Spaces URL to server after this render cycle
-        setTimeout(() => {
-          saveNow(updated).catch(err =>
-            console.error('Failed to persist synced photo URL:', err)
-          );
-        }, 0);
-        return updated;
-      });
+      updateData(prev => replacePhotoUrl(prev, local_id, spaces_url));
     });
 
     syncManager.setOnStatusChange(async () => {
@@ -223,7 +216,7 @@ function InspectionToolInner({ inspection, onBack, onComplete }) {
       syncManager.setOnPhotoSynced(null);
       syncManager.setOnStatusChange(null);
     };
-  }, [saveNow]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [updateData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const sharedProps = {
     inspection, data, updateData, saveNow,
@@ -271,7 +264,7 @@ function InspectionToolInner({ inspection, onBack, onComplete }) {
       )}
       {!isOffline && syncStatus.failed > 0 && (
         <div className="it-save-toast it-save-toast--error it-sync-toast">
-          ⚠ {syncStatus.failed} photo{syncStatus.failed !== 1 ? 's' : ''} failed to upload
+          ⚠ {syncStatus.failed} photo{syncStatus.failed !== 1 ? 's' : ''} failed to sync — will retry
         </div>
       )}
 
@@ -280,7 +273,7 @@ function InspectionToolInner({ inspection, onBack, onComplete }) {
         <div className={`it-save-toast it-save-toast--${saveStatus}`}>
           {saveStatus === 'saving' && 'Saving…'}
           {saveStatus === 'saved'  && '✓ Saved'}
-          {saveStatus === 'error'  && '⚠ Save failed — check connection'}
+          {saveStatus === 'error'  && '⚠ Workfile save failed — check connection'}
         </div>
       )}
     </div>

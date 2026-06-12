@@ -24,6 +24,7 @@ import AcceptInvite from './components/AcceptInvite';
 import WorkfileHub from './components/WorkfileHub';
 import NewWorkfileModal from './components/NewWorkfileModal';
 import InspectionTool from './components/InspectionTool';
+import PhotosPage from './components/PhotosPage';
 import * as syncManager from './utils/syncManager';
 
 function App() {
@@ -654,9 +655,11 @@ if (!isLoggedIn) {
 
 return (
   <div className="App">
-    <button className="mobile-menu-btn" onClick={() => setSidebarOpen(!sidebarOpen)}>
-      ☰
-    </button>
+    {currentView !== 'inspection-tool' && (
+      <button className="mobile-menu-btn" onClick={() => setSidebarOpen(!sidebarOpen)}>
+        ☰
+      </button>
+    )}
     
     <div className={`sidebar-overlay ${sidebarOpen ? 'active' : ''}`} onClick={() => setSidebarOpen(false)}></div>
     
@@ -846,10 +849,23 @@ return (
             <WorkfileHub
               inspection={activeInspection}
               onInspectionUpdate={loadInspectionsFromCloud}
-              onNavigate={view => {
-                setCurrentView(view === 'inspection' ? 'inspection-tool' : 'inspection');
+              onNavigate={async view => {
+                if (view === 'inspection') {
+                  setCurrentView('inspection-tool');
+                } else if (view === 'photos') {
+                  await loadInspectionsFromCloud(); // ensure latest photos are visible
+                  setCurrentView('photos-page');
+                } else {
+                  setCurrentView('inspection'); // report/documents fallback
+                }
                 setSidebarOpen(false);
               }}
+            />
+          )}
+          {currentView === 'photos-page' && activeInspection && (
+            <PhotosPage
+              inspection={activeInspection}
+              onBack={() => setCurrentView('workfile-hub')}
             />
           )}
           {currentView === 'inspection-tool' && activeInspection && (

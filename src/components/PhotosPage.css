@@ -1,0 +1,244 @@
+/* ── Photos Page ─────────────────────────────────────────────── */
+
+.pp-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 0 80px;
+}
+
+/* Header */
+.pp-header {
+  background: #13294B;
+  color: #fff;
+  padding: 16px 20px 14px;
+  border-bottom: 2px solid #D6A319;
+}
+
+.pp-back-btn {
+  background: none;
+  border: none;
+  color: #D6A319;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.pp-back-btn:hover { color: #f0c040; }
+
+.pp-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  letter-spacing: 0.5px;
+}
+
+.pp-address {
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  margin: 0;
+}
+
+/* Toolbar */
+.pp-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+  flex-wrap: wrap;
+}
+
+.pp-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pp-filter-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  white-space: nowrap;
+}
+
+.pp-filter-select {
+  font-size: 13px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.pp-count {
+  font-size: 13px;
+  color: #777;
+  margin-left: auto;
+}
+
+.pp-pending-hint {
+  color: #e67e22;
+  font-weight: 600;
+}
+
+/* Empty state */
+.pp-empty {
+  padding: 48px 20px;
+  text-align: center;
+  color: #888;
+}
+
+.pp-empty p { margin: 0 0 8px; font-size: 15px; }
+.pp-empty-hint { font-size: 13px; color: #aaa; }
+
+/* Photo grid */
+.pp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  padding: 16px 20px;
+}
+
+.pp-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+/* Thumbnail */
+.pp-thumb-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #f0f0f0;
+  overflow: hidden;
+}
+
+.pp-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pp-thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: #ccc;
+}
+
+.pp-pending-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 13px;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+/* Card metadata */
+.pp-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 8px 8px 4px;
+}
+
+.pp-room-badge {
+  font-size: 11px;
+  font-weight: 700;
+  background: #13294B;
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.pp-floor-badge {
+  font-size: 11px;
+  background: #e8ecf0;
+  color: #444;
+  padding: 2px 7px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.pp-flooring-badge {
+  font-size: 11px;
+  background: #fff3cd;
+  color: #856404;
+  padding: 2px 7px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.pp-notes {
+  font-size: 11px;
+  color: #666;
+  margin: 0;
+  padding: 0 8px 8px;
+  line-height: 1.4;
+}
+
+/* Download bar */
+.pp-download-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 1px solid #e0e0e0;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.07);
+  z-index: 10;
+}
+
+.pp-download-btn {
+  background: #13294B;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pp-download-btn:hover { background: #1a3a6a; }
+
+.pp-download-hint {
+  font-size: 12px;
+  color: #999;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .pp-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .pp-toolbar {
+    padding: 10px 12px;
+  }
+
+  .pp-header {
+    padding: 12px;
+  }
+}
