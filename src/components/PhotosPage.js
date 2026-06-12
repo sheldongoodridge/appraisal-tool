@@ -49,14 +49,19 @@ export default function PhotosPage({ inspection, onBack }) {
 
   const newPhotos = collectPhotos(inspection.workfile_data);
 
-  const legacyMapped = legacyPhotos.map(p => ({
-    id:           String(p.id),
-    url:          p.file_path,
-    roomLabel:    p.room || 'Untagged',
-    floorDisplay: 'Legacy',
-    notes:        p.notes || '',
-    synced:       true,
-  }));
+  // Only fall back to legacy photos when the new inspection system has none.
+  // When both sources exist, the same upload appears in both tables (room='inspection'
+  // in the legacy table), so mixing them produces duplicates with wrong labels.
+  const legacyMapped = newPhotos.length === 0
+    ? legacyPhotos.map(p => ({
+        id:           String(p.id),
+        url:          p.file_path,
+        roomLabel:    p.room || 'Untagged',
+        floorDisplay: 'Legacy',
+        notes:        p.notes || '',
+        synced:       true,
+      }))
+    : [];
 
   const allPhotos = [...newPhotos, ...legacyMapped];
   const allLabels = ['All', ...new Set(allPhotos.map(p => p.roomLabel).filter(Boolean))];

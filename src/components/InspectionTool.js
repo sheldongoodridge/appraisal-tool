@@ -46,6 +46,34 @@ function replacePhotoUrl(data, localId, spacesUrl) {
   };
 }
 
+// Strip blob URLs before sending to server — the photo remains visible in the UI
+// via React state and IndexedDB; the server stores null until the Spaces URL is ready.
+function sanitizeForSave(data) {
+  const clean = (photos) =>
+    photos.map(p => p.url?.startsWith('blob:') ? { ...p, url: null } : p);
+
+  return {
+    ...data,
+    exterior: {
+      ...data.exterior,
+      photos: clean(data.exterior.photos),
+    },
+    floors: Object.fromEntries(
+      Object.entries(data.floors).map(([key, floor]) => [
+        key,
+        {
+          ...floor,
+          photos: clean(floor.photos),
+          rooms: floor.rooms.map(room => ({
+            ...room,
+            photos: clean(room.photos),
+          })),
+        },
+      ])
+    ),
+  };
+}
+
 function createNewInspection() {
   return {
     id: crypto.randomUUID(),
@@ -159,7 +187,7 @@ function InspectionToolInner({ inspection, onBack, onComplete }) {
       if (!mountedRef.current) return;
       setSaveStatus('saving');
       try {
-        await patchSection(inspection.id, 'inspections', [updated]);
+        await patchSection(inspection.id, 'inspections', [sanitizeForSave(updated)]);
         markSaved();
       } catch (err) {
         console.error('Inspection save error:', err);
@@ -183,7 +211,7 @@ function InspectionToolInner({ inspection, onBack, onComplete }) {
     if (!mountedRef.current) return;
     setSaveStatus('saving');
     try {
-      await patchSection(inspection.id, 'inspections', [updated]);
+      await patchSection(inspection.id, 'inspections', [sanitizeForSave(updated)]);
       markSaved();
     } catch (err) {
       console.error('Inspection save error:', err);
