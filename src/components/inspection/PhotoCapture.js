@@ -1,5 +1,7 @@
 import { useState, useRef } from 'react';
 import { uploadPhoto } from '../../services/api';
+import { addToQueue } from '../../utils/photoQueue';
+import { processPendingQueue } from '../../utils/syncManager';
 
 const FLOORING_TYPES = [
   'Hardwood', 'Laminate', 'Engineered Hardwood',
@@ -12,20 +14,20 @@ export default function PhotoCapture({
   labels,
   onPhotoAdded,
   onLabelModeChange,
-  uploading,
-  setUploading,
-  // Optional floor-screen props:
-  showFlooring      = false, // show flooring dropdown after room label
-  flooringLabels    = [],    // which labels trigger the flooring step
-  requiredNoteLabels = [],   // which labels require notes before saving
+  uploading,         // retained — used only in graceful-degradation fallback
+  setUploading,      // retained — used only in graceful-degradation fallback
+  showFlooring       = false,
+  flooringLabels     = [],
+  requiredNoteLabels = [],
 }) {
-  const [pending,       setPending]      = useState(null);
-  const [inLabel,       setInLabel]      = useState(false);
-  const [selected,      setSelected]     = useState('');
-  const [otherText,     setOtherText]    = useState('');
-  const [flooring,      setFlooring]     = useState('');
+  const [pending,       setPending]       = useState(null);
+  const [inLabel,       setInLabel]       = useState(false);
+  const [selected,      setSelected]      = useState('');
+  const [otherText,     setOtherText]     = useState('');
+  const [flooring,      setFlooring]      = useState('');
   const [flooringOther, setFlooringOther] = useState('');
-  const [notes,         setNotes]        = useState('');
+  const [notes,         setNotes]         = useState('');
+  const [saving,        setSaving]        = useState(false);
 
   const cameraRef = useRef(null);
   const fileRef   = useRef(null);
@@ -33,58 +35,95 @@ export default function PhotoCapture({
   const enterLabelMode = () => { setInLabel(true);  onLabelModeChange?.(true);  };
   const exitLabelMode  = () => { setInLabel(false); onLabelModeChange?.(false); };
 
-  const handleFile = async (file) => {
+  // File selected — save blob locally and enter label mode immediately (no upload wait)
+  const handleFile = (file) => {
     if (!file) return;
-    const tempId  = crypto.randomUUID();
-    const preview = URL.createObjectURL(file);
+    setPending({ file, preview: URL.createObjectURL(file) });
+    enterLabelMode();
+  };
 
-    setUploading(prev => ({ ...prev, [tempId]: 0 }));
-    setPending({ tempId, preview, progress: 0, url: null, dbId: null, filename: file.name });
+  const handleSave = async () => {
+    if (saving) return;
+    setSaving(true);
+
+    const label         = selected === 'Other' ? (otherText.trim() || 'Other') : selected;
+    const finalFlooring = flooring === 'Other' ? (flooringOther.trim() || 'Other') : flooring;
 
     try {
-      const result = await uploadPhoto(inspectionId, file, 'inspection', (pct) => {
-        setUploading(prev => ({ ...prev, [tempId]: pct }));
-        setPending(prev => prev?.tempId === tempId ? { ...prev, progress: pct } : prev);
+      const localId = await addToQueue({
+        inspection_id: inspectionId,
+        blob:     pending.file,
+        blob_url: pending.preview,
+        metadata: { label, flooring: finalFlooring, notes, timestamp: new Date().toISOString() },
       });
 
-      setUploading(prev => { const n = { ...prev }; delete n[tempId]; return n; });
-      setPending({ tempId, preview, progress: 100, url: result.file_path, dbId: result.id, filename: result.filename });
-      enterLabelMode();
-    } catch (err) {
-      console.error('Photo upload failed:', err);
-      setUploading(prev => { const n = { ...prev }; delete n[tempId]; return n; });
-      setPending(null);
-      alert('Photo upload failed. Please try again.');
+      onPhotoAdded({
+        id:       localId,
+        url:      pending.preview,
+        synced:   false,
+        label,
+        flooring: finalFlooring,
+        notes,
+        timestamp: new Date().toISOString(),
+      });
+
+      if (navigator.onLine) processPendingQueue();
+      reset();
+    } catch {
+      // IndexedDB unavailable — fall back to direct upload
+      await fallbackDirectUpload(label, finalFlooring);
+    } finally {
+      setSaving(false);
     }
   };
 
-  const handleSave = () => {
-    const label        = selected === 'Other' ? (otherText.trim() || 'Other') : selected;
-    const finalFlooring = flooring === 'Other' ? (flooringOther.trim() || 'Other') : flooring;
-    onPhotoAdded({
-      id:        pending.tempId,
-      db_id:     pending.dbId,
-      url:       pending.url,
-      filename:  pending.filename,
-      label,
-      flooring:  finalFlooring,
-      notes,
-      timestamp: new Date().toISOString(),
-    });
+  // Only runs if IndexedDB is genuinely unavailable (very rare)
+  const fallbackDirectUpload = async (label, finalFlooring) => {
+    const tempId = crypto.randomUUID();
+    setUploading?.(prev => ({ ...prev, [tempId]: 0 }));
+    try {
+      const result = await uploadPhoto(inspectionId, pending.file, 'inspection', (pct) => {
+        setUploading?.(prev => ({ ...prev, [tempId]: pct }));
+      });
+      onPhotoAdded({
+        id:       tempId,
+        db_id:    result.id,
+        url:      result.file_path,
+        filename: result.filename,
+        synced:   true,
+        label,
+        flooring: finalFlooring,
+        notes,
+        timestamp: new Date().toISOString(),
+      });
+    } catch {
+      alert('Photo upload failed. Please check your connection and try again.');
+    } finally {
+      setUploading?.(prev => { const n = { ...prev }; delete n[tempId]; return n; });
+    }
     reset();
   };
 
-  const handleSkip = () => {
-    onPhotoAdded({
-      id:        pending.tempId,
-      db_id:     pending.dbId,
-      url:       pending.url,
-      filename:  pending.filename,
-      label:     '',
-      flooring:  '',
-      notes:     '',
-      timestamp: new Date().toISOString(),
-    });
+  const handleSkip = async () => {
+    if (saving) return;
+    setSaving(true);
+    try {
+      const localId = await addToQueue({
+        inspection_id: inspectionId,
+        blob:     pending.file,
+        blob_url: pending.preview,
+        metadata: { label: '', flooring: '', notes: '', timestamp: new Date().toISOString() },
+      });
+      onPhotoAdded({
+        id: localId, url: pending.preview, synced: false,
+        label: '', flooring: '', notes: '', timestamp: new Date().toISOString(),
+      });
+      if (navigator.onLine) processPendingQueue();
+    } catch {
+      // IndexedDB unavailable on skip — discard the photo silently
+    } finally {
+      setSaving(false);
+    }
     reset();
   };
 
@@ -98,14 +137,13 @@ export default function PhotoCapture({
     exitLabelMode();
   };
 
-  const isUploading   = pending && pending.progress < 100;
   const needsFlooring = showFlooring && flooringLabels.includes(selected);
   const needsNotes    = requiredNoteLabels.includes(selected);
   const canSave       = selected &&
     !(selected === 'Other' && !otherText.trim()) &&
     !(needsNotes && !notes.trim());
 
-  // ── Label panel (post-upload) ──
+  // ── Label panel (shown immediately after file selection) ──
   if (inLabel && pending) {
     return (
       <div className="it-label-panel">
@@ -125,7 +163,6 @@ export default function PhotoCapture({
           ))}
         </div>
 
-        {/* Custom label for 'Other' */}
         {selected === 'Other' && (
           <input
             type="text"
@@ -137,7 +174,6 @@ export default function PhotoCapture({
           />
         )}
 
-        {/* Flooring dropdown for room labels */}
         {needsFlooring && (
           <div className="it-label-field">
             <span className="it-label-sublabel">Flooring</span>
@@ -161,7 +197,6 @@ export default function PhotoCapture({
           </div>
         )}
 
-        {/* Notes — required hint for Deficiency */}
         {needsNotes && (
           <p className="it-required-note-hint">↓ Notes are required for deficiencies</p>
         )}
@@ -176,12 +211,12 @@ export default function PhotoCapture({
         <button
           className="it-save-photo-btn"
           onClick={handleSave}
-          disabled={!canSave}
+          disabled={!canSave || saving}
         >
-          ✓ Save Photo & Label
+          {saving ? 'Saving…' : '✓ Save Photo & Label'}
         </button>
 
-        <button className="it-skip-btn" onClick={handleSkip}>
+        <button className="it-skip-btn" onClick={handleSkip} disabled={saving}>
           Skip label
         </button>
       </div>
@@ -191,28 +226,11 @@ export default function PhotoCapture({
   // ── Capture buttons ──
   return (
     <div className="it-photo-capture">
-      {isUploading && (
-        <div className="it-upload-progress-wrap">
-          <div className="it-upload-bar">
-            <div className="it-upload-fill" style={{ width: `${pending.progress}%` }} />
-          </div>
-          <span className="it-upload-pct">Uploading… {pending.progress}%</span>
-        </div>
-      )}
-
-      <button
-        className="it-capture-btn"
-        onClick={() => cameraRef.current?.click()}
-        disabled={isUploading}
-      >
+      <button className="it-capture-btn" onClick={() => cameraRef.current?.click()}>
         📷 Take Photo
       </button>
 
-      <button
-        className="it-upload-btn"
-        onClick={() => fileRef.current?.click()}
-        disabled={isUploading}
-      >
+      <button className="it-upload-btn" onClick={() => fileRef.current?.click()}>
         📁 Upload Photo
       </button>
 

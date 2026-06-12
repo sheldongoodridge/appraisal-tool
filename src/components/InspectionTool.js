@@ -6,6 +6,7 @@ import InsideQuestionnaire from './inspection/InsideQuestionnaire';
 import FloorScreen          from './inspection/FloorScreen';
 import MeasurementsScreen  from './inspection/MeasurementsScreen';
 import ReviewScreen        from './inspection/ReviewScreen';
+import * as syncManager from '../utils/syncManager';
 
 const API_BASE = 'https://spokeappraisal.com/api';
 
@@ -17,6 +18,32 @@ async function patchSection(id, section, data) {
     body: JSON.stringify({ section, data }),
   });
   if (!res.ok) throw new Error('Inspection save failed');
+}
+
+function replacePhotoUrl(data, localId, spacesUrl) {
+  const replace = (photos) =>
+    photos.map(p => p.id === localId ? { ...p, url: spacesUrl, synced: true } : p);
+
+  return {
+    ...data,
+    exterior: {
+      ...data.exterior,
+      photos: replace(data.exterior.photos),
+    },
+    floors: Object.fromEntries(
+      Object.entries(data.floors).map(([key, floor]) => [
+        key,
+        {
+          ...floor,
+          photos: replace(floor.photos),
+          rooms: floor.rooms.map(room => ({
+            ...room,
+            photos: replace(room.photos),
+          })),
+        },
+      ])
+    ),
+  };
 }
 
 function createNewInspection() {
@@ -104,6 +131,8 @@ function InspectionToolInner({ inspection, onBack, onComplete }) {
   const [data,        setData]        = useState(() => initInspection(inspection.workfile_data));
   const [uploading,   setUploading]   = useState({});
   const [saveStatus,  setSaveStatus]  = useState(null); // null | 'saving' | 'saved' | 'error'
+  const [syncStatus,  setSyncStatus]  = useState({ pending: 0, uploading: 0, failed: 0 });
+  const [isOffline,   setIsOffline]   = useState(!navigator.onLine);
 
   const saveTimer      = useRef(null);
   const saveClearTimer = useRef(null);
@@ -163,6 +192,39 @@ function InspectionToolInner({ inspection, onBack, onComplete }) {
     }
   }, [inspection.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    const handleOnline  = () => setIsOffline(false);
+    const handleOffline = () => setIsOffline(true);
+    window.addEventListener('online',  handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    syncManager.setOnPhotoSynced(({ local_id, spaces_url }) => {
+      setData(prev => {
+        const updated = replacePhotoUrl(prev, local_id, spaces_url);
+        // Persist the new Spaces URL to server after this render cycle
+        setTimeout(() => {
+          saveNow(updated).catch(err =>
+            console.error('Failed to persist synced photo URL:', err)
+          );
+        }, 0);
+        return updated;
+      });
+    });
+
+    syncManager.setOnStatusChange(async () => {
+      if (!mountedRef.current) return;
+      const status = await syncManager.getSyncStatus();
+      if (mountedRef.current) setSyncStatus(status);
+    });
+
+    return () => {
+      window.removeEventListener('online',  handleOnline);
+      window.removeEventListener('offline', handleOffline);
+      syncManager.setOnPhotoSynced(null);
+      syncManager.setOnStatusChange(null);
+    };
+  }, [saveNow]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const sharedProps = {
     inspection, data, updateData, saveNow,
     isDriveby, uploading, setUploading,
@@ -191,7 +253,29 @@ function InspectionToolInner({ inspection, onBack, onComplete }) {
         <ReviewScreen {...sharedProps} />
       )}
 
-      {/* Floating save status toast */}
+      {/* Sync status toast — stacks above the save toast */}
+      {isOffline && (
+        <div className="it-save-toast it-save-toast--offline it-sync-toast">
+          📵 Offline — photos saved locally
+        </div>
+      )}
+      {!isOffline && syncStatus.uploading > 0 && (
+        <div className="it-save-toast it-save-toast--syncing it-sync-toast">
+          ⬆️ Uploading photos…
+        </div>
+      )}
+      {!isOffline && syncStatus.uploading === 0 && syncStatus.pending > 0 && (
+        <div className="it-save-toast it-save-toast--pending it-sync-toast">
+          ☁️ {syncStatus.pending} photo{syncStatus.pending !== 1 ? 's' : ''} pending sync
+        </div>
+      )}
+      {!isOffline && syncStatus.failed > 0 && (
+        <div className="it-save-toast it-save-toast--error it-sync-toast">
+          ⚠ {syncStatus.failed} photo{syncStatus.failed !== 1 ? 's' : ''} failed to upload
+        </div>
+      )}
+
+      {/* Save status toast */}
       {saveStatus && (
         <div className={`it-save-toast it-save-toast--${saveStatus}`}>
           {saveStatus === 'saving' && 'Saving…'}

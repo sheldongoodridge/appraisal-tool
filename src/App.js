@@ -24,6 +24,7 @@ import AcceptInvite from './components/AcceptInvite';
 import WorkfileHub from './components/WorkfileHub';
 import NewWorkfileModal from './components/NewWorkfileModal';
 import InspectionTool from './components/InspectionTool';
+import * as syncManager from './utils/syncManager';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -226,6 +227,8 @@ useEffect(() => {
       setCurrentUser(user);
       setIsLoggedIn(true);
       await loadInspectionsFromCloud();
+      syncManager.startBackgroundSync();
+      syncManager.processPendingQueue();
     }
     setLoading(false);
   };
@@ -256,6 +259,7 @@ const handleWorkfileCreated = async (newInspection) => {
 };
 
 const handleLogout = () => {
+  syncManager.stopBackgroundSync();
   clearAuthToken();
   localStorage.removeItem('user');
   setIsLoggedIn(false);

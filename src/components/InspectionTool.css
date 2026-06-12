@@ -1080,6 +1080,12 @@
   pointer-events: auto;
   cursor: default;
 }
+.it-save-toast--offline { background: #e67e22; color: #fff; }
+.it-save-toast--syncing { background: #2980b9; color: #fff; }
+.it-save-toast--pending { background: #7f8c8d; color: #fff; }
+
+/* Sync toast sits above the save toast */
+.it-sync-toast { bottom: 72px; }
 
 /* ── Error boundary screen ── */
 .it-error-screen {
