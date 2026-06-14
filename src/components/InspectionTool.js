@@ -50,21 +50,21 @@ function replacePhotoUrl(data, localId, spacesUrl) {
 // via React state and IndexedDB; the server stores null until the Spaces URL is ready.
 function sanitizeForSave(data) {
   const clean = (photos) =>
-    photos.map(p => p.url?.startsWith('blob:') ? { ...p, url: null } : p);
+    (photos || []).map(p => p.url?.startsWith('blob:') ? { ...p, url: null } : p);
 
   return {
     ...data,
     exterior: {
       ...data.exterior,
-      photos: clean(data.exterior.photos),
+      photos: clean(data.exterior?.photos),
     },
     floors: Object.fromEntries(
-      Object.entries(data.floors).map(([key, floor]) => [
+      Object.entries(data.floors || {}).map(([key, floor]) => [
         key,
         {
           ...floor,
           photos: clean(floor.photos),
-          rooms: floor.rooms.map(room => ({
+          rooms: (floor.rooms || []).map(room => ({
             ...room,
             photos: clean(room.photos),
           })),

@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { getPhotos } from '../services/api';
+import { useState } from 'react';
 import './PhotosPage.css';
 
 const FLOOR_DISPLAY = {
@@ -38,32 +37,9 @@ function collectPhotos(workfileData) {
 }
 
 export default function PhotosPage({ inspection, onBack }) {
-  const [legacyPhotos, setLegacyPhotos] = useState([]);
-  const [filterLabel,  setFilterLabel]  = useState('All');
+  const [filterLabel, setFilterLabel] = useState('All');
 
-  useEffect(() => {
-    getPhotos(inspection.id)
-      .then(setLegacyPhotos)
-      .catch(() => {});
-  }, [inspection.id]);
-
-  const newPhotos = collectPhotos(inspection.workfile_data);
-
-  // Only fall back to legacy photos when the new inspection system has none.
-  // When both sources exist, the same upload appears in both tables (room='inspection'
-  // in the legacy table), so mixing them produces duplicates with wrong labels.
-  const legacyMapped = newPhotos.length === 0
-    ? legacyPhotos.map(p => ({
-        id:           String(p.id),
-        url:          p.file_path,
-        roomLabel:    p.room || 'Untagged',
-        floorDisplay: 'Legacy',
-        notes:        p.notes || '',
-        synced:       true,
-      }))
-    : [];
-
-  const allPhotos = [...newPhotos, ...legacyMapped];
+  const allPhotos = collectPhotos(inspection.workfile_data);
   const allLabels = ['All', ...new Set(allPhotos.map(p => p.roomLabel).filter(Boolean))];
   const filtered  = filterLabel === 'All' ? allPhotos : allPhotos.filter(p => p.roomLabel === filterLabel);
   const pendingCt = filtered.filter(p => p.url?.startsWith('blob:')).length;

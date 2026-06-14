@@ -100,6 +100,20 @@ export default function WorkfileHub({ inspection, onInspectionUpdate, onNavigate
       .catch(() => {});
   }, []);
 
+  // Auto-initialize workfile_data on the server when a workfile has never been
+  // opened in WorkfileHub (empty object coming from legacy or brand-new creation).
+  useEffect(() => {
+    const wd = inspection?.workfile_data;
+    if (!wd || Object.keys(wd).length === 0) {
+      Promise.all([
+        patchSection(id, 'order',    DEFAULT_WF.order),
+        patchSection(id, 'contacts', DEFAULT_WF.contacts),
+        patchSection(id, 'property', DEFAULT_WF.property),
+        patchSection(id, 'site',     DEFAULT_WF.site),
+      ]).catch(() => {});
+    }
+  }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
+
   useEffect(() => () => {
     Object.values(sectionTimers.current).forEach(clearTimeout);
     clearTimeout(propTimer.current);
