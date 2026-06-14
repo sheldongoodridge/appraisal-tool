@@ -371,7 +371,10 @@ return (
             <InspectionTool
               inspection={activeInspection}
               onBack={() => setCurrentView('workfile-hub')}
-              onComplete={loadInspectionsFromCloud}
+              onComplete={async () => {
+                await loadInspectionsFromCloud();
+                setCurrentView('workfile-hub');
+              }}
             />
           )}
         </main>

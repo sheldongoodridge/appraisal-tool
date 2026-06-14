@@ -120,6 +120,13 @@ function createNewInspection() {
   };
 }
 
+// Ensure a photos array is always a proper array — null/undefined from the server
+// causes spread to win over the default [] and crashes any .length or [...arr] call.
+function safePhotos(arr) { return Array.isArray(arr) ? arr : []; }
+function safeRooms(arr)  {
+  return (Array.isArray(arr) ? arr : []).map(r => ({ ...r, photos: safePhotos(r.photos) }));
+}
+
 function initInspection(workfileData) {
   const existing = workfileData?.inspections?.[0];
   if (!existing) return createNewInspection();
@@ -127,26 +134,30 @@ function initInspection(workfileData) {
   // Deep-merge with defaults so screens never crash on missing fields
   // (older inspections may lack measurements, systems, has_garage, etc.)
   const def = createNewInspection();
+  const ef  = existing.floors ?? {};
   return {
     ...def,
     ...existing,
     exterior: {
       ...def.exterior,
       ...(existing.exterior ?? {}),
+      photos:  safePhotos(existing.exterior?.photos),
       parking: { ...def.exterior.parking, ...(existing.exterior?.parking ?? {}) },
     },
     floors: {
       ...def.floors,
-      ...(existing.floors ?? {}),
+      ...ef,
       basement: {
         ...def.floors.basement,
-        ...(existing.floors?.basement ?? {}),
-        systems: { ...def.floors.basement.systems, ...(existing.floors?.basement?.systems ?? {}) },
+        ...(ef.basement ?? {}),
+        photos:  safePhotos(ef.basement?.photos),
+        rooms:   safeRooms(ef.basement?.rooms),
+        systems: { ...def.floors.basement.systems, ...(ef.basement?.systems ?? {}) },
       },
-      main:   { ...def.floors.main,   ...(existing.floors?.main   ?? {}) },
-      second: { ...def.floors.second, ...(existing.floors?.second ?? {}) },
-      third:  { ...def.floors.third,  ...(existing.floors?.third  ?? {}) },
-      fourth: { ...def.floors.fourth, ...(existing.floors?.fourth ?? {}) },
+      main:   { ...def.floors.main,   ...(ef.main   ?? {}), photos: safePhotos(ef.main?.photos),   rooms: safeRooms(ef.main?.rooms)   },
+      second: { ...def.floors.second, ...(ef.second ?? {}), photos: safePhotos(ef.second?.photos), rooms: safeRooms(ef.second?.rooms) },
+      third:  { ...def.floors.third,  ...(ef.third  ?? {}), photos: safePhotos(ef.third?.photos),  rooms: safeRooms(ef.third?.rooms)  },
+      fourth: { ...def.floors.fourth, ...(ef.fourth ?? {}), photos: safePhotos(ef.fourth?.photos), rooms: safeRooms(ef.fourth?.rooms) },
     },
     measurements: { ...def.measurements, ...(existing.measurements ?? {}) },
   };
