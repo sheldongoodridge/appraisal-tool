@@ -3,9 +3,9 @@ import { uploadPhoto } from '../../services/api';
 import { addToQueue } from '../../utils/photoQueue';
 import { processPendingQueue } from '../../utils/syncManager';
 
-// iOS Safari navigates away (full page reload) when capture="environment" is used.
-// On iOS we omit capture and let the system photo sheet offer both camera and library.
-const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+// Mobile browsers (iOS + Android) can reload the page when capture="environment" triggers
+// the camera intent. Without capture, the system photo sheet is used instead — no reload.
+const isMobile = /iPad|iPhone|iPod|Android/i.test(navigator.userAgent) ||
   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
 const FLOORING_TYPES = [
@@ -148,6 +148,28 @@ export default function PhotoCapture({
     !(selected === 'Other' && !otherText.trim()) &&
     !(needsNotes && !notes.trim());
 
+  // File inputs live here permanently — never unmounted — so cameraRef is always valid
+  // and Android Chrome can redeliver a file to a known DOM element after a page reload.
+  const fileInputs = (
+    <>
+      <input
+        ref={cameraRef}
+        type="file"
+        accept="image/*"
+        {...(!isMobile && { capture: 'environment' })}
+        style={{ display: 'none' }}
+        onChange={e => { handleFile(e.target.files?.[0]); e.target.value = ''; }}
+      />
+      <input
+        ref={fileRef}
+        type="file"
+        accept="image/*"
+        style={{ display: 'none' }}
+        onChange={e => { handleFile(e.target.files?.[0]); e.target.value = ''; }}
+      />
+    </>
+  );
+
   // ── Label panel (shown immediately after file selection) ──
   if (inLabel && pending) {
     return (
@@ -224,6 +246,8 @@ export default function PhotoCapture({
         <button className="it-skip-btn" onClick={handleSkip} disabled={saving}>
           Skip label
         </button>
+
+        {fileInputs}
       </div>
     );
   }
@@ -239,21 +263,7 @@ export default function PhotoCapture({
         📁 Upload Photo
       </button>
 
-      <input
-        ref={cameraRef}
-        type="file"
-        accept="image/*"
-        {...(!isIOS && { capture: 'environment' })}
-        style={{ display: 'none' }}
-        onChange={e => { handleFile(e.target.files?.[0]); e.target.value = ''; }}
-      />
-      <input
-        ref={fileRef}
-        type="file"
-        accept="image/*"
-        style={{ display: 'none' }}
-        onChange={e => { handleFile(e.target.files?.[0]); e.target.value = ''; }}
-      />
+      {fileInputs}
     </div>
   );
 }
