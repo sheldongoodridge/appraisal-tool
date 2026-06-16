@@ -22,7 +22,11 @@ async function patchSection(id, section, data) {
 
 function replacePhotoUrl(data, localId, spacesUrl) {
   const replace = (photos) =>
-    (photos || []).map(p => p.id === localId ? { ...p, url: spacesUrl, synced: true } : p);
+    (photos || []).map(p => {
+      if (p.id !== localId) return p;
+      if (p.url?.startsWith('blob:')) URL.revokeObjectURL(p.url);
+      return { ...p, url: spacesUrl, synced: true };
+    });
 
   return {
     ...data,
@@ -176,15 +180,31 @@ function InspectionToolInner({ inspection, onBack, onComplete }) {
   const saveTimer      = useRef(null);
   const saveClearTimer = useRef(null);
   const mountedRef     = useRef(true);
+  const dataRef        = useRef(data); // kept current so cleanup can revoke blob URLs
 
   // Persist screen position so Android camera page-reloads restore to the right screen.
   useEffect(() => { sessionStorage.setItem('inspectionScreen', screen);      }, [screen]);
   useEffect(() => { sessionStorage.setItem('inspectionFloor',  activeFloor); }, [activeFloor]);
 
+  // Keep dataRef in sync so the unmount closure always sees the latest state.
+  useEffect(() => { dataRef.current = data; });
+
   useEffect(() => () => {
     mountedRef.current = false;
     clearTimeout(saveTimer.current);
     clearTimeout(saveClearTimer.current);
+    // Revoke any blob URLs still held in state — sync may not have completed yet.
+    const d = dataRef.current;
+    if (d) {
+      const allPhotos = [
+        ...(d.exterior?.photos || []),
+        ...Object.values(d.floors || {}).flatMap(f => [
+          ...(f.photos || []),
+          ...(f.rooms  || []).flatMap(r => r.photos || []),
+        ]),
+      ];
+      allPhotos.forEach(p => { if (p?.url?.startsWith('blob:')) URL.revokeObjectURL(p.url); });
+    }
   }, []);
 
   const markSaved = () => {

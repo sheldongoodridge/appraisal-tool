@@ -43,6 +43,8 @@ export default function PhotoCapture({
   // File selected — save blob locally and enter label mode immediately (no upload wait)
   const handleFile = (file) => {
     if (!file) return;
+    // Revoke any previous pending preview that was never saved (user re-selected before labeling)
+    if (pending?.preview) URL.revokeObjectURL(pending.preview);
     setPending({ file, preview: URL.createObjectURL(file) });
     enterLabelMode();
   };
