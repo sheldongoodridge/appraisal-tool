@@ -165,8 +165,8 @@ function initInspection(workfileData) {
 
 function InspectionToolInner({ inspection, onBack, onComplete }) {
   const isDriveby     = inspection.property_data?.appraisalType === 'Drive-By';
-  const [screen,      setScreen]      = useState('start');
-  const [activeFloor, setActiveFloor] = useState('main');
+  const [screen,      setScreen]      = useState(() => sessionStorage.getItem('inspectionScreen') || 'start');
+  const [activeFloor, setActiveFloor] = useState(() => sessionStorage.getItem('inspectionFloor') || 'main');
   const [data,        setData]        = useState(() => initInspection(inspection.workfile_data));
   const [uploading,   setUploading]   = useState({});
   const [saveStatus,  setSaveStatus]  = useState(null); // null | 'saving' | 'saved' | 'error'
@@ -176,6 +176,10 @@ function InspectionToolInner({ inspection, onBack, onComplete }) {
   const saveTimer      = useRef(null);
   const saveClearTimer = useRef(null);
   const mountedRef     = useRef(true);
+
+  // Persist screen position so Android camera page-reloads restore to the right screen.
+  useEffect(() => { sessionStorage.setItem('inspectionScreen', screen);      }, [screen]);
+  useEffect(() => { sessionStorage.setItem('inspectionFloor',  activeFloor); }, [activeFloor]);
 
   useEffect(() => () => {
     mountedRef.current = false;
@@ -257,17 +261,29 @@ function InspectionToolInner({ inspection, onBack, onComplete }) {
     };
   }, [updateData]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const clearScreenSession = () => {
+    sessionStorage.removeItem('inspectionScreen');
+    sessionStorage.removeItem('inspectionFloor');
+  };
+
+  const handleBack = () => { clearScreenSession(); onBack(); };
+
+  const handleComplete = async (updated) => {
+    clearScreenSession();
+    if (onComplete) await onComplete(updated);
+  };
+
   const sharedProps = {
     inspection, data, updateData, saveNow,
     isDriveby, uploading, setUploading,
     activeFloor, setActiveFloor, setScreen,
-    onComplete,
+    onComplete: handleComplete,
   };
 
   return (
     <div className="it-overlay">
       {screen === 'start' && (
-        <StartScreen {...sharedProps} onBack={onBack} />
+        <StartScreen {...sharedProps} onBack={handleBack} />
       )}
       {screen === 'exterior' && (
         <ExteriorScreen {...sharedProps} />
