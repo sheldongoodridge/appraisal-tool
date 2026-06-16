@@ -26,16 +26,34 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [inspections, setInspections] = useState([]);
-  const [currentInspection, setCurrentInspection] = useState(null);
+  const [currentInspection, setCurrentInspection] = useState(() => {
+    const saved = sessionStorage.getItem('currentInspection');
+    return saved ? Number(saved) : null;
+  });
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showNewWorkfileModal, setShowNewWorkfileModal] = useState(false);
-  const [currentView, setCurrentView] = useState('workfiles');
+  const [currentView, setCurrentView] = useState(() => {
+    return sessionStorage.getItem('currentView') || 'workfiles';
+  });
   const [inviteToken, setInviteToken] = useState(null);
   const [propertySearchQuery, setPropertySearchQuery] = useState('');
   const [propertySearchResults, setPropertySearchResults] = useState([]);
   const [propertyDetailId, setPropertyDetailId] = useState(null);
   const [workfileSearch, setWorkfileSearch] = useState('');
   const [workfileFilter, setWorkfileFilter] = useState('active');
+
+// Persist navigation position so iOS camera page-reloads restore to the right place.
+useEffect(() => {
+  if (currentView) sessionStorage.setItem('currentView', currentView);
+}, [currentView]);
+
+useEffect(() => {
+  if (currentInspection != null) {
+    sessionStorage.setItem('currentInspection', String(currentInspection));
+  } else {
+    sessionStorage.removeItem('currentInspection');
+  }
+}, [currentInspection]);
 
 useEffect(() => {
   const checkAuth = async () => {
@@ -84,6 +102,8 @@ const handleLogout = () => {
   syncManager.stopBackgroundSync();
   clearAuthToken();
   localStorage.removeItem('user');
+  sessionStorage.removeItem('currentView');
+  sessionStorage.removeItem('currentInspection');
   setIsLoggedIn(false);
   setCurrentUser(null);
   setInspections([]);

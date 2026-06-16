@@ -3,6 +3,11 @@ import { uploadPhoto } from '../../services/api';
 import { addToQueue } from '../../utils/photoQueue';
 import { processPendingQueue } from '../../utils/syncManager';
 
+// iOS Safari navigates away (full page reload) when capture="environment" is used.
+// On iOS we omit capture and let the system photo sheet offer both camera and library.
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
 const FLOORING_TYPES = [
   'Hardwood', 'Laminate', 'Engineered Hardwood',
   'Vinyl Plank', 'Tile', 'Carpet',
@@ -238,7 +243,7 @@ export default function PhotoCapture({
         ref={cameraRef}
         type="file"
         accept="image/*"
-        capture="environment"
+        {...(!isIOS && { capture: 'environment' })}
         style={{ display: 'none' }}
         onChange={e => { handleFile(e.target.files?.[0]); e.target.value = ''; }}
       />
