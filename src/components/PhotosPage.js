@@ -105,11 +105,13 @@ export default function PhotosPage({ inspection, onBack }) {
           {filtered.map(photo => (
             <div key={photo.id} className="pp-card">
               <div className="pp-thumb-wrap">
-                {photo.url
+                {photo.url && !photo.url.startsWith('blob:')
                   ? <img src={photo.url} alt={photo.roomLabel} className="pp-thumb" />
-                  : <div className="pp-thumb-placeholder">📷</div>
+                  : <div className="pp-thumb-placeholder">
+                      {photo.url?.startsWith('blob:') ? '📷' : '⏳'}
+                    </div>
                 }
-                {photo.url?.startsWith('blob:') && (
+                {(!photo.url || photo.url.startsWith('blob:')) && (
                   <div className="pp-pending-badge">☁️</div>
                 )}
               </div>

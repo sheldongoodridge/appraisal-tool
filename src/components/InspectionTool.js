@@ -22,21 +22,21 @@ async function patchSection(id, section, data) {
 
 function replacePhotoUrl(data, localId, spacesUrl) {
   const replace = (photos) =>
-    photos.map(p => p.id === localId ? { ...p, url: spacesUrl, synced: true } : p);
+    (photos || []).map(p => p.id === localId ? { ...p, url: spacesUrl, synced: true } : p);
 
   return {
     ...data,
     exterior: {
       ...data.exterior,
-      photos: replace(data.exterior.photos),
+      photos: replace(data.exterior?.photos),
     },
     floors: Object.fromEntries(
-      Object.entries(data.floors).map(([key, floor]) => [
+      Object.entries(data.floors || {}).map(([key, floor]) => [
         key,
         {
           ...floor,
           photos: replace(floor.photos),
-          rooms: floor.rooms.map(room => ({
+          rooms: (floor.rooms || []).map(room => ({
             ...room,
             photos: replace(room.photos),
           })),
