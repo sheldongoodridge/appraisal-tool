@@ -38,6 +38,17 @@ export default function CameraModal({ onCapture, onCancel, onFallback }) {
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width    = '100%';
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width    = '';
+    };
+  }, []);
+
   const handleFlip = async () => {
     if (!ready) return;
     stopStream();
