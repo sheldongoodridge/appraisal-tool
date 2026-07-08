@@ -41,11 +41,18 @@ function App() {
   const [propertyDetailId, setPropertyDetailId] = useState(null);
   const [workfileSearch, setWorkfileSearch] = useState('');
   const [workfileFilter, setWorkfileFilter] = useState('active');
+  const [sessionExpired, setSessionExpired] = useState(false);
 
 // Persist navigation position so iOS camera page-reloads restore to the right place.
 useEffect(() => {
   if (currentView) sessionStorage.setItem('currentView', currentView);
 }, [currentView]);
+
+useEffect(() => {
+  const handler = () => { if (isLoggedIn) setSessionExpired(true); };
+  window.addEventListener('session-expired', handler);
+  return () => window.removeEventListener('session-expired', handler);
+}, [isLoggedIn]);
 
 useEffect(() => {
   if (currentInspection != null) {
@@ -109,6 +116,18 @@ const handleLogout = () => {
   setInspections([]);
   setCurrentInspection(null);
   setCurrentView('workfiles');
+};
+
+// Called from the session-expired modal — preserves sessionStorage so the
+// user returns to where they were after re-login.
+const handleSessionExpiredLogin = () => {
+  syncManager.stopBackgroundSync();
+  clearAuthToken();
+  localStorage.removeItem('user');
+  setIsLoggedIn(false);
+  setCurrentUser(null);
+  setInspections([]);
+  setSessionExpired(false);
 };
 
 const loadInspection = (inspection) => {
@@ -407,6 +426,21 @@ return (
           onCreated={handleWorkfileCreated}
           onCancel={() => setShowNewWorkfileModal(false)}
         />
+      )}
+      {sessionExpired && (
+        <div className="modal-overlay session-expired-overlay">
+          <div className="modal-box session-expired-box">
+            <div className="session-expired-icon">🔒</div>
+            <h2 className="session-expired-title">Session Expired</h2>
+            <p className="session-expired-message">
+              Your session has expired.<br />
+              Please log in again to continue.
+            </p>
+            <button className="btn btn-primary session-expired-btn" onClick={handleSessionExpiredLogin}>
+              Log In Again
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

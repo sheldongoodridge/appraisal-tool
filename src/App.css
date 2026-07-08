@@ -1494,3 +1494,45 @@ textarea:focus {
 
 .suggestion-address { font-size: 13px; font-weight: 600; color: #13294B; }
 .suggestion-meta    { font-size: 11px; color: #9ca3af; margin-top: 2px; }
+
+/* ── Session Expired Modal ── */
+.session-expired-overlay {
+  z-index: 9999;
+}
+
+.session-expired-box {
+  max-width: 360px;
+  text-align: center;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.session-expired-icon {
+  font-size: 40px;
+  line-height: 1;
+}
+
+.session-expired-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #13294B;
+}
+
+.session-expired-message {
+  margin: 0;
+  font-size: 15px;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.session-expired-btn {
+  margin-top: 8px;
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+}

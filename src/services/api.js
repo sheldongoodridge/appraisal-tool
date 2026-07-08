@@ -37,6 +37,17 @@ apiClient.interceptors.request.use((config) => {
   return config;
 });
 
+// Fire session-expired event on 401 so App.js can show the modal
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      window.dispatchEvent(new CustomEvent('session-expired'));
+    }
+    return Promise.reject(error);
+  }
+);
+
 // Auth endpoints
 export const signup = async (email, password, fullName) => {
   const response = await axios.post(`${API_URL}/auth/signup`, {

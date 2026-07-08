@@ -2,11 +2,15 @@ import { useState, useRef } from 'react';
 import { uploadPhoto } from '../../services/api';
 import { addToQueue } from '../../utils/photoQueue';
 import { processPendingQueue } from '../../utils/syncManager';
+import CameraModal from './CameraModal';
 
 // Mobile browsers (iOS + Android) can reload the page when capture="environment" triggers
 // the camera intent. Without capture, the system photo sheet is used instead — no reload.
 const isMobile = /iPad|iPhone|iPod|Android/i.test(navigator.userAgent) ||
   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+// Android gets the in-browser getUserMedia camera to avoid Samsung Internet page-reload bug.
+const isAndroid = /Android/i.test(navigator.userAgent);
 
 const FLOORING_TYPES = [
   'Hardwood', 'Laminate', 'Engineered Hardwood',
@@ -33,6 +37,7 @@ export default function PhotoCapture({
   const [flooringOther, setFlooringOther] = useState('');
   const [notes,         setNotes]         = useState('');
   const [saving,        setSaving]        = useState(false);
+  const [showCamera,    setShowCamera]    = useState(false);
 
   const cameraRef = useRef(null);
   const fileRef   = useRef(null);
@@ -172,100 +177,112 @@ export default function PhotoCapture({
     </>
   );
 
-  // ── Label panel (shown immediately after file selection) ──
-  if (inLabel && pending) {
-    return (
-      <div className="it-label-panel">
-        <div className="it-label-preview-wrap">
-          <img src={pending.preview} alt="captured" className="it-label-preview-img" />
-        </div>
-
-        <p className="it-label-prompt">Label this photo:</p>
-
-        <div className="it-label-chips">
-          {labels.map(l => (
-            <button
-              key={l}
-              className={`it-label-chip ${selected === l ? 'selected' : ''}`}
-              onClick={() => { setSelected(selected === l ? '' : l); setFlooring(''); setFlooringOther(''); }}
-            >{l}</button>
-          ))}
-        </div>
-
-        {selected === 'Other' && (
-          <input
-            type="text"
-            className="it-label-other-input"
-            placeholder="Describe this photo…"
-            value={otherText}
-            onChange={e => setOtherText(e.target.value)}
-            autoFocus
-          />
-        )}
-
-        {needsFlooring && (
-          <div className="it-label-field">
-            <span className="it-label-sublabel">Flooring</span>
-            <select
-              className="it-select"
-              value={flooring}
-              onChange={e => { setFlooring(e.target.value); setFlooringOther(''); }}
-            >
-              <option value="">— Select flooring —</option>
-              {FLOORING_TYPES.map(f => <option key={f}>{f}</option>)}
-            </select>
-            {flooring === 'Other' && (
-              <input
-                type="text"
-                className="it-other-input"
-                placeholder="Describe flooring…"
-                value={flooringOther}
-                onChange={e => setFlooringOther(e.target.value)}
-              />
-            )}
-          </div>
-        )}
-
-        {needsNotes && (
-          <p className="it-required-note-hint">↓ Notes are required for deficiencies</p>
-        )}
-        <textarea
-          className="it-label-notes"
-          placeholder={needsNotes ? 'Describe the deficiency…' : 'Notes (optional)'}
-          rows={2}
-          value={notes}
-          onChange={e => setNotes(e.target.value)}
-        />
-
-        <button
-          className="it-save-photo-btn"
-          onClick={handleSave}
-          disabled={!canSave || saving}
-        >
-          {saving ? 'Saving…' : '✓ Save Photo & Label'}
-        </button>
-
-        <button className="it-skip-btn" onClick={handleSkip} disabled={saving}>
-          Skip label
-        </button>
-
-        {fileInputs}
-      </div>
-    );
-  }
-
-  // ── Capture buttons ──
   return (
-    <div className="it-photo-capture">
-      <button className="it-capture-btn" onClick={() => cameraRef.current?.click()}>
-        📷 Take Photo
-      </button>
+    <>
+      {showCamera && (
+        <CameraModal
+          onCapture={blob => {
+            setShowCamera(false);
+            handleFile(new File([blob], `photo_${Date.now()}.jpg`, { type: 'image/jpeg' }));
+          }}
+          onCancel={() => setShowCamera(false)}
+          onFallback={() => { setShowCamera(false); cameraRef.current?.click(); }}
+        />
+      )}
 
-      <button className="it-upload-btn" onClick={() => fileRef.current?.click()}>
-        📁 Upload Photo
-      </button>
+      {inLabel && pending ? (
+        <div className="it-label-panel">
+          <div className="it-label-preview-wrap">
+            <img src={pending.preview} alt="captured" className="it-label-preview-img" />
+          </div>
 
-      {fileInputs}
-    </div>
+          <p className="it-label-prompt">Label this photo:</p>
+
+          <div className="it-label-chips">
+            {labels.map(l => (
+              <button
+                key={l}
+                className={`it-label-chip ${selected === l ? 'selected' : ''}`}
+                onClick={() => { setSelected(selected === l ? '' : l); setFlooring(''); setFlooringOther(''); }}
+              >{l}</button>
+            ))}
+          </div>
+
+          {selected === 'Other' && (
+            <input
+              type="text"
+              className="it-label-other-input"
+              placeholder="Describe this photo…"
+              value={otherText}
+              onChange={e => setOtherText(e.target.value)}
+              autoFocus
+            />
+          )}
+
+          {needsFlooring && (
+            <div className="it-label-field">
+              <span className="it-label-sublabel">Flooring</span>
+              <select
+                className="it-select"
+                value={flooring}
+                onChange={e => { setFlooring(e.target.value); setFlooringOther(''); }}
+              >
+                <option value="">— Select flooring —</option>
+                {FLOORING_TYPES.map(f => <option key={f}>{f}</option>)}
+              </select>
+              {flooring === 'Other' && (
+                <input
+                  type="text"
+                  className="it-other-input"
+                  placeholder="Describe flooring…"
+                  value={flooringOther}
+                  onChange={e => setFlooringOther(e.target.value)}
+                />
+              )}
+            </div>
+          )}
+
+          {needsNotes && (
+            <p className="it-required-note-hint">↓ Notes are required for deficiencies</p>
+          )}
+          <textarea
+            className="it-label-notes"
+            placeholder={needsNotes ? 'Describe the deficiency…' : 'Notes (optional)'}
+            rows={2}
+            value={notes}
+            onChange={e => setNotes(e.target.value)}
+          />
+
+          <button
+            className="it-save-photo-btn"
+            onClick={handleSave}
+            disabled={!canSave || saving}
+          >
+            {saving ? 'Saving…' : '✓ Save Photo & Label'}
+          </button>
+
+          <button className="it-skip-btn" onClick={handleSkip} disabled={saving}>
+            Skip label
+          </button>
+
+          {fileInputs}
+        </div>
+      ) : (
+        <div className="it-photo-capture">
+          <button
+            className="it-capture-btn"
+            onClick={() => isAndroid ? setShowCamera(true) : cameraRef.current?.click()}
+          >
+            📷 Take Photo
+          </button>
+
+          <button className="it-upload-btn" onClick={() => fileRef.current?.click()}>
+            📁 Upload Photo
+          </button>
+
+          {fileInputs}
+        </div>
+      )}
+    </>
   );
 }
