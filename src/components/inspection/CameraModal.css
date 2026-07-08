@@ -2,16 +2,22 @@
 .cam-overlay {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh; /* dynamic viewport height — accounts for mobile browser chrome */
   background: #000;
   z-index: 8000;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .cam-video {
   flex: 1;
+  min-height: 0; /* critical — allows flex child to shrink below content size */
   width: 100%;
   object-fit: cover;
+  overflow: hidden;
 }
 
 .cam-loading {
@@ -25,10 +31,12 @@
 }
 
 .cam-controls {
+  flex-shrink: 0; /* never shrink controls off screen */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 32px 44px; /* 44px bottom clears home indicator */
+  padding: 20px 32px;
+  padding-bottom: max(20px, env(safe-area-inset-bottom, 44px)); /* home indicator + gesture bar */
   background: rgba(0, 0, 0, 0.6);
 }
 
