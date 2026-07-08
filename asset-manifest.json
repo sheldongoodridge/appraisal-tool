@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/appraisal-tool/static/css/main.74a8ef62.css",
-    "main.js": "/appraisal-tool/static/js/main.45edc57c.js",
+    "main.css": "/appraisal-tool/static/css/main.fd785472.css",
+    "main.js": "/appraisal-tool/static/js/main.1feb2324.js",
     "static/js/453.a5f86340.chunk.js": "/appraisal-tool/static/js/453.a5f86340.chunk.js",
     "index.html": "/appraisal-tool/index.html",
     "static/media/logo-white.svg": "/appraisal-tool/static/media/logo-white.edf6e8d41a16ff95798ca4dbf3d1f0d5.svg",
-    "main.74a8ef62.css.map": "/appraisal-tool/static/css/main.74a8ef62.css.map",
-    "main.45edc57c.js.map": "/appraisal-tool/static/js/main.45edc57c.js.map",
+    "main.fd785472.css.map": "/appraisal-tool/static/css/main.fd785472.css.map",
+    "main.1feb2324.js.map": "/appraisal-tool/static/js/main.1feb2324.js.map",
     "453.a5f86340.chunk.js.map": "/appraisal-tool/static/js/453.a5f86340.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.74a8ef62.css",
-    "static/js/main.45edc57c.js"
+    "static/css/main.fd785472.css",
+    "static/js/main.1feb2324.js"
   ]
 }
