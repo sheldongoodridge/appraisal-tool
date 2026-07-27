@@ -317,5 +317,23 @@ export const DEFAULT_REPORT = {
   },
   narrative: {
     included: false, content: "", content2: ""
+  },
+  parties: {
+    client: {
+      name: "", attention: "", address: "",
+      email: "", phone: "", fax: ""
+    },
+    appraiser: {
+      name: "", company: "", address: "",
+      email: "", phone: "", fax: "",
+      membership_number: "", designation: "", province: ""
+    },
+    cosigner: {
+      enabled: false,
+      name: "", designation: "", membership_number: "",
+      date_inspection: null, date_report: null,
+      professional_assistance: "N/A",
+      professional_assistance_text: ""
+    }
   }
 };

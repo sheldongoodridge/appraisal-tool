@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { getOrganization, updateOrganization, sendInvite, getWorkfileSettings, saveWorkfileSettings } from '../services/api';
+import { getOrganization, updateOrganization, sendInvite, getWorkfileSettings, saveWorkfileSettings, updateProfile } from '../services/api';
 
-const PLAN_LABELS = { solo: 'Solo', solo_plus: 'Solo+', team: 'Team' };
+const PLAN_LABELS   = { solo: 'Solo', solo_plus: 'Solo+', team: 'Team' };
+const DESIGNATIONS  = ['', 'CRA', 'P.App.', 'AACI', 'Candidate', 'Other'];
 const ROLE_LABELS = { org_admin: 'Admin', appraiser: 'Appraiser', assistant: 'Assistant', platform_admin: 'Platform Admin' };
 const ROLE_COLORS = { org_admin: '#3b82f6', appraiser: '#22c55e', assistant: '#f97316', platform_admin: '#8b5cf6' };
 
@@ -21,6 +22,38 @@ function buildFileNumberPreview({ prefix, current_number, separator, year_format
 }
 
 export default function AccountSettings({ currentUser, onUserUpdate }) {
+  // ── My Profile ──
+  const [profileFields, setProfileFields] = useState({
+    full_name:         currentUser?.full_name         || '',
+    company:           currentUser?.company           || '',
+    address:           currentUser?.address           || '',
+    phone:             currentUser?.phone             || '',
+    fax:               currentUser?.fax               || '',
+    aic_designation:   currentUser?.aic_designation   || '',
+    membership_number: currentUser?.membership_number || '',
+  });
+  const [profileSaving, setProfileSaving] = useState(false);
+  const [profileMsg,    setProfileMsg]    = useState('');
+
+  const handleSaveProfile = async () => {
+    setProfileSaving(true); setProfileMsg('');
+    try {
+      const updated = await updateProfile(profileFields);
+      // Persist to localStorage so currentUser stays fresh across page reloads
+      const stored = JSON.parse(localStorage.getItem('user') || '{}');
+      const merged = { ...stored, ...updated };
+      localStorage.setItem('user', JSON.stringify(merged));
+      onUserUpdate(merged);
+      setProfileMsg('Saved!');
+      setTimeout(() => setProfileMsg(''), 2500);
+    } catch {
+      setProfileMsg('Failed to save.');
+    } finally {
+      setProfileSaving(false);
+    }
+  };
+
+  // ── Organization ──
   const [orgData, setOrgData] = useState(null);
   const [members, setMembers] = useState([]);
   const [pendingInvites, setPendingInvites] = useState([]);
@@ -121,6 +154,67 @@ export default function AccountSettings({ currentUser, onUserUpdate }) {
   return (
     <div style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px' }}>
       <h2 style={{ marginBottom: 24 }}>Account Settings</h2>
+
+      {/* My Profile */}
+      <div className="form-section">
+        <div className="section-header" style={{ cursor: 'default' }}><h2>My Profile</h2></div>
+        <div className="section-content">
+          <p style={{ fontSize: 13, color: '#6b7280', marginTop: 0, marginBottom: 16 }}>
+            These details auto-fill into reports. Set them once and they'll appear on every report you generate.
+          </p>
+          <div className="form-row">
+            <div className="form-group">
+              <label>Full Name</label>
+              <input type="text" value={profileFields.full_name}
+                onChange={e => setProfileFields(p => ({ ...p, full_name: e.target.value }))} />
+            </div>
+            <div className="form-group">
+              <label>Company / Firm</label>
+              <input type="text" value={profileFields.company}
+                onChange={e => setProfileFields(p => ({ ...p, company: e.target.value }))} />
+            </div>
+          </div>
+          <div className="form-group">
+            <label>Address</label>
+            <input type="text" value={profileFields.address}
+              onChange={e => setProfileFields(p => ({ ...p, address: e.target.value }))} />
+          </div>
+          <div className="form-row">
+            <div className="form-group">
+              <label>Phone</label>
+              <input type="text" value={profileFields.phone}
+                onChange={e => setProfileFields(p => ({ ...p, phone: e.target.value }))} />
+            </div>
+            <div className="form-group">
+              <label>Fax</label>
+              <input type="text" value={profileFields.fax}
+                onChange={e => setProfileFields(p => ({ ...p, fax: e.target.value }))} />
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="form-group">
+              <label>AIC Designation</label>
+              <select value={profileFields.aic_designation}
+                onChange={e => setProfileFields(p => ({ ...p, aic_designation: e.target.value }))}>
+                {DESIGNATIONS.map(d => <option key={d} value={d}>{d || 'Select…'}</option>)}
+              </select>
+            </div>
+            <div className="form-group">
+              <label>AIC Membership #</label>
+              <input type="text" value={profileFields.membership_number}
+                onChange={e => setProfileFields(p => ({ ...p, membership_number: e.target.value }))} />
+            </div>
+          </div>
+          <button className="btn btn-primary" onClick={handleSaveProfile} disabled={profileSaving}>
+            {profileSaving ? 'Saving…' : 'Save Profile'}
+          </button>
+          {profileMsg && (
+            <span style={{ marginLeft: 12, color: profileMsg === 'Saved!' ? '#22c55e' : '#ef4444' }}>
+              {profileMsg}
+            </span>
+          )}
+        </div>
+      </div>
 
       {/* Organization */}
       <div className="form-section">

@@ -251,6 +251,17 @@ export const acceptInvite = async (token, data) => {
   return response.data;
 };
 
+// User profile
+export const getProfile = async () => {
+  const response = await apiClient.get('/auth/profile');
+  return response.data.user;
+};
+
+export const updateProfile = async (data) => {
+  const response = await apiClient.patch('/auth/profile', data);
+  return response.data.user;
+};
+
 // Workfile section patch
 export const patchWorkfileSection = async (id, section, data) => {
   const response = await apiClient.patch(`/inspections/${id}/workfile`, { section, data });

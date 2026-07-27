@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { DEFAULT_REPORT } from '../utils/defaultReport';
 import './ReportForm.css';
+import CoverTab from './report-tabs/CoverTab';
+import { getClients } from '../services/api';
 
 const API_BASE = 'https://spokeappraisal.com/api';
 
@@ -32,7 +34,7 @@ function normalizeUnit(u) {
   return 'Sq Ft';
 }
 
-function buildAutoFill(inspection) {
+function buildAutoFill(inspection, currentUser) {
   const wd       = inspection?.workfile_data ?? {};
   const order    = wd.order ?? {};
   const wfSite   = wd.site  ?? {};
@@ -54,16 +56,28 @@ function buildAutoFill(inspection) {
       zoning_code:   wfSite.zoning         ?? '',
     },
     improvements: {
-      design_style:     insp.dwelling_style    ?? '',
-      roofing_type:     exterior.roofing       ?? '',
-      exterior_finish:  exterior.cladding      ?? '',
-      windows_type:     exterior.windows       ?? '',
-      heating_system:   systems.heating        ?? '',
-      fuel_type:        systems.fuel           ?? '',
-      water_heater:     systems.water_heater   ?? '',
+      design_style:     insp.dwelling_style     ?? '',
+      roofing_type:     exterior.roofing        ?? '',
+      exterior_finish:  exterior.cladding       ?? '',
+      windows_type:     exterior.windows        ?? '',
+      heating_system:   systems.heating         ?? '',
+      fuel_type:        systems.fuel            ?? '',
+      water_heater:     systems.water_heater    ?? '',
       electrical_other: systems.electrical_type ?? '',
       panel_capacity:   systems.electrical_amps ?? '',
-      cooling_system:   systems.cooling        ?? '',
+      cooling_system:   systems.cooling         ?? '',
+    },
+    parties: {
+      appraiser: {
+        name:              currentUser?.full_name         ?? '',
+        company:           currentUser?.company           ?? '',
+        address:           currentUser?.address           ?? '',
+        email:             currentUser?.email             ?? '',
+        phone:             currentUser?.phone             ?? '',
+        fax:               currentUser?.fax               ?? '',
+        designation:       currentUser?.aic_designation   ?? '',
+        membership_number: currentUser?.membership_number ?? '',
+      },
     },
   };
 }
@@ -140,6 +154,37 @@ export default function ReportForm({ inspection, currentUser, onBack, onSave }) 
     setReportData(mergeReport(inspection?.workfile_data?.report));
   }, [inspection?.id]);
 
+  // Async: fetch the linked orderer client and populate parties.client
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    const orderer_id = inspection?.workfile_data?.order?.orderer_id;
+    if (!orderer_id) return;
+
+    getClients().then(clients => {
+      const match = clients.find(c => c.id === Number(orderer_id));
+      if (!match) return;
+      setReportData(prev => {
+        if (prev.parties?.client?.name) return prev; // already filled — don't clobber
+        const next = {
+          ...prev,
+          parties: {
+            ...prev.parties,
+            client: {
+              ...prev.parties.client,
+              name:      match.company_name  ?? '',
+              attention: match.contact_name  ?? '',
+              address:   match.address       ?? '',
+              email:     match.email         ?? '',
+              phone:     match.phone         ?? '',
+            },
+          },
+        };
+        triggerSave(next);
+        return next;
+      });
+    }).catch(() => {});
+  }, [inspection?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+
   useEffect(() => () => {
     clearTimeout(saveTimer.current);
     clearTimeout(toastTimer.current);
@@ -165,10 +210,43 @@ export default function ReportForm({ inspection, currentUser, onBack, onSave }) 
       triggerSave(next);
       return next;
     });
-  }, [triggerSave]); // eslint-disable-line no-unused-vars
+  }, [triggerSave]);
 
   const activeDef = TABS.find(t => t.id === activeTab);
   const address   = inspection?.property_data?.address || 'Draft Report';
+
+  function renderTab() {
+    switch (activeTab) {
+      case 'cover':
+        return (
+          <CoverTab
+            cover={reportData.cover}
+            summary={reportData.summary}
+            fullReport={reportData}
+            onCoverChange={d   => updateSection('cover',   d)}
+            onSummaryChange={d => updateSection('summary', d)}
+          />
+        );
+      case 'generate':
+        return (
+          <div className="rf-center-placeholder">
+            <div style={{ fontSize: 40, marginBottom: 12 }}>📄</div>
+            <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 8 }}>Generate Report</div>
+            <p style={{ color: '#6b7280' }}>PDF generation coming in a future session.</p>
+          </div>
+        );
+      default:
+        return (
+          <div className="rf-center-placeholder">
+            <div style={{ fontSize: 32, marginBottom: 8 }}>🚧</div>
+            <div style={{ fontWeight: 600, marginBottom: 4 }}>{activeDef?.label}</div>
+            <p style={{ fontSize: 13, color: '#9ca3af' }}>
+              Form fields coming in a future session.
+            </p>
+          </div>
+        );
+    }
+  }
 
   return (
     <div className="rf-page">
@@ -219,21 +297,7 @@ export default function ReportForm({ inspection, currentUser, onBack, onSave }) 
           )}
         </div>
 
-        {activeTab === 'generate' ? (
-          <div className="rf-center-placeholder">
-            <div style={{ fontSize: 40, marginBottom: 12 }}>📄</div>
-            <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 8 }}>Generate Report</div>
-            <p style={{ color: '#6b7280' }}>PDF generation coming in a future session.</p>
-          </div>
-        ) : (
-          <div className="rf-center-placeholder">
-            <div style={{ fontSize: 32, marginBottom: 8 }}>🚧</div>
-            <div style={{ fontWeight: 600, marginBottom: 4 }}>{activeDef?.label}</div>
-            <p style={{ fontSize: 13, color: '#9ca3af' }}>
-              Form fields coming in a future session.
-            </p>
-          </div>
-        )}
+        {renderTab()}
       </div>
 
       {/* ── TOAST ── */}
