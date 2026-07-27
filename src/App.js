@@ -8,6 +8,7 @@ import {
   getInspections,
   deleteInspection as deleteInspectionAPI,
   searchProperties,
+  patchWorkfileSection,
 } from './services/api';
 import ImportData from './components/ImportData';
 import ResponseLibrary from './components/ResponseLibrary';
@@ -19,6 +20,8 @@ import WorkfileHub from './components/WorkfileHub';
 import NewWorkfileModal from './components/NewWorkfileModal';
 import InspectionTool from './components/InspectionTool';
 import PhotosPage from './components/PhotosPage';
+import ReportPage from './components/ReportPage';
+import ReportForm from './components/ReportForm';
 import * as syncManager from './utils/syncManager';
 
 function App() {
@@ -158,6 +161,10 @@ const deleteInspection = async (id) => {
   const activeInspection = currentInspection
     ? inspections.find(i => i.id === currentInspection) ?? null
     : null;
+
+const handleSaveReportSection = async (data) => {
+  await patchWorkfileSection(currentInspection, 'report', data);
+};
 
 const filteredWorkfiles = inspections.filter(w => {
   const isClosed = w.property_data?.workflowStatus === 'closed';
@@ -393,6 +400,9 @@ return (
                 } else if (view === 'photos') {
                   await loadInspectionsFromCloud();
                   setCurrentView('photos-page');
+                } else if (view === 'report') {
+                  await loadInspectionsFromCloud();
+                  setCurrentView('report');
                 } else {
                   setCurrentView('workfile-hub');
                 }
@@ -402,6 +412,20 @@ return (
           )}
           {currentView === 'photos-page' && activeInspection && (
             <PhotosPage
+              inspection={activeInspection}
+              onBack={() => setCurrentView('workfile-hub')}
+            />
+          )}
+          {currentView === 'report' && activeInspection && (
+            <ReportForm
+              inspection={activeInspection}
+              currentUser={currentUser}
+              onBack={() => setCurrentView('workfile-hub')}
+              onSave={handleSaveReportSection}
+            />
+          )}
+          {currentView === 'report-page' && activeInspection && (
+            <ReportPage
               inspection={activeInspection}
               onBack={() => setCurrentView('workfile-hub')}
             />

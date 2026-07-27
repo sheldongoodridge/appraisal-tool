@@ -1,0 +1,1300 @@
+AIC FULL Form ENG — Organized Field List
+Total fields: 1,140
+===========================================
+
+================================================================================
+1. COVER / TRANSMITTAL
+================================================================================
+  Tx  | DateTransmittal
+  Tx  | Client Name
+  Tx  | LetterBody
+  Tx  | LetterBody2
+  Tx  | Construction Complete
+  Tx  | Additions Complete
+  Tx  | Improvement As Is
+  Sig | Signature1Transmittal
+  Sig | Signature2Transmittal
+  Btn | AppraiserLogo
+  Btn | TitlePhoto
+
+================================================================================
+2. EXECUTIVE SUMMARY
+================================================================================
+  Tx  | Report Date
+  Tx  | Report Warnings
+  Tx  | FinalValue
+  Tx  | DateReport
+  Tx  | Direct Comparison Value
+  Tx  | Direct Comparison Value As If Complete
+  Tx  | Exposure Analysis
+  Tx  | Exposure As If
+  Tx  | Reconciliation
+  Tx  | Range comment
+  Tx  | Trends
+
+================================================================================
+3. CLIENT / APPRAISER
+================================================================================
+  Tx  | Client
+  Tx  | ClientAttention
+  Tx  | ClientAddress
+  Tx  | ClientEmail
+  Tx  | ClientPhone
+  Tx  | ClientFax
+  Tx  | AIC Member
+  Tx  | MemberName1
+  Tx  | MemberName2
+  Tx  | MemberAddress
+  Tx  | MemberCompany
+  Tx  | E-mail
+  Tx  | Phone
+  Tx  | Fax
+  Tx  | Membership1
+  Tx  | Membership2
+  Ch  | Prov
+  Btn | AIC Designation 1
+  Btn | AIC Designation 2
+
+================================================================================
+4. SUBJECT / PROPERTY
+================================================================================
+  Tx  | Property Address
+  Tx  | File No
+  Tx  | City
+  Tx  | Postal Code
+  Tx  | Legal Description
+  Tx  | Location Name
+  Tx  | Municipality and District
+  Tx  | House Size
+  Tx  | Lot Size
+  Tx  | Year Built
+  Tx  | Additions
+  Tx  | Effective Age
+  Tx  | Taxes
+  Tx  | Total
+  Tx  | Source
+  Tx  | Reference
+  Tx  | Condo/Strate Complex Name
+  Tx  | Maintenance Fee
+  Tx  | Maintenance Fee Amount
+  Tx  | MaintenanceSource
+  Tx  | SubjectList
+  Tx  | Ass. date
+  Ch  | Tax Year
+  Ch  | AssessmentPhase
+  Ch  | PIN
+  Ch  | PropertyRightsOtherDropdown
+  Ch  | MaintenanceSpecial
+  Ch  | Occupiedby
+  Ch  | Name Type
+  Btn | Rights
+  Btn | FeeMonthAnnual
+  Unknown | Ass
+
+================================================================================
+5. ASSIGNMENT
+================================================================================
+  Tx  | Assignment Name
+  Tx  | Inspection Date
+  Tx  | Effective Date
+  Tx  | EffectiveDateUpdate
+  Tx  | File No Old
+  Tx  | Complete On
+  Tx  | Requested By
+  Tx  | Assumptions and Conditions
+  Tx  | Hypothetical Conditions
+  Tx  | Scope
+  Tx  | DisclaimerBlank
+  Tx  | Source of Data
+  Ch  | DropdownUse
+  Ch  | OtherPurpose
+  Ch  | DropdownIntendedUse
+  Ch  | IntendedUsers
+  Ch  | Hypotheticaldropdown
+  Ch  | ExtraordinaryItemsdropdown
+  Ch  | DropdownInspection
+  Ch  | Inspection Type List
+  Ch  | Inspection Type List2
+  Btn | Requested by Client
+  Btn | Requested by Other
+  Btn | Update of Original Report
+  Btn | To Estimate MV
+  Btn | To Estimate Other
+  Btn | To Estimate MR
+  Btn | DCA Approach
+  Btn | Cost Approach
+  Btn | Income Approach
+  Btn | Conventional
+  Btn | Intended Use Other
+  Btn | ASIS/ASIF
+  Btn | Value Effective CRP
+
+================================================================================
+6. NEIGHBOURHOOD
+================================================================================
+  Tx  | Neighbourhood Comments
+  Tx  | FromAGE RANGE OF PROPERTIES years
+  Tx  | ToAGE RANGE OF PROPERTIES years
+  Tx  | Other Trend
+  Tx  | fill_11
+  Tx  | fill_12
+  Ch  | DetrimentalNbhd
+  Btn | Nature District
+  Btn | Type District
+  Btn | Trend District
+  Btn | Builtup
+  Btn | Conformity Age
+  Btn | HC
+  Btn | EALC
+  Btn | Market Supply
+  Btn | Market Demand
+  Btn | Price Trends
+  Btn | Landscaping
+  Btn | Nbhd Detrimental
+
+================================================================================
+7. SITE
+================================================================================
+  Tx  | Site Dimensions
+  Tx  | Topography
+  Tx  | Configuration
+  Tx  | Sourcelot
+  Tx  | Floodplain
+  Tx  | Flooddate
+  Tx  | Site Improvements
+  Tx  | Site Comments
+  Tx  | Other Water Supply
+  Tx  | Landscaping Blank
+  Tx  | HBU Vacant Blank
+  Tx  | HBU Improved Blank
+  Tx  | HBU Analyses
+  Tx  | Land Value
+  Tx  | Existing Use Conforms
+  Ch  | DropdownZoningSource
+  Ch  | Site Unit of Measurement
+  Ch  | Unit of Measurement
+  Ch  | Easements
+  Ch  | Land Use Controls
+  Ch  | ZoningDesignation
+  Ch  | ExistingUse2
+  Ch  | DropdownOtherUse
+  Ch  | DetrimentalSite
+  Ch  | HBU Land Comment
+  Ch  | Land Value Source dropdown
+  Btn | Floodbox
+  Btn | ExistingUse
+  Btn | OtherLUC
+  Btn | Site Detrimental
+  Btn | U Gas
+  Btn | U Storm
+  Btn | U Sanitary
+  Btn | U Ditch
+  Btn | U Septic
+  Btn | U Holding
+  Btn | W Municipal
+  Btn | W Private Well
+  Btn | W Other
+  Btn | Feature Street Lights
+  Btn | Feature Other
+  Btn | Feature Gravel
+  Btn | Feature Paved
+  Btn | Feature Lane
+  Btn | Feature Sidewalk
+  Btn | Feature Curbs
+  Btn | Elec Overhead
+  Btn | Elec Underground
+  Btn | Elec Other
+  Btn | HBU Vacant
+  Btn | HBU Improved
+  Btn | Land Value NA
+
+================================================================================
+8. IMPROVEMENTS / BUILDING
+================================================================================
+  --- Construction & Exterior ---
+  Tx  | Construction/Additions Comments
+  Tx  | Building Comments
+  Tx  | Roofing Condition Notes
+  Tx  | Exterior Finish Notes
+  Ch  | Constructiondropdown
+  Ch  | Roofing Type
+  Ch  | Exterior Finish
+  Ch  | Foundation Walls
+  Ch  | Window Type
+  Ch  | Window Thickness
+  Ch  | Basement Type
+  Tx  | Basement Area
+  Tx  | Basement Finished
+  Tx  | Basementcomments
+
+  --- Mechanical & Systems ---
+  Tx  | Info Sourceplumb
+  Tx  | Panel Capacity
+  Tx  | Energycomments
+  Tx  | EnergyRating
+  Ch  | Plumbing Lines
+  Ch  | Water Heater
+  Ch  | Fuel Type
+  Ch  | Heating System
+  Ch  | Cooling System
+  Ch  | ElectricalOtherdrop
+  Ch  | OtherElectrical
+  Ch  | EnergyLabel
+  Ch  | Charger Type
+  Btn | Elec Fuses
+  Btn | Elec Breakers
+  Btn | SolarPanels
+  Ch  | SolarPaneltext
+
+  --- Interior Finishes ---
+  Tx  | Flooring
+  Ch  | InteriorFinishOther
+  Ch  | Flooring1
+  Ch  | Flooring2
+  Ch  | Flooring3
+  Btn | Drywall Walls
+  Btn | Check Box104
+  Btn | Plaster Walls
+  Btn | Plaster Ceiling
+  Btn | Paneling Walls
+  Btn | Paneling Ceiling
+
+  --- Extras & Appliances ---
+  Btn | Stove
+  Btn | Oven
+  Btn | Dishwasher
+  Btn | Mic
+  Btn | Security System
+  Btn | Fireplace
+  Ch  | Fireplacedropdown
+  Btn | HR Ventilator
+  Btn | Swimming Pool
+  Btn | Check Box121
+  Ch  | ExtraOtherdrop
+  Ch  | Other Features dropdown
+
+  --- Condition ---
+  Btn | Condition Roof
+  Btn | Condition Exterior
+  Btn | Overall Int Condition
+  Btn | Improvements Detrimental
+  Ch  | DetrimentalImprovements
+
+  --- Totals & Notes ---
+  Tx  | ABOVEGRADETOTALSPART
+  Tx  | AGTROOMS
+  Tx  | AGTSBEDROOMS
+  Btn | Incomplete Construction
+  Btn | ASIS/ASIF
+  Btn | Builtother
+  Ch  | BuiltOther
+  Btn | Builtother2
+  Ch  | BuiltOther2
+
+  --- Floor Levels ---
+  Ch  | ALEVEL
+  Ch  | BLEVEL
+  Ch  | CLEVEL
+  Ch  | DropdownSourceMeasure
+
+  --- Garage / Parking ---
+  Tx  | Other Driveway
+  Ch  | Garagestalls
+  Ch  | GarageDrop
+  Ch  | Garagedrop2
+  Ch  | Garagedrop3
+  Ch  | OtherParking
+  Btn | Garagesingle
+  Btn | Garagedouble
+  Btn | Garagetriple
+  Btn | GarageInt
+  Btn | GarageDet
+  Btn | GarageOther
+  Btn | GarageAtt
+  Btn | Garage2
+  Btn | Garage3
+  Btn | Drive Private
+  Btn | Drive Mutual
+  Btn | Drive Underground
+  Btn | Drive Laneway
+  Btn | Drive Other
+  Btn | Drive None
+  Btn | Drive Single
+  Btn | Drive Double
+  Btn | Parking Garage
+  Btn | Parking Carport
+  Btn | Parking Driveway
+  Btn | Parking Street
+  Btn | Parking Other
+
+================================================================================
+9. ROOM ALLOCATION
+================================================================================
+  --- Main Floor ---
+  Tx  | ENTRANCEMAIN
+  Tx  | LIVINGMAIN
+  Tx  | DININGMAIN
+  Tx  | KITCHENMAIN
+  Tx  | FAMILYMAIN
+  Tx  | BEDROOMSMAIN
+  Tx  | DENMAIN
+  Tx  | FULL BATHMAIN
+  Tx  | PART BATHMAIN
+  Tx  | LAUNDRYMAIN
+  Tx  | AMAIN
+  Tx  | BMAIN
+  Tx  | CMAIN
+  Tx  | ROOM TOTALMAIN
+  Tx  | AREAMAIN
+
+  --- Second Floor ---
+  Tx  | ENTRANCESECOND
+  Tx  | LIVINGSECOND
+  Tx  | DININGSECOND
+  Tx  | KITCHENSECOND
+  Tx  | FAMILYSECOND
+  Tx  | BEDROOMSSECOND
+  Tx  | DENSECOND
+  Tx  | FULL BATHSECOND
+  Tx  | PART BATHSECOND
+  Tx  | LAUNDRYSECOND
+  Tx  | ASECOND
+  Tx  | BSECOND
+  Tx  | CSECOND
+  Tx  | ROOM TOTALSECOND
+  Tx  | AREASECOND
+
+  --- Third Floor (Row3) ---
+  Tx  | ENTRANCERow3
+  Tx  | LIVINGRow3
+  Tx  | DININGRow3
+  Tx  | KITCHENRow3
+  Tx  | FAMILYRow3
+  Tx  | BEDROOMSRow3
+  Tx  | DENRow3
+  Tx  | FULL BATHRow3
+  Tx  | PART BATHRow3
+  Tx  | LAUNDRYRow3
+  Tx  | ATHIRD
+  Tx  | BTHIRD
+  Tx  | CTHIRD
+  Tx  | ROOM TOTALRow3
+  Tx  | AREARow3
+
+  --- Fourth Floor (Row4) ---
+  Tx  | RoomRow4
+  Tx  | ENTRANCERow4
+  Tx  | LIVINGRow4
+  Tx  | DININGRow4
+  Tx  | KITCHENRow4
+  Tx  | FAMILYRow4
+  Tx  | BEDROOMSRow4
+  Tx  | DENRow4
+  Tx  | FULL BATHRow4
+  Tx  | PART BATHRow4
+  Tx  | LAUNDRYRow4
+  Tx  | AFOURTH
+  Tx  | BFOURTH
+  Tx  | CFOURTH
+  Tx  | ROOM TOTALRow4
+  Tx  | AREARow4
+
+  --- Fifth Floor (Row5) ---
+  Tx  | RoomRow5
+  Tx  | ENTRANCERow5
+  Tx  | LIVINGRow5
+  Tx  | DININGRow5
+  Tx  | KITCHENRow5
+  Tx  | FAMILYRow5
+  Tx  | BEDROOMSRow5
+  Tx  | DENRow5
+  Tx  | FULL BATHRow5
+  Tx  | PART BATHRow5
+  Tx  | LAUNDRYRow5
+  Tx  | AFIFTH
+  Tx  | BFIFTH
+  Tx  | CFIFTH
+  Tx  | ROOM TOTALRow5
+  Tx  | AREARow5
+
+  --- Basement 1 ---
+  Tx  | ENTRANCEBASEMENT
+  Tx  | LIVINGBASEMENT
+  Tx  | DININGBASEMENT
+  Tx  | KITCHENBASEMENT
+  Tx  | FAMILYBASEMENT
+  Tx  | BEDROOMSBASEMENT
+  Tx  | DENBASEMENT
+  Tx  | FULL BATHBASEMENT
+  Tx  | PART BATHBASEMENT
+  Tx  | LAUNDRYBASEMENT
+  Tx  | ABASEMENT
+  Tx  | BBASEMENT
+  Tx  | CBASEMENT
+  Tx  | ROOM TOTALBASEMENT
+  Tx  | AREABASEMENT
+
+  --- Basement 2 ---
+  Tx  | BASEMENT2
+  Tx  | ENTRANCEBASEMENT2
+  Tx  | LIVINGBASEMENT2
+  Tx  | DININGBASEMENT2
+  Tx  | KITCHENBASEMENT2
+  Tx  | FAMILYBASEMENT2
+  Tx  | BEDROOMSBASEMENT2
+  Tx  | DENBASEMENT2
+  Tx  | FULL BATHBASEMENT2
+  Tx  | PART BATHBASEMENT2
+  Tx  | LAUNDRYBASEMENT2
+  Tx  | ABASEMENT2
+  Tx  | BBASEMENT2
+  Tx  | CBASEMENT2
+  Tx  | ROOM TOTALBASEMENT2
+
+  --- Total ---
+  Tx  | TotalArea
+  Btn | SFSM
+
+================================================================================
+10. COMPARABLES 1–3 (Direct Comparison)
+================================================================================
+  --- Subject Column ---
+  Tx  | Subject 1 Source
+  Tx  | Subject LFA
+  Tx  | Subject Age
+  Tx  | Subject Site Size
+  Tx  | Subject Location
+  Tx  | Subject Date of Sale
+  Tx  | Subject Sale Price
+  Tx  | Subject Market
+  Tx  | Subject Rooms
+  Tx  | Subject Bdrms
+  Tx  | SUBJECTFB
+  Tx  | SubjectFB
+  Tx  | SUBJECTPB
+  Tx  | Subject Basement
+  Tx  | Subject Parking
+  Tx  | Subjectblank1
+  Tx  | Subjectblank2
+  Ch  | SubjectPT
+  Ch  | SubjectDS
+  Ch  | Subject Condition
+  Ch  | Subject 1 Source Dropdown
+  Unknown | Subjectdetailblank1
+  Tx  | Subjectdetailblank1.0
+  Tx  | Subjectdetailblank1.1
+  Tx  | Subjectdetailblank1.2
+  Tx  | Subjectdetailblank1.3
+  Tx  | Subjectdetailblank1.4
+
+  --- Comp 1 ---
+  Tx  | Comp 1
+  Tx  | Comp 1 Date of Sale
+  Tx  | Comp 1 Sale Price
+  Tx  | Comp 1 Market
+  Tx  | Comp 1 Location
+  Tx  | Comp 1 Site Size
+  Tx  | Comp 1 Age
+  Tx  | Comp 1 Floor Area
+  Tx  | Comp 1 Rooms
+  Tx  | Comp 1 Bdrms
+  Tx  | Comp 1 Bath
+  Tx  | Comp 1 Dimensions
+  Tx  | Comp 1 Source
+  Tx  | Comp 1 Basement 1
+  Tx  | Comp 1 Parking 1
+  Tx  | Comp1blank1
+  Tx  | Comp1blank2
+  Tx  | Comp1GrossPercent
+  Tx  | Comp1Net
+  Ch  | Comp 1 Source Dropdown
+  Ch  | Comp1PT
+  Ch  | Comp1DS
+  Ch  | Comp1Condition
+  Ch  | AIComp1PT
+  Ch  | AICComp1DS
+  Ch  | AIComp1Condition
+  Ch  | Comp 1 Basement
+  Ch  | Comp 1 Parking
+  Unknown | Comp1adj
+  Tx  | Comp1adj.0
+  Tx  | Comp1adj.1
+  Tx  | Comp1adj.2
+  Tx  | Comp1adj.3
+  Tx  | Comp1adj.4
+  Tx  | Comp1adj.5
+  Tx  | Comp1adj.6
+  Tx  | Comp1adj.7
+  Tx  | Comp1adj.8
+  Tx  | Comp1adj.9
+  Tx  | Comp1adj.10
+  Tx  | Comp1adj.11
+  Tx  | Comp1adj.12
+  Tx  | Comp1adj.13
+  Tx  | Comp1adj.14
+  Tx  | Comp1adj.15
+  Tx  | Comp1adj.16
+  Tx  | Comp1adj.17
+  Tx  | Comp1adj.18
+  Tx  | Comp1adj.19
+  Tx  | Comp1adj.20
+  Tx  | Comp1adj.21
+  Unknown | Comp1blankdetail1
+  Tx  | Comp1blankdetail1.0
+  Tx  | Comp1blankdetail1.1
+  Tx  | Comp1blankdetail1.2
+  Tx  | Comp1blankdetail1.3
+  Tx  | Comp1blankdetail1.4
+  Unknown | ADJUSTED VALUES1
+  Tx  | ADJUSTED VALUES1.0
+
+  --- Comp 2 ---
+  Tx  | Comp 2
+  Tx  | Comp 2 Date of Sale
+  Tx  | Comp 2 Sale Price
+  Tx  | Comp 2 Market
+  Tx  | Comp 2 Location
+  Tx  | Comp 2 Site Size
+  Tx  | Comp 2 Age
+  Tx  | Comp 2 Floor Area
+  Tx  | Comp 2 Rooms
+  Tx  | Comp 2 Bdrms
+  Tx  | Comp 2 Bath
+  Tx  | Comp 2 Dimensions
+  Tx  | Comp 2 Source
+  Tx  | Comp 2 Basement 1
+  Tx  | Comp 2 Parking 1
+  Tx  | Comp2blank1
+  Tx  | Comp2blank2
+  Tx  | Comp2GrossPercent
+  Tx  | Comp2Net
+  Ch  | Comp 2 Source Dropdown
+  Ch  | Comp2PT
+  Ch  | Comp2DS
+  Ch  | Comp2Condition
+  Ch  | AIComp2PT
+  Ch  | AIComp2DS
+  Ch  | AIComp2Condition
+  Ch  | Comp 2 Basement
+  Ch  | Comp 2 Parking
+  Unknown | Comp2adj
+  Tx  | Comp2adj.0
+  Tx  | Comp2adj.1
+  Tx  | Comp2adj.2
+  Tx  | Comp2adj.3
+  Tx  | Comp2adj.4
+  Tx  | Comp2adj.5
+  Tx  | Comp2adj.6
+  Tx  | Comp2adj.7
+  Tx  | Comp2adj.8
+  Tx  | Comp2adj.9
+  Tx  | Comp2adj.10
+  Tx  | Comp2adj.11
+  Tx  | Comp2adj.12
+  Tx  | Comp2adj.13
+  Tx  | Comp2adj.14
+  Tx  | Comp2adj.15
+  Tx  | Comp2adj.16
+  Tx  | Comp2adj.17
+  Tx  | Comp2adj.18
+  Tx  | Comp2adj.19
+  Tx  | Comp2adj.20
+  Tx  | Comp2adj.21
+  Unknown | Comp2blankdetail1
+  Tx  | Comp2blankdetail1.0
+  Tx  | Comp2blankdetail1.1
+  Tx  | Comp2blankdetail1.2
+  Tx  | Comp2blankdetail1.3
+  Tx  | Comp2blankdetail1.4
+  Unknown | ADJUSTED VALUES2
+  Tx  | ADJUSTED VALUES2.0
+
+  --- Comp 3 ---
+  Tx  | Comp 3
+  Tx  | Comp 3 Date of Sale
+  Tx  | Comp 3 Sale Price
+  Tx  | Comp 3 Market
+  Tx  | Comp 3 Location
+  Tx  | Comp 3 Site Size
+  Tx  | Comp 3 Age
+  Tx  | Comp 3 Floor Area
+  Tx  | Comp 3 Rooms
+  Tx  | Comp 3 Bdrms
+  Tx  | Comp 3 Bath
+  Tx  | Comp 3 Dimensions
+  Tx  | Comp 3 Source
+  Tx  | Comp 3 Basement 1
+  Tx  | Comp 3 Parking 1
+  Tx  | Comp3blank1
+  Tx  | Comp3blank2
+  Tx  | Comp3GrossPercent
+  Tx  | Comp3Net
+  Ch  | Comp 3 Source Dropdown
+  Ch  | Comp3PT
+  Ch  | Comp3DS
+  Ch  | Comp3Condition
+  Ch  | AIComp3PT
+  Ch  | AICComp3DS
+  Ch  | AIComp3Condition
+  Ch  | Comp 3 Basement
+  Ch  | Comp 3 Parking
+  Unknown | Comp3adj
+  Tx  | Comp3adj.0
+  Tx  | Comp3adj.1
+  Tx  | Comp3adj.2
+  Tx  | Comp3adj.3
+  Tx  | Comp3adj.4
+  Tx  | Comp3adj.5
+  Tx  | Comp3adj.6
+  Tx  | Comp3adj.7
+  Tx  | Comp3adj.8
+  Tx  | Comp3adj.9
+  Tx  | Comp3adj.10
+  Tx  | Comp3adj.11
+  Tx  | Comp3adj.12
+  Tx  | Comp3adj.13
+  Tx  | Comp3adj.14
+  Tx  | Comp3adj.15
+  Tx  | Comp3adj.16
+  Tx  | Comp3adj.17
+  Tx  | Comp3adj.18
+  Tx  | Comp3adj.19
+  Tx  | Comp3adj.20
+  Tx  | Comp3adj.21
+  Unknown | Comp3blankdetail1
+  Tx  | Comp3blankdetail1.0
+  Tx  | Comp3blankdetail1.1
+  Tx  | Comp3blankdetail1.2
+  Tx  | Comp3blankdetail1.3
+  Tx  | Comp3blankdetail1.4
+  Unknown | ADJUSTED VALUES3
+  Tx  | ADJUSTED VALUES3.0
+
+  --- Shared Comp 1-3 Fields ---
+  Unknown | ItemBlank1
+  Tx  | ItemBlank1.0
+  Tx  | ItemBlank1.1
+  Tx  | ItemBlank1.2
+  Tx  | ItemBlank1.3
+  Tx  | ItemBlank1.4
+  Tx  | DCA Analyses 1-3
+  Tx  | Comparable Analysis and Comments1-3
+  Tx  | LFA PSF ADJ
+  Ch  | DropdownAdjustment1comp1-3
+  Ch  | DropdownAdjustment2comp1-3
+
+================================================================================
+11. COMPARABLES 4–6 (Extended Sales)
+================================================================================
+  --- Comp 4 ---
+  Tx  | Comp 4
+  Tx  | Comp 4 Date of Sale
+  Tx  | Comp 4 Sale Price
+  Tx  | Comp 4 Market
+  Tx  | Comp 4 Location
+  Tx  | Comp 4 Site Size
+  Tx  | Comp 4 Age
+  Tx  | Comp 4 Floor Area
+  Tx  | Comp 4 Rooms
+  Tx  | Comp 4 Bdrms
+  Tx  | Comp 4 Bath
+  Tx  | Comp 4 Dimensions
+  Tx  | Comp4blank1
+  Tx  | Comp4blank2
+  Tx  | Comp4GrossPercent
+  Tx  | Comp4Net
+  Ch  | Comp 4 Source Dropdown
+  Ch  | Comp4PT
+  Ch  | Comp4DS
+  Ch  | Comp4Condition
+  Unknown | Comp4adj
+  Tx  | Comp4adj.0
+  Tx  | Comp4adj.1
+  Tx  | Comp4adj.2
+  Tx  | Comp4adj.3
+  Tx  | Comp4adj.4
+  Tx  | Comp4adj.5
+  Tx  | Comp4adj.6
+  Tx  | Comp4adj.7
+  Tx  | Comp4adj.8
+  Tx  | Comp4adj.9
+  Tx  | Comp4adj.10
+  Tx  | Comp4adj.11
+  Tx  | Comp4adj.12
+  Tx  | Comp4adj.13
+  Tx  | Comp4adj.14
+  Tx  | Comp4adj.15
+  Tx  | Comp4adj.16
+  Tx  | Comp4adj.17
+  Tx  | Comp4adj.18
+  Tx  | Comp4adj.19
+  Tx  | Comp4adj.20
+  Tx  | Comp4adj.21
+  Unknown | Comp4blankdetail1
+  Tx  | Comp4blankdetail1.0
+  Tx  | Comp4blankdetail1.1
+  Tx  | Comp4blankdetail1.2
+  Tx  | Comp4blankdetail1.3
+  Tx  | Comp4blankdetail1.4
+  Unknown | ADJUSTED VALUES4
+  Tx  | ADJUSTED VALUES4.0
+
+  --- Comp 5 ---
+  Tx  | Comp 5
+  Tx  | Comp 5 Date of Sale
+  Tx  | Comp 5 Sale Price
+  Tx  | Comp 5 Market
+  Tx  | Comp 5 Location
+  Tx  | Comp 5 Site Size
+  Tx  | Comp 5 Age
+  Tx  | Comp 5 Floor Area
+  Tx  | Comp 5 Rooms
+  Tx  | Comp 5 Bdrms
+  Tx  | Comp 5 Bath
+  Tx  | Comp 5 Dimensions
+  Tx  | Comp5blank1
+  Tx  | Comp5blank2
+  Tx  | Comp5GrossPercent
+  Tx  | Comp5Net
+  Ch  | Comp 5 Source Dropdown
+  Ch  | Comp5PT
+  Ch  | Comp5DS
+  Ch  | Comp5Condition
+  Unknown | Comp5adj
+  Tx  | Comp5adj.0
+  Tx  | Comp5adj.1
+  Tx  | Comp5adj.2
+  Tx  | Comp5adj.3
+  Tx  | Comp5adj.4
+  Tx  | Comp5adj.5
+  Tx  | Comp5adj.6
+  Tx  | Comp5adj.7
+  Tx  | Comp5adj.8
+  Tx  | Comp5adj.9
+  Tx  | Comp5adj.10
+  Tx  | Comp5adj.11
+  Tx  | Comp5adj.12
+  Tx  | Comp5adj.13
+  Tx  | Comp5adj.14
+  Tx  | Comp5adj.15
+  Tx  | Comp5adj.16
+  Tx  | Comp5adj.17
+  Tx  | Comp5adj.18
+  Tx  | Comp5adj.19
+  Tx  | Comp5adj.20
+  Tx  | Comp5adj.21
+  Unknown | Comp5blankdetail1
+  Tx  | Comp5blankdetail1.0
+  Tx  | Comp5blankdetail1.1
+  Tx  | Comp5blankdetail1.2
+  Tx  | Comp5blankdetail1.3
+  Tx  | Comp5blankdetail1.4
+  Unknown | ADJUSTED VALUES5
+  Tx  | ADJUSTED VALUES5.0
+
+  --- Comp 6 ---
+  Tx  | Comp 6
+  Tx  | Comp 6 Date of Sale
+  Tx  | Comp 6 Sale Price
+  Tx  | Comp 6 Market
+  Tx  | Comp 6 Location
+  Tx  | Comp 6 Site Size
+  Tx  | Comp 6 Age
+  Tx  | Comp 6 Floor Area
+  Tx  | Comp 6 Rooms
+  Tx  | Comp 6 Bdrms
+  Tx  | Comp 6 Bath
+  Tx  | Comp 6 Dimensions
+  Tx  | Comp6blank1
+  Tx  | Comp6blank2
+  Tx  | Comp6GrossPercent
+  Tx  | Comp6Net
+  Ch  | Comp 6 Source Dropdown
+  Ch  | Comp6PT
+  Ch  | Comp6DS
+  Ch  | Comp6Condition
+  Unknown | Comp6adj
+  Tx  | Comp6adj.0
+  Tx  | Comp6adj.1
+  Tx  | Comp6adj.2
+  Tx  | Comp6adj.3
+  Tx  | Comp6adj.4
+  Tx  | Comp6adj.5
+  Tx  | Comp6adj.6
+  Tx  | Comp6adj.7
+  Tx  | Comp6adj.8
+  Tx  | Comp6adj.9
+  Tx  | Comp6adj.10
+  Tx  | Comp6adj.11
+  Tx  | Comp6adj.12
+  Tx  | Comp6adj.13
+  Tx  | Comp6adj.14
+  Tx  | Comp6adj.15
+  Tx  | Comp6adj.16
+  Tx  | Comp6adj.17
+  Tx  | Comp6adj.18
+  Tx  | Comp6adj.19
+  Tx  | Comp6adj.20
+  Tx  | Comp6adj.21
+  Unknown | Comp6blankdetail1
+  Tx  | Comp6blankdetail1.0
+  Tx  | Comp6blankdetail1.1
+  Tx  | Comp6blankdetail1.2
+  Tx  | Comp6blankdetail1.3
+  Tx  | Comp6blankdetail1.4
+  Unknown | ADJUSTED VALUES6
+  Tx  | ADJUSTED VALUES6.0
+
+  --- Shared Comp 4-6 Fields ---
+  Tx  | Subject Date of Sale
+  Tx  | Subject Sale Price
+  Tx  | Subject Market
+  Tx  | Subject Location
+  Tx  | Subject LFA
+  Tx  | Subject Age
+  Tx  | Subject Site Size
+  Tx  | Subject Basement
+  Tx  | Subject Parking
+  Tx  | Subjectblank1
+  Tx  | Subjectblank2
+  Tx  | DCA Analyses 4-6
+  Tx  | ANALYSESCOMMENTS
+
+================================================================================
+12. HISTORY / EXPOSURE / RECONCILIATION
+================================================================================
+  Tx  | History Sale
+  Tx  | History Listings
+  Tx  | HistorySaleprice
+  Tx  | HistorySaledate
+  Tx  | HistoryCurrentList
+  Tx  | HistoryPriorList
+  Tx  | REL
+  Tx  | PendingPrice
+  Tx  | Exposure Analysis
+  Tx  | Exposure As If
+  Tx  | Reconciliation
+  Tx  | FinalValue
+  Tx  | DateReport
+  Btn | History Sold
+  Btn | History Listed
+  Btn | Listed
+
+================================================================================
+13. CERTIFICATION / SIGNATURES
+================================================================================
+  Tx  | Certificationextra
+  Tx  | DisclaimerBlank
+  Tx  | DateReportSigned1
+  Tx  | DateReportSigned2
+  Tx  | DateInspection1
+  Tx  | DateInspection2
+  Tx  | NarrativeAdd
+  Tx  | NarrativeAdd1
+  Tx  | NarrativeAdd2
+  Tx  | NarrativeAdd4
+  Sig | Signature1
+  Sig | Signature2
+  Ch  | SourceSignature
+  Ch  | PAdropdowns
+  Ch  | Addenda Dropdown2
+  Ch  | Addenda Dropdown3
+  Ch  | Addenda Dropdown4
+  Ch  | AddendumDropdown
+  Ch  | AddendumDropdown2
+  Ch  | AddendumDropdown4
+  Ch  | AddendumDropdown5
+  Btn | PSA
+  Btn | PSAObtained
+  Btn | PA
+  Btn | Att Additional Sales
+  Btn | Att Cost
+  Btn | Att Maps
+  Btn | Att Extra
+  Btn | Att Income
+  Btn | Att Narrative
+  Btn | Att Scope
+  Btn | Att Photo
+  Btn | Att LUDC
+  Btn | Att Sketch
+  Btn | Att Other 2
+  Btn | Att Other 3
+  Btn | Check Box2
+  Btn | Check Box3
+  Btn | Group2
+
+================================================================================
+14. COST APPROACH
+================================================================================
+  Tx  | CALandValue
+  Tx  | Other Source
+  Tx  | CARCNTOTAL
+  Tx  | Text79
+  Tx  | TOTALDRCN
+  Tx  | TOTALDRCN2
+  Tx  | CostApproachText
+  Tx  | CATOTAL
+  Tx  | Cost Analyses
+  Tx  | CADEP
+  Tx  | FODep
+  Tx  | PDDep
+  Tx  | EODep
+  Btn | Check Box43
+  Btn | Contractor
+  Btn | Check Box477
+  Unknown | CAItem
+  Tx  | CAItem.0
+  Tx  | CAItem.1
+  Tx  | CAItem.2
+  Tx  | CAItem.3
+  Tx  | CAItem.4
+  Tx  | CAItem.5
+  Tx  | CAItem.6
+  Unknown | CALFA
+  Tx  | CALFA.0
+  Tx  | CALFA.1
+  Tx  | CALFA.2
+  Tx  | CALFA.3
+  Tx  | CALFA.4
+  Tx  | CALFA.5
+  Tx  | CALFA.6
+  Unknown | CARATE
+  Tx  | CARATE.0
+  Tx  | CARATE.1
+  Tx  | CARATE.2
+  Tx  | CARATE.3
+  Tx  | CARATE.4
+  Tx  | CARATE.5
+  Tx  | CARATE.6
+  Unknown | RCN
+  Tx  | RCN.0
+  Tx  | RCN.1
+  Tx  | RCN.2
+  Tx  | RCN.3
+  Tx  | RCN.4
+  Tx  | RCN.5
+  Tx  | RCN.6
+  Tx  | RCN.7
+  Tx  | RCN.8
+  Tx  | RCN.9
+  Tx  | RCN.10
+  Unknown | DRCN
+  Tx  | DRCN.0
+  Tx  | DRCN.1
+  Tx  | DRCN.2
+  Tx  | DRCN.3
+  Tx  | DRCN.4
+  Tx  | DRCN.5
+  Tx  | DRCN.6
+  Tx  | DRCN.7
+  Tx  | DRCN.8
+  Tx  | DRCN.9
+  Tx  | DRCN.10
+  Unknown | Other0
+  Tx  | Other0.0
+  Unknown | Other1
+  Tx  | Other1.0
+  Tx  | Other1.1
+  Tx  | Other1.2
+
+================================================================================
+15. MARKET RENT
+================================================================================
+  --- Subject ---
+  Tx  | Rent Date
+  Tx  | MRSubject LFA
+  Tx  | RENT RATE
+  Ch  | MRSubjectDS
+  Ch  | Rentsubject
+  Ch  | Rentmonthoryear
+  Unknown | MSubjectdetailblank1
+  Tx  | MSubjectdetailblank1.0
+  Unknown | MRSubjectdetailblank1
+  Tx  | MRSubjectdetailblank1.1
+  Tx  | MRSubjectdetailblank1.2
+
+  --- Rent Comps ---
+  Tx  | MRCOMP 1
+  Tx  | MRCOMP 2
+  Tx  | MRCOMP 3
+  Tx  | MR Data Source
+  Tx  | MR1DATA
+  Tx  | MR2DATA
+  Tx  | MR3DATA
+  Tx  | Comp1RENTRATE
+  Tx  | Comp2RENTRATE
+  Tx  | Comp3RENTRATE
+  Tx  | MR1LOC
+  Tx  | MR2LOC
+  Tx  | MR3LOC
+  Tx  | MR1LFA
+  Tx  | MR2LFA
+  Tx  | MR3LFA
+  Tx  | Comp 1 Rent Date
+  Tx  | Comp 2 Rent Date
+  Tx  | Comp 3 Rent Date
+  Ch  | MR1Design
+  Ch  | MR2Design
+  Ch  | MR3Design
+  Ch  | MRDrop1
+  Ch  | MRDrop2
+  Ch  | MRDrop3
+  Unknown | MRComp1blankdetail1
+  Tx  | MRComp1blankdetail1.0
+  Tx  | MRComp1blankdetail1.1
+  Tx  | MRComp1blankdetail1.2
+  Unknown | MRComp2blankdetail1
+  Tx  | MRComp2blankdetail1.0
+  Tx  | MRComp2blankdetail1.1
+  Tx  | MRComp2blankdetail1.2
+  Unknown | MRComp3blankdetail1
+  Tx  | MRComp3blankdetail1.0
+  Tx  | MRComp3blankdetail1.1
+  Tx  | MRComp3blankdetail1.2
+
+  --- Utilities Included ---
+  Tx  | MRInclude1
+  Tx  | MRInclude2
+  Tx  | MRInclude3
+  Tx  | MRInclude4
+  Btn | ELECTRICITY_3
+  Btn | GARBAGE COLLECTION_3
+  Btn | PARKING_2
+  Btn | REFRIDGERATOR_2
+  Btn | STOVE_2
+  Btn | HOT WATER_2
+  Btn | CABLE TV  SATELITE_2
+  Btn | WATER LEVIES_2
+  Btn | Check Box469
+  Btn | Check Box470
+  Btn | Check Box471
+  Btn | Check Box472
+
+  --- Analysis & Conclusions ---
+  Tx  | Rent History
+  Tx  | Rental Market Comments
+  Tx  | COMPARABLE RENT DATA - COMMENTS
+  Tx  | MR Reconciliation
+  Tx  | RENTLOW
+  Tx  | RENTHIGH
+  Btn | Authorized
+  Btn | Rented
+  Btn | Leases Verified
+
+================================================================================
+16. INCOME APPROACH
+================================================================================
+  --- Unit Schedule ---
+  Unknown | Floor
+  Tx  | Floor.0
+  Tx  | Floor.1
+  Tx  | Floor.2
+  Tx  | Floor.3
+  Unknown | IAUNITS
+  Tx  | IAUNITS.0
+  Tx  | IAUNITS.1
+  Tx  | IAUNITS.2
+  Tx  | IAUNITS.3
+  Unknown | IABDS
+  Tx  | IABDS.0
+  Tx  | IABDS.1
+  Tx  | IABDS.2
+  Tx  | IABDS.3
+  Unknown | IANFA
+  Tx  | IANFA.0
+  Tx  | IANFA.1
+  Tx  | IANFA.2
+  Tx  | IANFA.3
+  Unknown | ActualRent
+  Tx  | ActualRent.0
+  Tx  | ActualRent.1
+  Tx  | ActualRent.2
+  Tx  | ActualRent.3
+  Unknown | EconomicRent
+  Tx  | EconomicRent.0
+  Tx  | EconomicRent.1
+  Tx  | EconomicRent.2
+  Tx  | EconomicRent.3
+  Unknown | AnnualSquare
+  Tx  | AnnualSquare.0
+  Tx  | AnnualSquare.1
+  Tx  | AnnualSquare.2
+  Tx  | AnnualSquare.3
+  Unknown | TotalMonthly
+  Tx  | TotalMonthly.0
+  Tx  | TotalMonthly.1
+  Tx  | TotalMonthly.2
+  Tx  | TotalMonthly.3
+  Unknown | TotalAnnual
+  Tx  | TotalAnnual.0
+  Tx  | TotalAnnual.1
+  Tx  | TotalAnnual.2
+  Tx  | TotalAnnual.3
+  Tx  | TotalAnnual.9
+  Tx  | TotalAnnual.10
+
+  --- Gross Income ---
+  Tx  | LaundryUnits
+  Tx  | LaundryRate
+  Tx  | LaundryTotal
+  Tx  | Total1
+  Tx  | Otherincome1
+  Tx  | Otherincome2
+  Tx  | VCL
+  Tx  | TotalGross
+  Tx  | VCLDollar
+  Tx  | Subtotal1
+  Tx  | ParkInterior
+  Tx  | PIRent
+  Tx  | PITotal
+  Tx  | PIOcc
+  Tx  | PITotal2
+  Tx  | ParkExterior
+  Tx  | PERent
+  Tx  | PETotal
+  Tx  | PEOcc
+  Tx  | PETotal2
+  Tx  | EGI
+
+  --- Expenses ---
+  Tx  | Expenseblank1
+  Tx  | Expenseblank2
+  Tx  | NET INCOME TOTAL EXPENSES
+  Tx  | TotalAE
+  Unknown | Expense
+  Tx  | Expense.0
+  Tx  | Expense.1
+  Tx  | Expense.2
+  Tx  | Expense.3
+  Tx  | Expense.4
+  Tx  | Expense.5
+  Tx  | Expense.6
+  Tx  | Expense.7
+  Tx  | Expense.8
+  Tx  | Expense.9
+  Tx  | Expense.10
+  Tx  | Expense.11
+  Tx  | Expense.12
+  Tx  | Expense.13
+  Tx  | Expense.14
+  Tx  | Expense.15
+  Tx  | Expense.16
+  Unknown | IPU
+  Tx  | IPU.0
+  Tx  | IPU.1
+  Tx  | IPU.2
+  Tx  | IPU.3
+  Tx  | IPU.4
+  Tx  | IPU.5
+  Tx  | IPU.6
+  Tx  | IPU.7
+  Tx  | IPU.8
+  Tx  | IPU.9
+  Tx  | IPU.10
+  Tx  | IPU.11
+  Tx  | IPU.12
+  Tx  | IPU.13
+  Tx  | IPU.14
+  Tx  | IPU.15
+  Tx  | IPU.16
+  Unknown | SQSM
+  Tx  | SQSM.0
+  Tx  | SQSM.1
+  Tx  | SQSM.2
+  Tx  | SQSM.3
+  Tx  | SQSM.4
+  Tx  | SQSM.5
+  Tx  | SQSM.6
+  Tx  | SQSM.7
+  Tx  | SQSM.8
+  Tx  | SQSM.9
+  Tx  | SQSM.10
+  Tx  | SQSM.11
+  Tx  | SQSM.12
+  Tx  | SQSM.13
+  Tx  | SQSM.14
+  Tx  | SQSM.15
+  Tx  | SQSM.16
+  Unknown | PercentOGI
+  Tx  | PercentOGI.0
+  Tx  | PercentOGI.1
+  Tx  | PercentOGI.2
+  Tx  | PercentOGI.3
+  Tx  | PercentOGI.4
+  Tx  | PercentOGI.5
+  Tx  | PercentOGI.6
+  Tx  | PercentOGI.7
+  Tx  | PercentOGI.8
+  Tx  | PercentOGI.9
+  Tx  | PercentOGI.10
+  Tx  | PercentOGI.11
+  Tx  | PercentOGI.12
+  Tx  | PercentOGI.13
+  Tx  | PercentOGI.14
+  Tx  | PercentOGI.15
+  Tx  | PercentOGI.16
+
+  --- NOI / Value ---
+  Tx  | NOI
+  Tx  | Cap Rate
+  Tx  | NOIValue
+  Tx  | NOIValuerounded
+  Tx  | IAComment
+
+================================================================================
+17. PHOTOS
+================================================================================
+  --- Subject Photos ---
+  Btn | TitlePhoto
+  Btn | Photo1
+  Tx  | Photocaption1
+  Btn | Photo2
+  Tx  | Photocaption2
+  Btn | Photo3
+  Tx  | Photocaption3
+  Btn | Photo4
+  Ch  | Photocaption4
+  Btn | Photo5
+  Ch  | Photocaption5
+  Btn | Photo6
+  Ch  | Photocaption6
+  Btn | Photo7
+  Ch  | Photocaption7
+  Btn | Photo8
+  Ch  | Photocaption8
+  Btn | Photo9
+  Ch  | Photocaption9
+  Btn | Photo10
+  Ch  | Photocaption10
+  Btn | Photo11
+  Ch  | Photocaption11
+  Btn | Photo12
+  Ch  | Photocaption12
+  Btn | Photo13
+  Ch  | Photocaption13
+  Btn | Photo14
+  Ch  | Photocaption14
+  Btn | Photo15
+  Ch  | Photocaption15
+
+  --- Comparable Photos ---
+  Tx  | Comp1Photo
+  Btn | Comp1photobox
+  Tx  | Comp2Photo
+  Btn | Comp2photobox
+  Tx  | Comp3Photo
+  Btn | Comp3photobox
+
+  --- Maps & Attachments ---
+  Btn | AerialMap
+  Btn | AppraiserLogo
+  Btn | Add More Photos
+  Btn | Floorplan Sketch
+  Btn | AddSales
+  Btn | ZoningMap
+
+================================================================================
+18. EVERYTHING ELSE / UNKNOWN / UTILITY
+================================================================================
+  Btn | Reset Form
+  Unknown | Ass

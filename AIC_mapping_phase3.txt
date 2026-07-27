@@ -1,0 +1,557 @@
+AIC FULL Form ENG — Mapping Phase 3
+Sections 10, 11, 14, 17: Complete Field List with Types and Dropdown Options
+================================================================================
+
+FIELD TYPE LEGEND
+  [Tx]  = Text input (free-form)
+  [Ch]  = Choice / Dropdown  →  options listed
+  [Btn] = Button / Checkbox
+  [Sig] = Signature field
+  [???] = Unknown / untyped parent group (data in indexed children .0 .1 etc.)
+
+================================================================================
+SECTION 10: COMPARABLES 1–3  (Direct Comparison)
+================================================================================
+
+NOTE on duplicate Ch fields:
+  CompNPT / AICompNPT       — same property type options, two sets of fields
+  CompNDS / AICompNDS       — same design/style options, two sets of fields
+  CompNCondition / AICompNCondition — condition options, two sets of fields
+  The "AI" prefix fields appear to be the active/AIC grid version.
+
+--- SUBJECT COLUMN ---
+[Tx]  Subject 1 Source
+[Tx]  Subject LFA
+[Tx]  Subject Age
+[Tx]  Subject Site Size
+[Tx]  Subject Location
+[Tx]  Subject Date of Sale
+[Tx]  Subject Sale Price
+[Tx]  Subject Market
+[Tx]  Subject Rooms
+[Tx]  Subject Bdrms
+[Tx]  SUBJECTFB
+[Tx]  SubjectFB
+[Tx]  SUBJECTPB
+[Tx]  Subject Basement
+[Tx]  Subject Parking
+[Tx]  Subjectblank1
+[Tx]  Subjectblank2
+[Ch]  SubjectPT → Detached, Semi Detached, Duplex, Triplex, Fourplex, Grouphome, Link, Minihome, Rowhouse, Townhouse, Low Rise Apartment, Hi Rise Apartment, Cottage/Cabin, Other (specify)
+[Ch]  SubjectDS → 1 Storey, 1.5 Storey, 2 Storey, 2.5 Storey, 3 or more Storey, 3 Level Split, 4 Level Split, 5 Level Split, A-Frame, Bi-Level, Bungalow Raised, Loft, Manufactured, Mobile/Trailer Single, Mobile/Trailer Double, Modular, Other (specify)
+[Ch]  Subject Condition → Average, Excellent, Fair, Good, Inferior, Other (SPECIFY), Poor, Similar, Superior
+[Ch]  Subject 1 Source Dropdown → Appraiser Workfiles, Assessment Records, Land Titles Registry, MLS, MLS #, Offer to purchase, Online Data, Other (specify), Owner/Occupant
+[???] Subjectdetailblank1
+[Tx]  Subjectdetailblank1.0
+[Tx]  Subjectdetailblank1.1
+[Tx]  Subjectdetailblank1.2
+[Tx]  Subjectdetailblank1.3
+[Tx]  Subjectdetailblank1.4
+
+--- COMPARABLE 1 ---
+[Tx]  Comp 1
+[Tx]  Comp 1 Date of Sale
+[Tx]  Comp 1 Sale Price
+[Tx]  Comp 1 Market
+[Tx]  Comp 1 Location
+[Tx]  Comp 1 Site Size
+[Tx]  Comp 1 Age
+[Tx]  Comp 1 Floor Area
+[Tx]  Comp 1 Rooms
+[Tx]  Comp 1 Bdrms
+[Tx]  Comp 1 Bath
+[Tx]  Comp 1 Dimensions
+[Tx]  Comp 1 Source
+[Tx]  Comp 1 Basement 1
+[Tx]  Comp 1 Parking 1
+[Tx]  Comp1blank1
+[Tx]  Comp1blank2
+[Tx]  Comp1GrossPercent
+[Tx]  Comp1Net
+[Ch]  Comp 1 Source Dropdown → Appraiser Workfiles, Assessment Records, Land Titles Registry, MLS, MLS #, Offer to Purchase, Online Data, Other (specify), Owner/Occupant
+[Ch]  Comp1PT → Acreage, Condo/Strata Conversion, Cottage/Cabin, Duplex, Fourplex, Grouphome, Minihome, Other (specify), Residential with Carriage/Coach/Laneway, Rooming House, Rowhouse, Semi-Detached, Single Family Dwelling, Townhouse, Triplex
+[Ch]  Comp1DS → 1.5 Storey, 2 Storey, 2.5 Storey, 3 Storey, A-Frame, Bi-Level, Bungalow, Bungalow Raised, Duplex, Log Home, Manufactured, Mobile/Trailer, Modular, Other (specify), Split Level (specify), Tri-Level
+[Ch]  Comp1Condition → Average, Excellent, Fair, Good, Inferior, Other (SPECIFY), Poor, Similar, Superior
+[Ch]  AIComp1PT → Acreage, Condo/Strata Conversion, Cottage/Cabin, Duplex, Fourplex, Grouphome, Minihome, Other (specify), Residential with Carriage/Coach/Laneway, Rooming House, Rowhouse, Semi-Detached, Single Family Dwelling, Townhouse, Triplex
+[Ch]  AICComp1DS → 1.5 Storey, 2 Storey, 2.5 Storey, 3 Storey, A-Frame, Bi-Level, Bungalow, Bungalow Raised, Duplex, Log Home, Manufactured, Mobile/Trailer, Modular, Other (specify), Split Level (specify), Tri-Level
+[Ch]  AIComp1Condition → Average, Excellent, Fair, Good, Other (SPECIFY), Poor
+[Ch]  Comp 1 Basement → Crawlspace, Full Finish 1 Bed 1 Full Bath, Full Finish 1 Bed 1 Half Bath, Full Finish Walkout, Full Finished, None, Other (specify), Part Finished
+[Ch]  Comp 1 Parking → Other (specify), Single, Double, Triple, Not Applicable
+[???] Comp1adj
+[Tx]  Comp1adj.0
+[Tx]  Comp1adj.1
+[Tx]  Comp1adj.2
+[Tx]  Comp1adj.3
+[Tx]  Comp1adj.4
+[Tx]  Comp1adj.5
+[Tx]  Comp1adj.6
+[Tx]  Comp1adj.7
+[Tx]  Comp1adj.8
+[Tx]  Comp1adj.9
+[Tx]  Comp1adj.10
+[Tx]  Comp1adj.11
+[Tx]  Comp1adj.12
+[Tx]  Comp1adj.13
+[Tx]  Comp1adj.14
+[Tx]  Comp1adj.15
+[Tx]  Comp1adj.16
+[Tx]  Comp1adj.17
+[Tx]  Comp1adj.18
+[Tx]  Comp1adj.19
+[Tx]  Comp1adj.20
+[Tx]  Comp1adj.21
+[???] Comp1blankdetail1
+[Tx]  Comp1blankdetail1.0
+[Tx]  Comp1blankdetail1.1
+[Tx]  Comp1blankdetail1.2
+[Tx]  Comp1blankdetail1.3
+[Tx]  Comp1blankdetail1.4
+[???] ADJUSTED VALUES1
+[Tx]  ADJUSTED VALUES1.0
+
+--- COMPARABLE 2 ---
+[Tx]  Comp 2
+[Tx]  Comp 2 Date of Sale
+[Tx]  Comp 2 Sale Price
+[Tx]  Comp 2 Market
+[Tx]  Comp 2 Location
+[Tx]  Comp 2 Site Size
+[Tx]  Comp 2 Age
+[Tx]  Comp 2 Floor Area
+[Tx]  Comp 2 Rooms
+[Tx]  Comp 2 Bdrms
+[Tx]  Comp 2 Bath
+[Tx]  Comp 2 Dimensions
+[Tx]  Comp 2 Source
+[Tx]  Comp 2 Basement 1
+[Tx]  Comp 2 Parking 1
+[Tx]  Comp2blank1
+[Tx]  Comp2blank2
+[Tx]  Comp2GrossPercent
+[Tx]  Comp2Net
+[Ch]  Comp 2 Source Dropdown → Appraiser Workfiles, Assessment Records, Land Titles Registry, MLS, MLS #, Online Data, Other (specify), Owner/Occupant
+[Ch]  Comp2PT → Acreage, Condo/Strata Conversion, Cottage/Cabin, Duplex, Fourplex, Grouphome, Minihome, Other (specify), Residential with Carriage/Coach/Laneway, Rooming House, Rowhouse, Semi-Detached, Single Family Dwelling, Townhouse, Triplex
+[Ch]  Comp2DS → 1.5 Storey, 2 Storey, 2.5 Storey, 3 Storey, A-Frame, Bi-Level, Bungalow, Bungalow Raised, Duplex, Log Home, Manufactured, Mobile/Trailer, Modular, Other (specify), Split Level (specify), Tri-Level
+[Ch]  Comp2Condition → Average, Excellent, Fair, Good, Other (SPECIFY), Poor
+[Ch]  AIComp2PT → Acreage, Condo/Strata Conversion, Cottage/Cabin, Duplex, Fourplex, Grouphome, Minihome, Other (specify), Residential with Carriage/Coach/Laneway, Rooming House, Rowhouse, Semi-Detached, Single Family Dwelling, Townhouse, Triplex
+[Ch]  AIComp2DS → 1.5 Storey, 2 Storey, 2.5 Storey, 3 Storey, A-Frame, Bi-Level, Bungalow, Bungalow Raised, Duplex, Log Home, Manufactured, Mobile/Trailer, Modular, Other (specify), Split Level (specify), Tri-Level
+[Ch]  AIComp2Condition → Average, Excellent, Fair, Good, Other (SPECIFY), Poor
+[Ch]  Comp 2 Basement → Crawlspace, Full Finish 1 Bed 1 Full Bath, Full Finish 1 Bed 1 Half Bath, Full Finish Walkout, Full Finished, None, Other (specify), Part Finished
+[Ch]  Comp 2 Parking → Other (specify), Single, Double, Triple, Not Applicable
+[???] Comp2adj
+[Tx]  Comp2adj.0
+[Tx]  Comp2adj.1
+[Tx]  Comp2adj.2
+[Tx]  Comp2adj.3
+[Tx]  Comp2adj.4
+[Tx]  Comp2adj.5
+[Tx]  Comp2adj.6
+[Tx]  Comp2adj.7
+[Tx]  Comp2adj.8
+[Tx]  Comp2adj.9
+[Tx]  Comp2adj.10
+[Tx]  Comp2adj.11
+[Tx]  Comp2adj.12
+[Tx]  Comp2adj.13
+[Tx]  Comp2adj.14
+[Tx]  Comp2adj.15
+[Tx]  Comp2adj.16
+[Tx]  Comp2adj.17
+[Tx]  Comp2adj.18
+[Tx]  Comp2adj.19
+[Tx]  Comp2adj.20
+[Tx]  Comp2adj.21
+[???] Comp2blankdetail1
+[Tx]  Comp2blankdetail1.0
+[Tx]  Comp2blankdetail1.1
+[Tx]  Comp2blankdetail1.2
+[Tx]  Comp2blankdetail1.3
+[Tx]  Comp2blankdetail1.4
+[???] ADJUSTED VALUES2
+[Tx]  ADJUSTED VALUES2.0
+
+--- COMPARABLE 3 ---
+[Tx]  Comp 3
+[Tx]  Comp 3 Date of Sale
+[Tx]  Comp 3 Sale Price
+[Tx]  Comp 3 Market
+[Tx]  Comp 3 Location
+[Tx]  Comp 3 Site Size
+[Tx]  Comp 3 Age
+[Tx]  Comp 3 Floor Area
+[Tx]  Comp 3 Rooms
+[Tx]  Comp 3 Bdrms
+[Tx]  Comp 3 Bath
+[Tx]  Comp 3 Dimensions
+[Tx]  Comp 3 Source
+[Tx]  Comp 3 Basement 1
+[Tx]  Comp 3 Parking 1
+[Tx]  Comp3blank1
+[Tx]  Comp3blank2
+[Tx]  Comp3GrossPercent
+[Tx]  Comp3Net
+[Ch]  Comp 3 Source Dropdown → Appraiser Workfiles, Assessment Records, Land Titles Registry, MLS, MLS #, Online Data, Other (specify), Owner/Occupant
+[Ch]  Comp3PT → Acreage, Condo/Strata Conversion, Cottage/Cabin, Duplex, Fourplex, Grouphome, Minihome, Other (specify), Residential with Carriage/Coach/Laneway, Rooming House, Rowhouse, Semi-Detached, Single Family Dwelling, Townhouse, Triplex
+[Ch]  Comp3DS → 1.5 Storey, 2 Storey, 2.5 Storey, 3 Storey, A-Frame, Bi-Level, Bungalow, Bungalow Raised, Duplex, Log Home, Manufactured, Mobile/Trailer, Modular, Other (specify), Split Level (specify), Tri-Level
+[Ch]  Comp3Condition → Average, Excellent, Fair, Good, Other (SPECIFY), Poor
+[Ch]  AIComp3PT → Acreage, Condo/Strata Conversion, Cottage/Cabin, Duplex, Fourplex, Grouphome, Minihome, Other (specify), Residential with Carriage/Coach/Laneway, Rooming House, Rowhouse, Semi-Detached, Single Family Dwelling, Townhouse, Triplex
+[Ch]  AICComp3DS → 1.5 Storey, 2 Storey, 2.5 Storey, 3 Storey, A-Frame, Bi-Level, Bungalow, Bungalow Raised, Duplex, Log Home, Manufactured, Mobile/Trailer, Modular, Other (specify), Split Level (specify), Tri-Level
+[Ch]  AIComp3Condition → Average, Excellent, Fair, Good, Other (SPECIFY), Poor
+[Ch]  Comp 3 Basement → Crawlspace, Full Finish 1 Bed 1 Full Bath, Full Finish 1 Bed 1 Half Bath, Full Finish Walkout, Full Finished, None, Other (specify), Part Finished
+[Ch]  Comp 3 Parking → Other (specify), Single, Double, Triple, Not Applicable
+[???] Comp3adj
+[Tx]  Comp3adj.0
+[Tx]  Comp3adj.1
+[Tx]  Comp3adj.2
+[Tx]  Comp3adj.3
+[Tx]  Comp3adj.4
+[Tx]  Comp3adj.5
+[Tx]  Comp3adj.6
+[Tx]  Comp3adj.7
+[Tx]  Comp3adj.8
+[Tx]  Comp3adj.9
+[Tx]  Comp3adj.10
+[Tx]  Comp3adj.11
+[Tx]  Comp3adj.12
+[Tx]  Comp3adj.13
+[Tx]  Comp3adj.14
+[Tx]  Comp3adj.15
+[Tx]  Comp3adj.16
+[Tx]  Comp3adj.17
+[Tx]  Comp3adj.18
+[Tx]  Comp3adj.19
+[Tx]  Comp3adj.20
+[Tx]  Comp3adj.21
+[???] Comp3blankdetail1
+[Tx]  Comp3blankdetail1.0
+[Tx]  Comp3blankdetail1.1
+[Tx]  Comp3blankdetail1.2
+[Tx]  Comp3blankdetail1.3
+[Tx]  Comp3blankdetail1.4
+[???] ADJUSTED VALUES3
+[Tx]  ADJUSTED VALUES3.0
+
+--- SHARED COMP 1-3 FIELDS ---
+[???] ItemBlank1
+[Tx]  ItemBlank1.0
+[Tx]  ItemBlank1.1
+[Tx]  ItemBlank1.2
+[Tx]  ItemBlank1.3
+[Tx]  ItemBlank1.4
+[Tx]  DCA Analyses 1-3
+[Tx]  Comparable Analysis and Comments1-3
+[Tx]  LFA PSF ADJ
+[Ch]  DropdownAdjustment1comp1-3 → Approx KMs to Subject, Conditions of Sale, Expenditures made immediately after purchase, Financing Terms, Market Conditions/Time Adjustment, Other (specify), Real Property Rights Conveyed, LIST PRICE
+[Ch]  DropdownAdjustment2comp1-3 → Approx KMs to Subject, Conditions of Sale, Expenditures made immediately after purchase, Financing Terms, Market Conditions/Time Adjustment, Other (specify), Real Property Rights Conveyed
+
+================================================================================
+SECTION 11: COMPARABLES 4–6  (Extended Sales)
+================================================================================
+
+NOTE: Comps 4-6 do not have the duplicate AI/AIC field variants.
+      No Basement or Parking dropdown fields for Comps 4-6.
+
+--- COMPARABLE 4 ---
+[Tx]  Comp 4
+[Tx]  Comp 4 Date of Sale
+[Tx]  Comp 4 Sale Price
+[Tx]  Comp 4 Market
+[Tx]  Comp 4 Location
+[Tx]  Comp 4 Site Size
+[Tx]  Comp 4 Age
+[Tx]  Comp 4 Floor Area
+[Tx]  Comp 4 Rooms
+[Tx]  Comp 4 Bdrms
+[Tx]  Comp 4 Bath
+[Tx]  Comp 4 Dimensions
+[Tx]  Comp4blank1
+[Tx]  Comp4blank2
+[Tx]  Comp4GrossPercent
+[Tx]  Comp4Net
+[Ch]  Comp 4 Source Dropdown → Appraiser Workfiles, Assessment Records, Land Titles Registry, MLS, MLS #, Online Data, Other (specify), Owner/Occupant
+[Ch]  Comp4PT → Acreage, Condo/Strata Conversion, Cottage/Cabin, Duplex, Fourplex, Grouphome, Minihome, Other (specify), Residential with Carriage/Coach/Laneway, Rooming House, Rowhouse, Semi-Detached, Single Family Dwelling, Townhouse, Triplex
+[Ch]  Comp4DS → 1.5 Storey, 2 Storey, 2.5 Storey, 3 Storey, A-Frame, Bi-Level, Bungalow, Bungalow Raised, Duplex, Log Home, Manufactured, Mobile/Trailer, Modular, Other (specify), Split Level (specify), Tri-Level
+[Ch]  Comp4Condition → Average, Excellent, Fair, Good, Other (SPECIFY), Poor
+[???] Comp4adj
+[Tx]  Comp4adj.0
+[Tx]  Comp4adj.1
+[Tx]  Comp4adj.2
+[Tx]  Comp4adj.3
+[Tx]  Comp4adj.4
+[Tx]  Comp4adj.5
+[Tx]  Comp4adj.6
+[Tx]  Comp4adj.7
+[Tx]  Comp4adj.8
+[Tx]  Comp4adj.9
+[Tx]  Comp4adj.10
+[Tx]  Comp4adj.11
+[Tx]  Comp4adj.12
+[Tx]  Comp4adj.13
+[Tx]  Comp4adj.14
+[Tx]  Comp4adj.15
+[Tx]  Comp4adj.16
+[Tx]  Comp4adj.17
+[Tx]  Comp4adj.18
+[Tx]  Comp4adj.19
+[Tx]  Comp4adj.20
+[Tx]  Comp4adj.21
+[???] Comp4blankdetail1
+[Tx]  Comp4blankdetail1.0
+[Tx]  Comp4blankdetail1.1
+[Tx]  Comp4blankdetail1.2
+[Tx]  Comp4blankdetail1.3
+[Tx]  Comp4blankdetail1.4
+[???] ADJUSTED VALUES4
+[Tx]  ADJUSTED VALUES4.0
+
+--- COMPARABLE 5 ---
+[Tx]  Comp 5
+[Tx]  Comp 5 Date of Sale
+[Tx]  Comp 5 Sale Price
+[Tx]  Comp 5 Market
+[Tx]  Comp 5 Location
+[Tx]  Comp 5 Site Size
+[Tx]  Comp 5 Age
+[Tx]  Comp 5 Floor Area
+[Tx]  Comp 5 Rooms
+[Tx]  Comp 5 Bdrms
+[Tx]  Comp 5 Bath
+[Tx]  Comp 5 Dimensions
+[Tx]  Comp5blank1
+[Tx]  Comp5blank2
+[Tx]  Comp5GrossPercent
+[Tx]  Comp5Net
+[Ch]  Comp 5 Source Dropdown → Appraiser Workfiles, Assessment Records, Land Titles Registry, MLS, MLS #, Online Data, Other (specify), Owner/Occupant
+[Ch]  Comp5PT → Acreage, Condo/Strata Conversion, Cottage/Cabin, Duplex, Fourplex, Grouphome, Minihome, Other (specify), Residential with Carriage/Coach/Laneway, Rooming House, Rowhouse, Semi-Detached, Single Family Dwelling, Townhouse, Triplex
+[Ch]  Comp5DS → 1.5 Storey, 2 Storey, 2.5 Storey, 3 Storey, A-Frame, Bi-Level, Bungalow, Bungalow Raised, Duplex, Log Home, Manufactured, Mobile/Trailer, Modular, Other (specify), Split Level (specify), Tri-Level
+[Ch]  Comp5Condition → Average, Excellent, Fair, Good, Other (SPECIFY), Poor
+[???] Comp5adj
+[Tx]  Comp5adj.0
+[Tx]  Comp5adj.1
+[Tx]  Comp5adj.2
+[Tx]  Comp5adj.3
+[Tx]  Comp5adj.4
+[Tx]  Comp5adj.5
+[Tx]  Comp5adj.6
+[Tx]  Comp5adj.7
+[Tx]  Comp5adj.8
+[Tx]  Comp5adj.9
+[Tx]  Comp5adj.10
+[Tx]  Comp5adj.11
+[Tx]  Comp5adj.12
+[Tx]  Comp5adj.13
+[Tx]  Comp5adj.14
+[Tx]  Comp5adj.15
+[Tx]  Comp5adj.16
+[Tx]  Comp5adj.17
+[Tx]  Comp5adj.18
+[Tx]  Comp5adj.19
+[Tx]  Comp5adj.20
+[Tx]  Comp5adj.21
+[???] Comp5blankdetail1
+[Tx]  Comp5blankdetail1.0
+[Tx]  Comp5blankdetail1.1
+[Tx]  Comp5blankdetail1.2
+[Tx]  Comp5blankdetail1.3
+[Tx]  Comp5blankdetail1.4
+[???] ADJUSTED VALUES5
+[Tx]  ADJUSTED VALUES5.0
+
+--- COMPARABLE 6 ---
+[Tx]  Comp 6
+[Tx]  Comp 6 Date of Sale
+[Tx]  Comp 6 Sale Price
+[Tx]  Comp 6 Market
+[Tx]  Comp 6 Location
+[Tx]  Comp 6 Site Size
+[Tx]  Comp 6 Age
+[Tx]  Comp 6 Floor Area
+[Tx]  Comp 6 Rooms
+[Tx]  Comp 6 Bdrms
+[Tx]  Comp 6 Bath
+[Tx]  Comp 6 Dimensions
+[Tx]  Comp6blank1
+[Tx]  Comp6blank2
+[Tx]  Comp6GrossPercent
+[Tx]  Comp6Net
+[Ch]  Comp 6 Source Dropdown → Appraiser Workfiles, Assessment Records, Land Titles Registry, MLS, MLS #, Online Data, Other (specify), Owner/Occupant
+[Ch]  Comp6PT → Acreage, Condo/Strata Conversion, Cottage/Cabin, Duplex, Fourplex, Grouphome, Minihome, Other (specify), Residential with Carriage/Coach/Laneway, Rooming House, Rowhouse, Semi-Detached, Single Family Dwelling, Townhouse, Triplex
+[Ch]  Comp6DS → 1.5 Storey, 2 Storey, 2.5 Storey, 3 Storey, A-Frame, Bi-Level, Bungalow, Bungalow Raised, Duplex, Log Home, Manufactured, Mobile/Trailer, Modular, Other (specify), Split Level (specify), Tri-Level
+[Ch]  Comp6Condition → Average, Excellent, Fair, Good, Other (SPECIFY), Poor
+[???] Comp6adj
+[Tx]  Comp6adj.0
+[Tx]  Comp6adj.1
+[Tx]  Comp6adj.2
+[Tx]  Comp6adj.3
+[Tx]  Comp6adj.4
+[Tx]  Comp6adj.5
+[Tx]  Comp6adj.6
+[Tx]  Comp6adj.7
+[Tx]  Comp6adj.8
+[Tx]  Comp6adj.9
+[Tx]  Comp6adj.10
+[Tx]  Comp6adj.11
+[Tx]  Comp6adj.12
+[Tx]  Comp6adj.13
+[Tx]  Comp6adj.14
+[Tx]  Comp6adj.15
+[Tx]  Comp6adj.16
+[Tx]  Comp6adj.17
+[Tx]  Comp6adj.18
+[Tx]  Comp6adj.19
+[Tx]  Comp6adj.20
+[Tx]  Comp6adj.21
+[???] Comp6blankdetail1
+[Tx]  Comp6blankdetail1.0
+[Tx]  Comp6blankdetail1.1
+[Tx]  Comp6blankdetail1.2
+[Tx]  Comp6blankdetail1.3
+[Tx]  Comp6blankdetail1.4
+[???] ADJUSTED VALUES6
+[Tx]  ADJUSTED VALUES6.0
+
+--- SHARED COMP 4-6 FIELDS ---
+[Tx]  Subject Date of Sale
+[Tx]  Subject Sale Price
+[Tx]  Subject Market
+[Tx]  Subject Location
+[Tx]  Subject LFA
+[Tx]  Subject Age
+[Tx]  Subject Site Size
+[Tx]  Subject Basement
+[Tx]  Subject Parking
+[Tx]  Subjectblank1
+[Tx]  Subjectblank2
+[Tx]  DCA Analyses 4-6
+[Tx]  ANALYSESCOMMENTS
+
+================================================================================
+SECTION 14: COST APPROACH
+================================================================================
+NOTE: No dropdown fields in this section — all [Tx], [Btn], and [???] groups.
+
+[Tx]  CALandValue
+[Tx]  Other Source
+[Tx]  CARCNTOTAL
+[Tx]  Text79
+[Tx]  TOTALDRCN
+[Tx]  TOTALDRCN2
+[Tx]  CostApproachText
+[Tx]  CATOTAL
+[Tx]  Cost Analyses
+[Tx]  CADEP
+[Tx]  FODep
+[Tx]  PDDep
+[Tx]  EODep
+[Btn] Check Box43
+[Btn] Contractor
+[Btn] Check Box477
+[???] CAItem
+[Tx]  CAItem.0
+[Tx]  CAItem.1
+[Tx]  CAItem.2
+[Tx]  CAItem.3
+[Tx]  CAItem.4
+[Tx]  CAItem.5
+[Tx]  CAItem.6
+[???] CALFA
+[Tx]  CALFA.0
+[Tx]  CALFA.1
+[Tx]  CALFA.2
+[Tx]  CALFA.3
+[Tx]  CALFA.4
+[Tx]  CALFA.5
+[Tx]  CALFA.6
+[???] CARATE
+[Tx]  CARATE.0
+[Tx]  CARATE.1
+[Tx]  CARATE.2
+[Tx]  CARATE.3
+[Tx]  CARATE.4
+[Tx]  CARATE.5
+[Tx]  CARATE.6
+[???] RCN
+[Tx]  RCN.0
+[Tx]  RCN.1
+[Tx]  RCN.2
+[Tx]  RCN.3
+[Tx]  RCN.4
+[Tx]  RCN.5
+[Tx]  RCN.6
+[Tx]  RCN.7
+[Tx]  RCN.8
+[Tx]  RCN.9
+[Tx]  RCN.10
+[???] DRCN
+[Tx]  DRCN.0
+[Tx]  DRCN.1
+[Tx]  DRCN.2
+[Tx]  DRCN.3
+[Tx]  DRCN.4
+[Tx]  DRCN.5
+[Tx]  DRCN.6
+[Tx]  DRCN.7
+[Tx]  DRCN.8
+[Tx]  DRCN.9
+[Tx]  DRCN.10
+[???] Other0
+[Tx]  Other0.0
+[???] Other1
+[Tx]  Other1.0
+[Tx]  Other1.1
+[Tx]  Other1.2
+
+================================================================================
+SECTION 17: PHOTOS
+================================================================================
+
+--- Subject Photos (Photo1-3: free-text captions) ---
+[Btn] TitlePhoto
+[Btn] Photo1
+[Tx]  Photocaption1
+[Btn] Photo2
+[Tx]  Photocaption2
+[Btn] Photo3
+[Tx]  Photocaption3
+
+--- Subject Photos (Photo4-15: dropdown captions — all 12 identical) ---
+[Btn] Photo4
+[Ch]  Photocaption4  → Basement, Bathroom #1, Bathroom #2, Bathroom #3, Bathroom #4, Bedroom #1, Bedroom #2, Bedroom #3, Bedroom #4, Comparable #1, Comparable #2, Comparable #3, Comparable #4, Comparable #5, Comparable #6, Dining, Entrance, Kitchen, Laundry, Living Room, Other (SPECIFY), Unit #1, Unit #2, Unit #3, Unit #4
+[Btn] Photo5
+[Ch]  Photocaption5  → (same 25 options as Photocaption4)
+[Btn] Photo6
+[Ch]  Photocaption6  → (same 25 options as Photocaption4)
+[Btn] Photo7
+[Ch]  Photocaption7  → (same 25 options as Photocaption4)
+[Btn] Photo8
+[Ch]  Photocaption8  → (same 25 options as Photocaption4)
+[Btn] Photo9
+[Ch]  Photocaption9  → (same 25 options as Photocaption4)
+[Btn] Photo10
+[Ch]  Photocaption10 → (same 25 options as Photocaption4)
+[Btn] Photo11
+[Ch]  Photocaption11 → (same 25 options as Photocaption4)
+[Btn] Photo12
+[Ch]  Photocaption12 → (same 25 options as Photocaption4)
+[Btn] Photo13
+[Ch]  Photocaption13 → (same 25 options as Photocaption4)
+[Btn] Photo14
+[Ch]  Photocaption14 → (same 25 options as Photocaption4)
+[Btn] Photo15
+[Ch]  Photocaption15 → (same 25 options as Photocaption4)
+
+--- Comparable Photos ---
+[Tx]  Comp1Photo
+[Btn] Comp1photobox
+[Tx]  Comp2Photo
+[Btn] Comp2photobox
+[Tx]  Comp3Photo
+[Btn] Comp3photobox
+
+--- Maps & Attachments ---
+[Btn] AerialMap
+[Btn] AppraiserLogo
+[Btn] Add More Photos
+[Btn] Floorplan Sketch
+[Btn] AddSales
+[Btn] ZoningMap

@@ -251,6 +251,12 @@ export const acceptInvite = async (token, data) => {
   return response.data;
 };
 
+// Workfile section patch
+export const patchWorkfileSection = async (id, section, data) => {
+  const response = await apiClient.patch(`/inspections/${id}/workfile`, { section, data });
+  return response.data;
+};
+
 // Workfile settings
 export const getWorkfileSettings = async () => {
   const response = await apiClient.get('/workfiles/settings');

@@ -1,0 +1,156 @@
+AIC FULL Form ENG — Mapping Phase 1
+Sections 1–5: Complete Field List with Types and Dropdown Options
+================================================================================
+
+FIELD TYPE LEGEND
+  [Tx]  = Text input (free-form)
+  [Ch]  = Choice / Dropdown  →  options listed
+  [Btn] = Button / Checkbox
+  [Sig] = Signature field
+  [???] = Unknown / untyped parent group
+
+================================================================================
+SECTION 1: COVER / TRANSMITTAL  (11 fields)
+================================================================================
+[Tx]  DateTransmittal
+[Tx]  Client Name
+[Tx]  LetterBody
+[Tx]  LetterBody2
+[Tx]  Construction Complete
+[Tx]  Additions Complete
+[Tx]  Improvement As Is
+[Sig] Signature1Transmittal
+[Sig] Signature2Transmittal
+[Btn] AppraiserLogo
+[Btn] TitlePhoto
+
+================================================================================
+SECTION 2: EXECUTIVE SUMMARY  (11 fields)
+================================================================================
+[Tx]  Report Date
+[Tx]  Report Warnings
+[Tx]  FinalValue
+[Tx]  DateReport
+[Tx]  Direct Comparison Value
+[Tx]  Direct Comparison Value As If Complete
+[Tx]  Exposure Analysis
+[Tx]  Exposure As If
+[Tx]  Reconciliation
+[Tx]  Range comment
+[Tx]  Trends
+
+================================================================================
+SECTION 3: CLIENT / APPRAISER  (19 fields)
+================================================================================
+[Tx]  Client
+[Tx]  ClientAttention
+[Tx]  ClientAddress
+[Tx]  ClientEmail
+[Tx]  ClientPhone
+[Tx]  ClientFax
+[Tx]  AIC Member
+[Tx]  MemberName1
+[Tx]  MemberName2
+[Tx]  MemberAddress
+[Tx]  MemberCompany
+[Tx]  E-mail
+[Tx]  Phone
+[Tx]  Fax
+[Tx]  Membership1
+[Tx]  Membership2
+[Ch]  Prov → AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, PROV, QC, SK, YT
+[Btn] AIC Designation 1
+[Btn] AIC Designation 2
+
+================================================================================
+SECTION 4: SUBJECT / PROPERTY  (31 fields + 1 unknown)
+================================================================================
+[Tx]  Property Address
+[Tx]  File No
+[Tx]  City
+[Tx]  Postal Code
+[Tx]  Legal Description
+[Tx]  Location Name
+[Tx]  Municipality and District
+[Tx]  House Size
+[Tx]  Lot Size
+[Tx]  Year Built
+[Tx]  Additions
+[Tx]  Effective Age
+[Tx]  Taxes
+[Tx]  Total
+[Tx]  Source
+[Tx]  Reference
+[Tx]  Condo/Strate Complex Name
+[Tx]  Maintenance Fee
+[Tx]  Maintenance Fee Amount
+[Tx]  MaintenanceSource
+[Tx]  SubjectList
+[Tx]  Ass. date
+[Ch]  Tax Year → 2022, 2023, 2024, 2025
+[Ch]  AssessmentPhase → Assessment Date, Assessment Phase-in Date
+[Ch]  PIN → Assessment Roll #, LINC #, Other (specify), PID #
+[Ch]  PropertyRightsOtherDropdown → Cooperative, Co-ownership, First Nations Land, Fractional Interest, Government Land (specify), Other (specify), Parcel of Tied Land, Partial Holding, Physical Segment
+[Ch]  MaintenanceSpecial → Special Assessment/Levies, Unknown Assessment/Levies
+[Ch]  Occupiedby → Name, Not Applicable, Other (specify), Owner, Owner and Tenant, Owner and Tenants, Owner Up/Tenant Down, Owners, Tenant, Tenants, Unknown, Vacant
+[Ch]  Name Type → Applicant, Other (specify), Owner, Purchaser, Seller, Tenant, Unknown
+[Btn] Rights
+[Btn] FeeMonthAnnual
+[???] Ass  (untyped parent field)
+
+================================================================================
+SECTION 5: ASSIGNMENT  (34 fields)
+================================================================================
+[Tx]  Assignment Name
+[Tx]  Inspection Date
+[Tx]  Effective Date
+[Tx]  EffectiveDateUpdate
+[Tx]  File No Old
+[Tx]  Complete On
+[Tx]  Requested By
+[Tx]  Assumptions and Conditions
+[Tx]  Hypothetical Conditions
+[Tx]  Scope
+[Tx]  DisclaimerBlank
+[Tx]  Source of Data
+[Ch]  DropdownUse → Multiresidential, Residential Condo/Strata, Residential Other (specify), Residential Single Family
+[Ch]  OtherPurpose → Other (specify), To estimate Fair Market Value for self-assessment (excludes GST/HST), Update of original report completed on (DATE) with an effective date of (DATE)  File No (File No Old)
+[Ch]  DropdownIntendedUse → Conventional first mortgage financing, Conventional second mortgage financing, Mortgage insurance only, Estate, Marketing purposes, Matrimonial, Other (specify), Foreclosure/Power of Sale, DRAFT Report Only. NOT for lending, financing or to be relied upon
+[Ch]  IntendedUsers → DRAFT Report Only. NOT for lending, financing or to be relied upon for any use, Intended User Name ABC (must be named), Other (must be named)
+[Ch]  Hypotheticaldropdown → 10 acres only, 5 acres only, As if 100% Complete, Other (specify)
+[Ch]  ExtraordinaryItemsdropdown → 10 acres only, 5 acres only, As if 100% Complete (new construction/renovation), Other (specify)
+[Ch]  DropdownInspection → On-Site Inspection Exterior and Interior, Other (specify)
+[Ch]  Inspection Type List → Full Inspection Exterior and Interior, Limited Inspection - Exterior only, Limited Inspection - from street, Other (specify)
+[Ch]  Inspection Type List2 → Full Inspection Exterior and Interior, Limited Inspection - Exterior only, Limited Inspection - from street, Other (specify)
+[Btn] Requested by Client
+[Btn] Requested by Other
+[Btn] Update of Original Report
+[Btn] To Estimate MV
+[Btn] To Estimate Other
+[Btn] To Estimate MR
+[Btn] DCA Approach
+[Btn] Cost Approach
+[Btn] Income Approach
+[Btn] Conventional
+[Btn] Intended Use Other
+[Btn] ASIS/ASIF
+[Btn] Value Effective CRP
+
+================================================================================
+PART A (from original request): PHOTOCAPTION DROPDOWN OPTIONS
+Photocaption4 through Photocaption15 — all identical, 25 options each
+================================================================================
+[Ch]  Photocaption4  → Basement, Bathroom #1, Bathroom #2, Bathroom #3, Bathroom #4, Bedroom #1, Bedroom #2, Bedroom #3, Bedroom #4, Comparable #1, Comparable #2, Comparable #3, Comparable #4, Comparable #5, Comparable #6, Dining, Entrance, Kitchen, Laundry, Living Room, Other (SPECIFY), Unit #1, Unit #2, Unit #3, Unit #4
+[Ch]  Photocaption5  → (same 25 options as above)
+[Ch]  Photocaption6  → (same 25 options as above)
+[Ch]  Photocaption7  → (same 25 options as above)
+[Ch]  Photocaption8  → (same 25 options as above)
+[Ch]  Photocaption9  → (same 25 options as above)
+[Ch]  Photocaption10 → (same 25 options as above)
+[Ch]  Photocaption11 → (same 25 options as above)
+[Ch]  Photocaption12 → (same 25 options as above)
+[Ch]  Photocaption13 → (same 25 options as above)
+[Ch]  Photocaption14 → (same 25 options as above)
+[Ch]  Photocaption15 → (same 25 options as above)
+
+NOTE: Photocaption1, Photocaption2, Photocaption3 are [Tx] free-text fields.

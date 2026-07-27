@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 import './PhotosPage.css';
 
 const FLOOR_DISPLAY = {
@@ -45,25 +47,28 @@ export default function PhotosPage({ inspection, onBack }) {
   const pendingCt = filtered.filter(p => p.url?.startsWith('blob:')).length;
 
   const handleDownloadAll = async () => {
-    for (const photo of filtered) {
-      if (!photo.url || photo.url.startsWith('blob:')) continue;
+    const toDownload = filtered.filter(p => p.url && !p.url.startsWith('blob:'));
+    if (!toDownload.length) return;
+
+    const zip    = new JSZip();
+    const counts = {};
+
+    for (const photo of toDownload) {
       try {
         const res  = await fetch(photo.url);
         const blob = await res.blob();
-        const url  = URL.createObjectURL(blob);
-        const a    = document.createElement('a');
-        a.href     = url;
-        a.download = `${photo.floorDisplay}-${photo.roomLabel}.jpg`
+        const base = `${photo.floorDisplay}-${photo.roomLabel}`
           .replace(/[^a-z0-9._-]/gi, '-');
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
-        await new Promise(r => setTimeout(r, 250));
+        counts[base] = (counts[base] || 0) + 1;
+        zip.file(`${base}_${counts[base]}.jpg`, blob);
       } catch {
-        window.open(photo.url, '_blank');
+        // skip photos that fail to fetch (CORS or broken URL)
       }
     }
+
+    const content = await zip.generateAsync({ type: 'blob' });
+    const addr    = inspection.property_data?.address?.replace(/[^a-z0-9]/gi, '-') || 'photos';
+    saveAs(content, `${addr}.zip`);
   };
 
   return (
@@ -106,7 +111,19 @@ export default function PhotosPage({ inspection, onBack }) {
             <div key={photo.id} className="pp-card">
               <div className="pp-thumb-wrap">
                 {photo.url && !photo.url.startsWith('blob:')
-                  ? <img src={photo.url} alt={photo.roomLabel} className="pp-thumb" />
+                  ? <img
+                      src={photo.url}
+                      alt={photo.roomLabel}
+                      className="pp-thumb"
+                      onError={e => {
+                        e.target.replaceWith(
+                          Object.assign(document.createElement('div'), {
+                            className: 'pp-thumb-placeholder',
+                            textContent: '⚠️',
+                          })
+                        );
+                      }}
+                    />
                   : <div className="pp-thumb-placeholder">
                       {photo.url?.startsWith('blob:') ? '📷' : '⏳'}
                     </div>

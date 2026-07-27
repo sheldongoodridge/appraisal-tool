@@ -1,0 +1,404 @@
+AIC FULL Form ENG — Mapping Phase 2
+Sections 6, 7, 8, 9, 12, 13: Complete Field List with Types and Dropdown Options
+================================================================================
+
+FIELD TYPE LEGEND
+  [Tx]  = Text input (free-form)
+  [Ch]  = Choice / Dropdown  →  options listed
+  [Btn] = Button / Checkbox
+  [Sig] = Signature field
+  [???] = Unknown / untyped parent group
+
+================================================================================
+SECTION 6: NEIGHBOURHOOD  (19 fields)
+================================================================================
+[Tx]  Neighbourhood Comments
+[Tx]  FromAGE RANGE OF PROPERTIES years
+[Tx]  ToAGE RANGE OF PROPERTIES years
+[Tx]  Other Trend
+[Tx]  fill_11
+[Tx]  fill_12
+[Ch]  DetrimentalNbhd → Cemetery, Commercial (describe), Gas Station, Landfill, Noise (describe - airport, highway, railway), Other (specify), Towers (communication, high voltage)
+[Btn] Nature District
+[Btn] Type District
+[Btn] Trend District
+[Btn] Builtup
+[Btn] Conformity Age
+[Btn] HC
+[Btn] EALC
+[Btn] Market Supply
+[Btn] Market Demand
+[Btn] Price Trends
+[Btn] Landscaping
+[Btn] Nbhd Detrimental
+
+================================================================================
+SECTION 7: SITE  (51 fields)
+================================================================================
+[Tx]  Site Dimensions
+[Tx]  Topography
+[Tx]  Configuration
+[Tx]  Sourcelot
+[Tx]  Floodplain
+[Tx]  Flooddate
+[Tx]  Site Improvements
+[Tx]  Site Comments
+[Tx]  Other Water Supply
+[Tx]  Landscaping Blank
+[Tx]  HBU Vacant Blank
+[Tx]  HBU Improved Blank
+[Tx]  HBU Analyses
+[Tx]  Land Value
+[Tx]  Existing Use Conforms
+[Ch]  DropdownZoningSource → Contacted Municipal Authority, Contacted Provincial Planning Authority, MLS Data, Online (specify), Online municipal zoning map
+[Ch]  Site Unit of Measurement → Acres, Condo Unit Factor, Hectares, Sq Ft, Sq M, Strat Unit Entitlement
+[Ch]  Unit of Measurement → SqFt, SqM
+[Ch]  Easements → Assumed Typical, Unknown
+[Ch]  ZoningDesignation → (free entry — no preset options)
+[Ch]  ExistingUse2 → Agricultural, AirBNB, Carriage/Coach/Laneway, Group Home, Hobby Farm, Live/Work, None, Other (specify), Recreation Only, Rental Only, Rooming House, Student Rental
+[Ch]  DropdownOtherUse → Financing not to exceed 80% loan to value ratio, Not Applicable, Other (specify)
+[Ch]  DetrimentalSite → Evidence of natural disaster, Other (specify), Storage of debris/drums/metal/tires, Underground fuel storage/tank
+[Ch]  HBU Land Comment → See Cost Approach addendum, See Narrative addendum
+[Ch]  Land Value Source dropdown → Appraisers Database, MLS, Online Data, Other (specify)
+[Btn] Floodbox
+[Btn] ExistingUse
+[Btn] OtherLUC
+[Btn] Site Detrimental
+[Btn] U Gas
+[Btn] U Storm
+[Btn] U Sanitary
+[Btn] U Ditch
+[Btn] U Septic
+[Btn] U Holding
+[Btn] W Municipal
+[Btn] W Private Well
+[Btn] W Other
+[Btn] Feature Street Lights
+[Btn] Feature Other
+[Btn] Feature Gravel
+[Btn] Feature Paved
+[Btn] Feature Lane
+[Btn] Feature Sidewalk
+[Btn] Feature Curbs
+[Btn] Elec Overhead
+[Btn] Elec Underground
+[Btn] Elec Other
+[Btn] HBU Vacant
+[Btn] HBU Improved
+[Btn] Land Value NA
+
+================================================================================
+SECTION 8: IMPROVEMENTS / BUILDING  (97 fields)
+================================================================================
+
+--- Construction & Exterior ---
+[Tx]  Construction/Additions Comments
+[Tx]  Building Comments
+[Tx]  Roofing Condition Notes
+[Tx]  Exterior Finish Notes
+[Ch]  Constructiondropdown → Brick, Concrete, Concrete Block, Log, Other (specify), Plywood, Stone, Wood
+[Ch]  Roofing Type → Asphalt/Fiberglass Shingle, Clay Tile, Metal, Other (specify), PVC/Polycarbonate/Plastic, Slate, Tar & Gravel, Wood Shingle/Shake
+[Ch]  Exterior Finish → Brick, Brick Veneer, Hardboard/Fibre cement, Log, Other (specify), Stucco, Stucco & Siding, Vinyl/Aluminum, Wood Shingle
+[Ch]  Foundation Walls → Brick, Concrete, Concrete Block, Insulated Concrete Forms, Other (specify), Pier, Plywood, Stone, Wood
+[Ch]  Window Type → Aluminum, Other (specify), PVC, PVC Clad Wood, Wood
+[Ch]  Window Thickness → Double, Other (specify), Single, Triple
+[Tx]  Basement Area
+[Tx]  Basement Finished
+[Tx]  Basementcomments
+[Ch]  Basement Type → (extracted via separate field — see note)
+
+--- Mechanical & Systems ---
+[Tx]  Info Sourceplumb
+[Tx]  Panel Capacity
+[Tx]  Energycomments
+[Tx]  EnergyRating
+[Ch]  Plumbing Lines → Copper, Kitec, Mixed, Other, PEX, PEX/PVC, Steel, Unknown
+[Ch]  Water Heater → Electric, Integrated with boiler, Natural Gas, None, Other (SPECIFY), Propane, Solar, Tankless/Instant
+[Ch]  Fuel Type → Electric, Ground Source, Natural Gas, Oil, Other (specify), Propane, Unknown, Wood
+[Ch]  Heating System → Electric Baseboard, Fireplace Only, Forced Air, Geothermal, Heat Pump, Hot Water/Steam Boiler, Hot Water/Steam Radiator, Other (SPECIFY), Radiant, Solar Heat, Wood Pellet Stove, Wood Stove
+[Ch]  Cooling System → Central Air, Ductless mini split, Geothermal, Heat Pump, None, Other (SPECIFY), Window air conditioner
+[Ch]  ElectricalOtherdrop → Aluminum, Garage Sub Panel, Generator/Portable Service, Knob and Tube, Other (specify), see photos, Service Drop Only, Service Panel Outside, Solar Panels, Splitter Box, Splitter Box on Yard Pole
+[Ch]  OtherElectrical → Not Applicable, Off grid, Other (specify), See Comments
+[Ch]  EnergyLabel → EnerGuide, Energy Star, LEED, Net Zero, None, Not Applicable, Not Provided, Other (specify), R-2000 Standard
+[Ch]  Charger Type → Level 1 (120V), Level 2 (240V), Level 3 (fast), None, Not Applicable
+[Ch]  SolarPaneltext → Leased, Leased as reported by owner, None, Not Applicable, Owned, Owned as reported by owner, Unknown
+[Btn] Elec Fuses
+[Btn] Elec Breakers
+[Btn] SolarPanels
+
+--- Interior Finishes ---
+[Tx]  Flooring
+[Ch]  InteriorFinishOther → Ceiling Tile, None, Other (specify), Shiplap, T-Bar
+[Ch]  Flooring1 → Bamboo, Carpet, Ceramic, Concrete, Hardwood, Laminate, Linoleum, Marble, Other (specify), Stone, Terrazzo, Tile, Unfinished, Vinyl
+[Ch]  Flooring2 → Bamboo, Carpet, Ceramic, Concrete, Hardwood, Laminate, Linoleum, Marble, Other (specify), Stone, Terrazzo, Tile, Unfinished, Vinyl
+[Ch]  Flooring3 → Bamboo, Carpet, Ceramic, Concrete, Hardwood, Laminate, Linoleum, Marble, Other (specify), Stone, Terrazzo, Tile, Unfinished, Vinyl
+[Btn] Drywall Walls
+[Btn] Check Box104
+[Btn] Plaster Walls
+[Btn] Plaster Ceiling
+[Btn] Paneling Walls
+[Btn] Paneling Ceiling
+
+--- Extras & Appliances ---
+[Btn] Stove
+[Btn] Oven
+[Btn] Dishwasher
+[Btn] Mic
+[Btn] Security System
+[Btn] Fireplace
+[Ch]  Fireplacedropdown → Fireplace (Gas), Fireplace (Wood), Other (specify)
+[Btn] HR Ventilator
+[Btn] Swimming Pool
+[Btn] Check Box121
+[Ch]  ExtraOtherdrop → Other (specify), Refer to comments below, Refer to narrative addendum for details, Smart Home system (specify)
+[Ch]  Other Features dropdown → Other (specify)
+
+--- Condition ---
+[Btn] Condition Roof
+[Btn] Condition Exterior
+[Btn] Overall Int Condition
+[Btn] Improvements Detrimental
+[Ch]  DetrimentalImprovements → Asbestos, Damaged by (specify Fire, Flood, Earthquake, Landslide, Tornado, Storm, Other, Unknown), Dirt Floor Basement, Foundation Cracks, Insulbrick, Knob and Tube Wiring, Lead/Kitec Plumbing, Moisture/Water Leak, Mould, Other (describe), UFFI
+
+--- Totals & Build Notes ---
+[Tx]  ABOVEGRADETOTALSPART
+[Tx]  AGTROOMS
+[Tx]  AGTSBEDROOMS
+[Btn] Incomplete Construction
+[Btn] ASIS/ASIF
+[Btn] Builtother
+[Ch]  BuiltOther → Other (specify), Water Softener
+[Btn] Builtother2
+[Ch]  BuiltOther2 → Other (specify)
+
+--- Floor Levels ---
+[Ch]  ALEVEL → Mechanical, Other (specify), Rec Room
+[Ch]  BLEVEL → Mechanical, Other (specify), Rec Room
+[Ch]  CLEVEL → Mechanical, Other (specify), Rec Room
+[Ch]  DropdownSourceMeasure → Assessment Records, Building Plans, Measured, MLS, Online Data, Other (specify)
+
+--- Garage / Parking ---
+[Tx]  Other Driveway
+[Ch]  Garagestalls → Other (specify), Single, Double, Triple, Not Applicable, Single Attached, Single Detached, Double Attached, Double Detached, Triple Attached, Triple Detached
+[Ch]  GarageDrop → Other (specify), Not Applicable, Quad, Underground
+[Ch]  Garagedrop2 → Carport (size), Not Applicable, Other (specify), Quonset, Second Garage (size)
+[Ch]  Garagedrop3 → Carport (size), Not Applicable, Other (specify), Quonset, Second Garage
+[Ch]  OtherParking → Not Applicable, Other (specify), See Comments, Underground
+[Btn] Garagesingle
+[Btn] Garagedouble
+[Btn] Garagetriple
+[Btn] GarageInt
+[Btn] GarageDet
+[Btn] GarageOther
+[Btn] GarageAtt
+[Btn] Garage2
+[Btn] Garage3
+[Btn] Drive Private
+[Btn] Drive Mutual
+[Btn] Drive Underground
+[Btn] Drive Laneway
+[Btn] Drive Other
+[Btn] Drive None
+[Btn] Drive Single
+[Btn] Drive Double
+[Btn] Parking Garage
+[Btn] Parking Carport
+[Btn] Parking Driveway
+[Btn] Parking Street
+[Btn] Parking Other
+
+================================================================================
+SECTION 9: ROOM ALLOCATION  (106 fields)
+================================================================================
+NOTE: All fields in this section are [Tx] except SFSM which is [Btn].
+      No dropdown fields in this section.
+
+--- Main Floor ---
+[Tx]  ENTRANCEMAIN
+[Tx]  LIVINGMAIN
+[Tx]  DININGMAIN
+[Tx]  KITCHENMAIN
+[Tx]  FAMILYMAIN
+[Tx]  BEDROOMSMAIN
+[Tx]  DENMAIN
+[Tx]  FULL BATHMAIN
+[Tx]  PART BATHMAIN
+[Tx]  LAUNDRYMAIN
+[Tx]  AMAIN
+[Tx]  BMAIN
+[Tx]  CMAIN
+[Tx]  ROOM TOTALMAIN
+[Tx]  AREAMAIN
+
+--- Second Floor ---
+[Tx]  ENTRANCESECOND
+[Tx]  LIVINGSECOND
+[Tx]  DININGSECOND
+[Tx]  KITCHENSECOND
+[Tx]  FAMILYSECOND
+[Tx]  BEDROOMSSECOND
+[Tx]  DENSECOND
+[Tx]  FULL BATHSECOND
+[Tx]  PART BATHSECOND
+[Tx]  LAUNDRYSECOND
+[Tx]  ASECOND
+[Tx]  BSECOND
+[Tx]  CSECOND
+[Tx]  ROOM TOTALSECOND
+[Tx]  AREASECOND
+
+--- Third Floor ---
+[Tx]  ENTRANCERow3
+[Tx]  LIVINGRow3
+[Tx]  DININGRow3
+[Tx]  KITCHENRow3
+[Tx]  FAMILYRow3
+[Tx]  BEDROOMSRow3
+[Tx]  DENRow3
+[Tx]  FULL BATHRow3
+[Tx]  PART BATHRow3
+[Tx]  LAUNDRYRow3
+[Tx]  ATHIRD
+[Tx]  BTHIRD
+[Tx]  CTHIRD
+[Tx]  ROOM TOTALRow3
+[Tx]  AREARow3
+
+--- Fourth Floor ---
+[Tx]  RoomRow4
+[Tx]  ENTRANCERow4
+[Tx]  LIVINGRow4
+[Tx]  DININGRow4
+[Tx]  KITCHENRow4
+[Tx]  FAMILYRow4
+[Tx]  BEDROOMSRow4
+[Tx]  DENRow4
+[Tx]  FULL BATHRow4
+[Tx]  PART BATHRow4
+[Tx]  LAUNDRYRow4
+[Tx]  AFOURTH
+[Tx]  BFOURTH
+[Tx]  CFOURTH
+[Tx]  ROOM TOTALRow4
+[Tx]  AREARow4
+
+--- Fifth Floor ---
+[Tx]  RoomRow5
+[Tx]  ENTRANCERow5
+[Tx]  LIVINGRow5
+[Tx]  DININGRow5
+[Tx]  KITCHENRow5
+[Tx]  FAMILYRow5
+[Tx]  BEDROOMSRow5
+[Tx]  DENRow5
+[Tx]  FULL BATHRow5
+[Tx]  PART BATHRow5
+[Tx]  LAUNDRYRow5
+[Tx]  AFIFTH
+[Tx]  BFIFTH
+[Tx]  CFIFTH
+[Tx]  ROOM TOTALRow5
+[Tx]  AREARow5
+
+--- Basement 1 ---
+[Tx]  ENTRANCEBASEMENT
+[Tx]  LIVINGBASEMENT
+[Tx]  DININGBASEMENT
+[Tx]  KITCHENBASEMENT
+[Tx]  FAMILYBASEMENT
+[Tx]  BEDROOMSBASEMENT
+[Tx]  DENBASEMENT
+[Tx]  FULL BATHBASEMENT
+[Tx]  PART BATHBASEMENT
+[Tx]  LAUNDRYBASEMENT
+[Tx]  ABASEMENT
+[Tx]  BBASEMENT
+[Tx]  CBASEMENT
+[Tx]  ROOM TOTALBASEMENT
+[Tx]  AREABASEMENT
+
+--- Basement 2 ---
+[Tx]  BASEMENT2
+[Tx]  ENTRANCEBASEMENT2
+[Tx]  LIVINGBASEMENT2
+[Tx]  DININGBASEMENT2
+[Tx]  KITCHENBASEMENT2
+[Tx]  FAMILYBASEMENT2
+[Tx]  BEDROOMSBASEMENT2
+[Tx]  DENBASEMENT2
+[Tx]  FULL BATHBASEMENT2
+[Tx]  PART BATHBASEMENT2
+[Tx]  LAUNDRYBASEMENT2
+[Tx]  ABASEMENT2
+[Tx]  BBASEMENT2
+[Tx]  CBASEMENT2
+[Tx]  ROOM TOTALBASEMENT2
+
+--- Total ---
+[Tx]  TotalArea
+[Btn] SFSM
+
+================================================================================
+SECTION 12: HISTORY / EXPOSURE / RECONCILIATION  (16 fields)
+================================================================================
+NOTE: No dropdown fields in this section — all [Tx] and [Btn].
+
+[Tx]  History Sale
+[Tx]  History Listings
+[Tx]  HistorySaleprice
+[Tx]  HistorySaledate
+[Tx]  HistoryCurrentList
+[Tx]  HistoryPriorList
+[Tx]  REL
+[Tx]  PendingPrice
+[Tx]  Exposure Analysis
+[Tx]  Exposure As If
+[Tx]  Reconciliation
+[Tx]  FinalValue
+[Tx]  DateReport
+[Btn] History Sold
+[Btn] History Listed
+[Btn] Listed
+
+================================================================================
+SECTION 13: CERTIFICATION / SIGNATURES  (38 fields)
+================================================================================
+[Tx]  Certificationextra
+[Tx]  DisclaimerBlank
+[Tx]  DateReportSigned1
+[Tx]  DateReportSigned2
+[Tx]  DateInspection1
+[Tx]  DateInspection2
+[Tx]  NarrativeAdd
+[Tx]  NarrativeAdd1
+[Tx]  NarrativeAdd2
+[Tx]  NarrativeAdd4
+[Sig] Signature1
+[Sig] Signature2
+[Ch]  SourceSignature → Notarius, Other (describe), PDF Secured, Software Company (NAME)
+[Ch]  PAdropdowns → N/A, NAME AIC Candidate Member certifies he/she is a member in good standing of the Appraisal Institute of Canada inspected the property on DATE., NAME certifies he/she is a member in good standing of the Association of Ontario Land Surveyors with professional liability insurance surveyed the property on DATE., NAME certifies he/she is a member in good standing of the Ontario General Contractors Association with professional liability insurance provided the cost estimate for the subject., NAME Evaluation Technician certifies he/she is a member in good standing of Association des techniciens en évaluation foncière du Québec (ATEFQ) with professional liability insurance inspected the property on DATE.
+[Ch]  Addenda Dropdown2 → Comparable Sale Photographs, Market Rent, Other (specify), Plans/Specifications, Progress Inspection, Qualifications
+[Ch]  Addenda Dropdown3 → Comparable Sale Photographs, Market Rent, Other (specify), Plans/Specifications, Qualifications
+[Ch]  Addenda Dropdown4 → Comparable Sale Photographs, Market Rent, Other (specify), Plans/Specifications, Qualifications
+[Ch]  AddendumDropdown → (Other- Specify) ADDENDUM, INSPECTION NOTES ADDENDUM, NARRATIVE ADDENDUM, SCOPE ADDENDUM
+[Ch]  AddendumDropdown2 → (Other- Specify) ADDENDUM, NARRATIVE ADDENDUM, SCOPE ADDENDUM
+[Ch]  AddendumDropdown4 → (Other- Specify) ADDENDUM, NARRATIVE ADDENDUM, SCOPE ADDENDUM
+[Ch]  AddendumDropdown5 → (Other- Specify) ADDENDUM, AGRICULTURAL LAND RESERVE, ELEVATION PROFILE ADDENDUM, FLOOD MAP ADDENDUM, GOOGLE EARTH ADDENDUM, OFFICIAL COMMUNITY PLAN MAP, PLOT MAP ADDENDUM, SITE MAP ADDENDUM
+[Btn] PSA
+[Btn] PSAObtained
+[Btn] PA
+[Btn] Att Additional Sales
+[Btn] Att Cost
+[Btn] Att Maps
+[Btn] Att Extra
+[Btn] Att Income
+[Btn] Att Narrative
+[Btn] Att Scope
+[Btn] Att Photo
+[Btn] Att LUDC
+[Btn] Att Sketch
+[Btn] Att Other 2
+[Btn] Att Other 3
+[Btn] Check Box2
+[Btn] Check Box3
+[Btn] Group2

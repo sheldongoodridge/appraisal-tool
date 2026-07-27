@@ -1,0 +1,1140 @@
+Unknown: Ass
+/Tx: Ass. date
+/Tx: Property Address
+/Tx: File No
+/Tx: City
+/Tx: Postal Code
+/Tx: Client
+/Tx: ClientAttention
+/Tx: ClientAddress
+/Btn: TitlePhoto
+/Tx: AIC Member
+/Ch: Prov
+/Btn: Value Effective CRP
+/Tx: Effective Date
+/Tx: MemberAddress
+/Tx: MemberCompany
+/Btn: Rights
+/Btn: Nature District
+/Btn: Type District
+/Btn: Trend District
+/Btn: Builtup
+/Btn: Conformity Age
+/Btn: HC
+/Btn: EALC
+/Btn: Market Supply
+/Btn: Market Demand
+/Btn: Price Trends
+/Btn: Landscaping
+/Tx: MemberName2
+/Tx: MemberName1
+/Btn: FeeMonthAnnual
+/Btn: OtherLUC
+/Btn: ExistingUse
+/Btn: Floodbox
+/Tx: Inspection Date
+/Tx: Location Name
+/Tx: House Size
+/Tx: Report Date
+/Tx: Report Warnings
+/Tx: Lot Size
+/Tx: Neighbourhood Comments
+/Btn: Reset Form
+/Tx: Reference
+/Tx: ClientEmail
+/Tx: ClientPhone
+/Tx: ClientFax
+/Tx: E-mail
+/Tx: Phone
+/Tx: Fax
+/Tx: Legal Description
+/Tx: Source
+/Tx: Total
+/Tx: Taxes
+/Ch: DropdownUse
+/Tx: Assignment Name
+/Btn: Requested by Client
+/Tx: Requested By
+/Tx: Complete On
+/Tx: EffectiveDateUpdate
+/Tx: File No Old
+/Tx: Maintenance Fee
+/Ch: PropertyRightsOtherDropdown
+/Tx: Condo/Strate Complex Name
+/Tx: FromAGE RANGE OF PROPERTIES years
+/Tx: ToAGE RANGE OF PROPERTIES years
+/Tx: Other Trend
+/Tx: fill_11
+/Tx: fill_12
+/Tx: Site Dimensions
+/Tx: Topography
+/Tx: Configuration
+/Tx: Sourcelot
+/Ch: DropdownZoningSource
+/Tx: Floodplain
+/Ch: Tax Year
+/Ch: Site Unit of Measurement
+/Ch: Name Type
+/Btn: Requested by Other
+/Btn: Update of Original Report
+/Btn: To Estimate MV
+/Btn: DCA Approach
+/Btn: Cost Approach
+/Btn: Income Approach
+/Btn: To Estimate Other
+/Btn: Conventional
+/Btn: Intended Use Other
+/Btn: Nbhd Detrimental
+/Btn: Site Detrimental
+/Btn: U Gas
+/Btn: U Storm
+/Btn: U Sanitary
+/Btn: U Ditch
+/Btn: U Septic
+/Btn: W Municipal
+/Btn: W Private Well
+/Btn: W Other
+/Btn: Feature Street Lights
+/Btn: Feature Other
+/Btn: Elec Overhead
+/Btn: Elec Underground
+/Btn: Elec Other
+/Ch: ExistingUse2
+/Ch: DetrimentalNbhd
+/Tx: Maintenance Fee Amount
+/Ch: MaintenanceSpecial
+/Tx: MaintenanceSource
+/Ch: OtherPurpose
+/Tx: Existing Use Conforms
+/Tx: Flooddate
+/Ch: DropdownOtherUse
+/Ch: Easements
+/Tx: Year Built
+/Tx: Additions
+/Tx: Effective Age
+/Ch: Constructiondropdown
+/Tx: Roofing Condition Notes
+/Tx: Construction/Additions Comments
+/Tx: Basement Area
+/Tx: Basement Finished
+/Tx: Exterior Finish Notes
+/Tx: Info Sourceplumb
+/Ch: ElectricalOtherdrop
+/Tx: Panel Capacity
+/Ch: Fuel Type
+/Btn: Drywall Walls
+/Btn: Check Box104
+/Btn: Plaster Walls
+/Btn: Plaster Ceiling
+/Btn: Paneling Walls
+/Btn: Paneling Ceiling
+/Btn: Stove
+/Btn: Oven
+/Btn: Dishwasher
+/Btn: Mic
+/Btn: Security System
+/Btn: Fireplace
+/Btn: HR Ventilator
+/Btn: Swimming Pool
+/Btn: Check Box121
+/Ch: ExtraOtherdrop
+/Tx: ENTRANCEMAIN
+/Tx: LIVINGMAIN
+/Tx: DININGMAIN
+/Tx: KITCHENMAIN
+/Tx: FAMILYMAIN
+/Tx: BEDROOMSMAIN
+/Tx: DENMAIN
+/Tx: FULL BATHMAIN
+/Tx: PART BATHMAIN
+/Tx: LAUNDRYMAIN
+/Tx: AMAIN
+/Tx: BMAIN
+/Tx: CMAIN
+/Tx: ROOM TOTALMAIN
+/Tx: AREAMAIN
+/Tx: ENTRANCESECOND
+/Tx: LIVINGSECOND
+/Tx: DININGSECOND
+/Tx: KITCHENSECOND
+/Tx: FAMILYSECOND
+/Tx: BEDROOMSSECOND
+/Tx: DENSECOND
+/Tx: FULL BATHSECOND
+/Tx: PART BATHSECOND
+/Tx: LAUNDRYSECOND
+/Tx: ASECOND
+/Tx: BSECOND
+/Tx: CSECOND
+/Tx: ROOM TOTALSECOND
+/Tx: AREASECOND
+/Tx: ENTRANCERow3
+/Tx: LIVINGRow3
+/Tx: DININGRow3
+/Tx: KITCHENRow3
+/Tx: FAMILYRow3
+/Tx: BEDROOMSRow3
+/Tx: DENRow3
+/Tx: FULL BATHRow3
+/Tx: PART BATHRow3
+/Tx: LAUNDRYRow3
+/Tx: ATHIRD
+/Tx: BTHIRD
+/Tx: CTHIRD
+/Tx: ROOM TOTALRow3
+/Tx: AREARow3
+/Tx: RoomRow4
+/Tx: ENTRANCERow4
+/Tx: LIVINGRow4
+/Tx: DININGRow4
+/Tx: KITCHENRow4
+/Tx: FAMILYRow4
+/Tx: BEDROOMSRow4
+/Tx: DENRow4
+/Tx: FULL BATHRow4
+/Tx: PART BATHRow4
+/Tx: LAUNDRYRow4
+/Tx: AFOURTH
+/Tx: BFOURTH
+/Tx: CFOURTH
+/Tx: ROOM TOTALRow4
+/Tx: AREARow4
+/Tx: RoomRow5
+/Tx: ENTRANCERow5
+/Tx: LIVINGRow5
+/Tx: DININGRow5
+/Tx: KITCHENRow5
+/Tx: FAMILYRow5
+/Tx: BEDROOMSRow5
+/Tx: DENRow5
+/Tx: FULL BATHRow5
+/Tx: PART BATHRow5
+/Tx: LAUNDRYRow5
+/Tx: AFIFTH
+/Tx: BFIFTH
+/Tx: CFIFTH
+/Tx: ROOM TOTALRow5
+/Tx: AREARow5
+/Tx: TotalArea
+/Tx: ENTRANCEBASEMENT
+/Tx: LIVINGBASEMENT
+/Tx: DININGBASEMENT
+/Tx: KITCHENBASEMENT
+/Tx: FAMILYBASEMENT
+/Tx: BEDROOMSBASEMENT
+/Tx: DENBASEMENT
+/Tx: FULL BATHBASEMENT
+/Tx: PART BATHBASEMENT
+/Tx: LAUNDRYBASEMENT
+/Tx: ABASEMENT
+/Tx: BBASEMENT
+/Tx: CBASEMENT
+/Tx: ROOM TOTALBASEMENT
+/Tx: AREABASEMENT
+/Tx: BASEMENT2
+/Tx: ENTRANCEBASEMENT2
+/Tx: LIVINGBASEMENT2
+/Tx: DININGBASEMENT2
+/Tx: KITCHENBASEMENT2
+/Tx: FAMILYBASEMENT2
+/Tx: BEDROOMSBASEMENT2
+/Tx: DENBASEMENT2
+/Tx: FULL BATHBASEMENT2
+/Tx: PART BATHBASEMENT2
+/Tx: LAUNDRYBASEMENT2
+/Tx: ABASEMENT2
+/Tx: BBASEMENT2
+/Tx: CBASEMENT2
+/Tx: ROOM TOTALBASEMENT2
+/Tx: Building Comments
+/Ch: Roofing Type
+/Ch: Exterior Finish
+/Ch: Basement Type
+/Ch: Window Type
+/Ch: Window Thickness
+/Ch: Water Heater
+/Ch: Plumbing Lines
+/Ch: Foundation Walls
+/Tx: ABOVEGRADETOTALSPART
+/Btn: Elec Fuses
+/Btn: Elec Breakers
+/Btn: Improvements Detrimental
+/Btn: Condition Roof
+/Btn: Condition Exterior
+/Btn: Overall Int Condition
+/Tx: AGTROOMS
+/Ch: Charger Type
+/Btn: Incomplete Construction
+/Btn: ASIS/ASIF
+/Btn: Builtother
+/Ch: BuiltOther
+/Btn: Builtother2
+/Btn: SolarPanels
+/Ch: SolarPaneltext
+/Ch: Land Value Source dropdown
+/Ch: HBU Land Comment
+/Tx: HBU Vacant Blank
+/Tx: HBU Improved Blank
+/Tx: HBU Analyses
+/Ch: Comp 1 Source Dropdown
+Unknown: Comp1adj
+/Tx: Comp1adj.0
+/Tx: Comp1adj.1
+/Tx: Comp1adj.2
+/Tx: Comp1adj.3
+/Tx: Comp1adj.4
+/Tx: Comp1adj.5
+/Tx: Comp1adj.6
+/Tx: Comp1adj.7
+/Tx: Comp1adj.8
+/Tx: Comp1adj.9
+/Tx: Comp1adj.10
+/Tx: Comp1adj.11
+/Tx: Comp1adj.12
+/Tx: Comp1adj.13
+/Tx: Comp1adj.14
+/Tx: Comp1adj.15
+/Tx: Comp1adj.16
+/Tx: Comp1adj.17
+/Tx: Comp1adj.18
+/Tx: Comp1adj.19
+/Tx: Comp1adj.20
+/Tx: Comp1adj.21
+/Ch: Comp 2 Source Dropdown
+Unknown: Comp2adj
+/Tx: Comp2adj.0
+/Tx: Comp2adj.1
+/Tx: Comp2adj.2
+/Tx: Comp2adj.3
+/Tx: Comp2adj.4
+/Tx: Comp2adj.5
+/Tx: Comp2adj.6
+/Tx: Comp2adj.7
+/Tx: Comp2adj.8
+/Tx: Comp2adj.9
+/Tx: Comp2adj.10
+/Tx: Comp2adj.11
+/Tx: Comp2adj.12
+/Tx: Comp2adj.13
+/Tx: Comp2adj.14
+/Tx: Comp2adj.15
+/Tx: Comp2adj.16
+/Tx: Comp2adj.17
+/Tx: Comp2adj.18
+/Tx: Comp2adj.19
+/Tx: Comp2adj.20
+/Tx: Comp2adj.21
+/Ch: Comp 3 Source Dropdown
+Unknown: Comp3adj
+/Tx: Comp3adj.0
+/Tx: Comp3adj.1
+/Tx: Comp3adj.2
+/Tx: Comp3adj.3
+/Tx: Comp3adj.4
+/Tx: Comp3adj.5
+/Tx: Comp3adj.6
+/Tx: Comp3adj.7
+/Tx: Comp3adj.8
+/Tx: Comp3adj.9
+/Tx: Comp3adj.10
+/Tx: Comp3adj.11
+/Tx: Comp3adj.12
+/Tx: Comp3adj.13
+/Tx: Comp3adj.14
+/Tx: Comp3adj.15
+/Tx: Comp3adj.16
+/Tx: Comp3adj.17
+/Tx: Comp3adj.18
+/Tx: Comp3adj.19
+/Tx: Comp3adj.20
+/Tx: Comp3adj.21
+/Tx: Comp2blank1
+/Tx: Comp 1 Dimensions
+/Tx: SUBJECTFB
+Unknown: ItemBlank1
+/Tx: ItemBlank1.0
+/Tx: ItemBlank1.1
+/Tx: ItemBlank1.2
+/Tx: ItemBlank1.3
+/Tx: ItemBlank1.4
+Unknown: Subjectdetailblank1
+/Tx: Subjectdetailblank1.0
+/Tx: Subjectdetailblank1.1
+/Tx: Subjectdetailblank1.2
+/Tx: Subjectdetailblank1.3
+/Tx: Subjectdetailblank1.4
+Unknown: Comp1blankdetail1
+/Tx: Comp1blankdetail1.0
+/Tx: Comp1blankdetail1.1
+/Tx: Comp1blankdetail1.2
+/Tx: Comp1blankdetail1.3
+/Tx: Comp1blankdetail1.4
+Unknown: Comp2blankdetail1
+/Tx: Comp2blankdetail1.0
+/Tx: Comp2blankdetail1.1
+/Tx: Comp2blankdetail1.2
+/Tx: Comp2blankdetail1.3
+/Tx: Comp2blankdetail1.4
+Unknown: Comp3blankdetail1
+/Tx: Comp3blankdetail1.0
+/Tx: Comp3blankdetail1.1
+/Tx: Comp3blankdetail1.2
+/Tx: Comp3blankdetail1.3
+/Tx: Comp3blankdetail1.4
+Unknown: ADJUSTED VALUES1
+/Tx: ADJUSTED VALUES1.0
+Unknown: ADJUSTED VALUES2
+/Tx: ADJUSTED VALUES2.0
+Unknown: ADJUSTED VALUES3
+/Tx: ADJUSTED VALUES3.0
+/Tx: DCA Analyses 1-3
+/Tx: Direct Comparison Value
+/Ch: SubjectPT
+/Ch: SubjectDS
+/Tx: Comp 2 Dimensions
+/Tx: Comp 3 Dimensions
+/Btn: SFSM
+/Ch: Comp1PT
+/Ch: Comp2PT
+/Ch: Comp3PT
+/Ch: Comp1DS
+/Ch: Comp2DS
+/Ch: Comp3DS
+/Ch: Comp1Condition
+/Ch: Comp2Condition
+/Ch: Comp3Condition
+/Tx: AGTSBEDROOMS
+/Btn: HBU Vacant
+/Btn: HBU Improved
+/Btn: Land Value NA
+/Tx: Comp 4
+/Tx: Comp 5
+/Tx: Comp 6
+/Tx: Subject 1 Source
+/Ch: Comp 4 Source Dropdown
+Unknown: Comp4adj
+/Tx: Comp4adj.0
+/Tx: Comp4adj.1
+/Tx: Comp4adj.2
+/Tx: Comp4adj.3
+/Tx: Comp4adj.4
+/Tx: Comp4adj.5
+/Tx: Comp4adj.6
+/Tx: Comp4adj.7
+/Tx: Comp4adj.8
+/Tx: Comp4adj.9
+/Tx: Comp4adj.10
+/Tx: Comp4adj.11
+/Tx: Comp4adj.12
+/Tx: Comp4adj.13
+/Tx: Comp4adj.14
+/Tx: Comp4adj.15
+/Tx: Comp4adj.16
+/Tx: Comp4adj.17
+/Tx: Comp4adj.18
+/Tx: Comp4adj.19
+/Tx: Comp4adj.20
+/Tx: Comp4adj.21
+/Ch: Comp 5 Source Dropdown
+Unknown: Comp5adj
+/Tx: Comp5adj.0
+/Tx: Comp5adj.1
+/Tx: Comp5adj.2
+/Tx: Comp5adj.3
+/Tx: Comp5adj.4
+/Tx: Comp5adj.5
+/Tx: Comp5adj.6
+/Tx: Comp5adj.7
+/Tx: Comp5adj.8
+/Tx: Comp5adj.9
+/Tx: Comp5adj.10
+/Tx: Comp5adj.11
+/Tx: Comp5adj.12
+/Tx: Comp5adj.13
+/Tx: Comp5adj.14
+/Tx: Comp5adj.15
+/Tx: Comp5adj.16
+/Tx: Comp5adj.17
+/Tx: Comp5adj.18
+/Tx: Comp5adj.19
+/Tx: Comp5adj.20
+/Tx: Comp5adj.21
+/Ch: Comp 6 Source Dropdown
+Unknown: Comp6adj
+/Tx: Comp6adj.0
+/Tx: Comp6adj.1
+/Tx: Comp6adj.2
+/Tx: Comp6adj.3
+/Tx: Comp6adj.4
+/Tx: Comp6adj.5
+/Tx: Comp6adj.6
+/Tx: Comp6adj.7
+/Tx: Comp6adj.8
+/Tx: Comp6adj.9
+/Tx: Comp6adj.10
+/Tx: Comp6adj.11
+/Tx: Comp6adj.12
+/Tx: Comp6adj.13
+/Tx: Comp6adj.14
+/Tx: Comp6adj.15
+/Tx: Comp6adj.16
+/Tx: Comp6adj.17
+/Tx: Comp6adj.18
+/Tx: Comp6adj.19
+/Tx: Comp6adj.20
+/Tx: Comp6adj.21
+/Tx: Subject Date of Sale
+/Tx: Comp 4 Date of Sale
+/Tx: Comp 5 Date of Sale
+/Tx: Comp 6 Date of Sale
+/Tx: Subject Sale Price
+/Tx: Comp 4 Sale Price
+/Tx: Comp 5 Sale Price
+/Tx: Comp 6 Sale Price
+/Tx: Subject Market
+/Tx: Comp 4 Market
+/Tx: Comp 5 Market
+/Tx: Comp 6 Market
+/Tx: Subjectblank1
+/Tx: Comp4blank1
+/Tx: Comp5blank1
+/Tx: Comp6blank1
+/Tx: Subjectblank2
+/Tx: Comp4blank2
+/Tx: Comp5blank2
+/Tx: Comp6blank2
+/Tx: Subject Location
+/Tx: Comp 4 Location
+/Tx: Comp 5 Location
+/Tx: Comp 6 Location
+/Tx: Comp 4 Site Size
+/Tx: Comp 5 Site Size
+/Tx: Comp 6 Site Size
+/Tx: Comp 4 Age
+/Tx: Comp 5 Age
+/Tx: Comp 6 Age
+/Tx: Subject LFA
+/Tx: Comp 4 Floor Area
+/Tx: Comp 5 Floor Area
+/Tx: Comp 6 Floor Area
+/Tx: Comp 4 Rooms
+/Tx: Comp 4 Bdrms
+/Tx: Comp 5 Rooms
+/Tx: Comp 5 Bdrms
+/Tx: Comp 6 Rooms
+/Tx: Comp 6 Bdrms
+/Tx: Comp 4 Bath
+/Tx: Comp 5 Bath
+/Tx: Comp 6 Bath
+/Tx: Subject Basement
+/Tx: Subject Parking
+Unknown: Comp4blankdetail1
+/Tx: Comp4blankdetail1.0
+/Tx: Comp4blankdetail1.1
+/Tx: Comp4blankdetail1.2
+/Tx: Comp4blankdetail1.3
+/Tx: Comp4blankdetail1.4
+Unknown: Comp5blankdetail1
+/Tx: Comp5blankdetail1.0
+/Tx: Comp5blankdetail1.1
+/Tx: Comp5blankdetail1.2
+/Tx: Comp5blankdetail1.3
+/Tx: Comp5blankdetail1.4
+Unknown: Comp6blankdetail1
+/Tx: Comp6blankdetail1.0
+/Tx: Comp6blankdetail1.1
+/Tx: Comp6blankdetail1.2
+/Tx: Comp6blankdetail1.3
+/Tx: Comp6blankdetail1.4
+/Tx: Comp4GrossPercent
+/Tx: Comp4Net
+/Tx: Comp5GrossPercent
+/Tx: Comp5Net
+/Tx: Comp6GrossPercent
+/Tx: Comp6Net
+Unknown: ADJUSTED VALUES4
+/Tx: ADJUSTED VALUES4.0
+Unknown: ADJUSTED VALUES5
+/Tx: ADJUSTED VALUES5.0
+Unknown: ADJUSTED VALUES6
+/Tx: ADJUSTED VALUES6.0
+/Tx: DCA Analyses 4-6
+/Tx: Subject Site Size
+/Tx: Comp 4 Dimensions
+/Tx: Comp 5 Dimensions
+/Tx: Comp 6 Dimensions
+/Tx: Subject Age
+/Ch: Subject Condition
+/Ch: Comp4Condition
+/Ch: Comp4PT
+/Ch: Comp4DS
+/Ch: Comp5Condition
+/Ch: Comp5PT
+/Ch: Comp5DS
+/Ch: Comp6Condition
+/Ch: Comp6PT
+/Ch: Comp6DS
+/Tx: SUBJECTPB
+/Btn: History Sold
+/Btn: History Listed
+/Tx: History Sale
+/Btn: Listed
+/Tx: History Listings
+/Tx: Exposure Analysis
+/Tx: DateReport
+/Tx: FinalValue
+/Ch: Info Source Interior
+/Btn: PSA
+/Btn: PSAObtained
+/Tx: DisclaimerBlank
+/Tx: Certificationextra
+/Btn: PA
+/Ch: PAdropdowns
+/Sig: Signature1
+/Sig: Signature2
+/Tx: DateReportSigned1
+/Tx: DateReportSigned2
+/Tx: DateInspection1
+/Tx: DateInspection2
+/Ch: Addenda Dropdown3
+/Ch: Addenda Dropdown2
+/Ch: Addenda Dropdown4
+/Btn: AIC Designation 1
+/Btn: AIC Designation 2
+/Btn: Att Additional Sales
+/Btn: Att Cost
+/Btn: Att Maps
+/Btn: Att Extra
+/Btn: Att Income
+/Btn: Att Narrative
+/Btn: Att Scope
+/Btn: Att Photo
+/Btn: Att LUDC
+/Btn: Att Sketch
+/Btn: Att Other 2
+/Btn: Att Other 3
+/Ch: SourceSignature
+/Tx: Assumptions and Conditions
+/Tx: Hypothetical Conditions
+/Tx: NarrativeAdd
+/Tx: NarrativeAdd1
+/Tx: NarrativeAdd2
+/Ch: AddendumDropdown2
+/Tx: NarrativeAdd4
+/Tx: Source of Data
+/Tx: CALandValue
+/Btn: Check Box43
+/Btn: Contractor
+/Btn: Check Box477
+/Tx: Other Source
+Unknown: CAItem
+/Tx: CAItem.0
+/Tx: CAItem.1
+/Tx: CAItem.2
+/Tx: CAItem.3
+/Tx: CAItem.4
+/Tx: CAItem.5
+/Tx: CAItem.6
+Unknown: CALFA
+/Tx: CALFA.0
+/Tx: CALFA.1
+/Tx: CALFA.2
+/Tx: CALFA.3
+/Tx: CALFA.4
+/Tx: CALFA.5
+/Tx: CALFA.6
+Unknown: CARATE
+/Tx: CARATE.0
+/Tx: CARATE.1
+/Tx: CARATE.2
+/Tx: CARATE.3
+/Tx: CARATE.4
+/Tx: CARATE.5
+/Tx: CARATE.6
+Unknown: RCN
+/Tx: RCN.0
+/Tx: RCN.1
+/Tx: RCN.2
+/Tx: RCN.3
+/Tx: RCN.4
+/Tx: RCN.5
+/Tx: RCN.6
+/Tx: RCN.7
+/Tx: RCN.8
+/Tx: RCN.9
+/Tx: RCN.10
+Unknown: DRCN
+/Tx: DRCN.0
+/Tx: DRCN.1
+/Tx: DRCN.2
+/Tx: DRCN.3
+/Tx: DRCN.4
+/Tx: DRCN.5
+/Tx: DRCN.6
+/Tx: DRCN.7
+/Tx: DRCN.8
+/Tx: DRCN.9
+/Tx: DRCN.10
+Unknown: Other0
+/Tx: Other0.0
+Unknown: Other1
+/Tx: Other1.0
+/Tx: Other1.1
+/Tx: Other1.2
+/Tx: CARCNTOTAL
+/Tx: Text79
+/Tx: TOTALDRCN
+/Tx: TOTALDRCN2
+/Tx: CostApproachText
+/Tx: CATOTAL
+/Tx: Cost Analyses
+/Tx: Rent History
+/Tx: Rental Market Comments
+/Tx: MRCOMP 1
+/Tx: MRCOMP 2
+/Tx: MRCOMP 3
+/Tx: MR Data Source
+/Tx: MR1DATA
+/Tx: MR2DATA
+/Tx: MR3DATA
+/Tx: RENT RATE
+/Tx: Comp1RENTRATE
+/Tx: Comp2RENTRATE
+/Tx: Comp3RENTRATE
+/Tx: MR1LOC
+/Tx: MR2LOC
+/Tx: MR3LOC
+/Tx: MR1LFA
+/Tx: MR2LFA
+/Tx: MR3LFA
+Unknown: MSubjectdetailblank1
+/Tx: MSubjectdetailblank1.0
+Unknown: MRComp1blankdetail1
+/Tx: MRComp1blankdetail1.0
+/Tx: MRComp1blankdetail1.1
+/Tx: MRComp1blankdetail1.2
+Unknown: MRComp2blankdetail1
+/Tx: MRComp2blankdetail1.0
+/Tx: MRComp2blankdetail1.1
+/Tx: MRComp2blankdetail1.2
+Unknown: MRComp3blankdetail1
+/Tx: MRComp3blankdetail1.0
+/Tx: MRComp3blankdetail1.1
+/Tx: MRComp3blankdetail1.2
+/Ch: MRDrop2
+Unknown: MRSubjectdetailblank1
+/Tx: MRSubjectdetailblank1.1
+/Tx: MRSubjectdetailblank1.2
+/Ch: MRDrop3
+/Tx: COMPARABLE RENT DATA - COMMENTS
+/Tx: MR Reconciliation
+/Tx: RENTLOW
+/Tx: RENTHIGH
+/Tx: MRSubject LFA
+/Ch: MR1Design
+/Ch: MR2Design
+/Ch: MR3Design
+/Btn: Authorized
+/Btn: Rented
+Unknown: Floor
+/Tx: Floor.0
+/Tx: Floor.1
+/Tx: Floor.2
+/Tx: Floor.3
+Unknown: IAUNITS
+/Tx: IAUNITS.0
+/Tx: IAUNITS.1
+/Tx: IAUNITS.2
+/Tx: IAUNITS.3
+Unknown: IABDS
+/Tx: IABDS.0
+/Tx: IABDS.1
+/Tx: IABDS.2
+/Tx: IABDS.3
+Unknown: IANFA
+/Tx: IANFA.0
+/Tx: IANFA.1
+/Tx: IANFA.2
+/Tx: IANFA.3
+Unknown: ActualRent
+/Tx: ActualRent.0
+/Tx: ActualRent.1
+/Tx: ActualRent.2
+/Tx: ActualRent.3
+Unknown: EconomicRent
+/Tx: EconomicRent.0
+/Tx: EconomicRent.1
+/Tx: EconomicRent.2
+/Tx: EconomicRent.3
+Unknown: AnnualSquare
+/Tx: AnnualSquare.0
+/Tx: AnnualSquare.1
+/Tx: AnnualSquare.2
+/Tx: AnnualSquare.3
+Unknown: TotalMonthly
+/Tx: TotalMonthly.0
+/Tx: TotalMonthly.1
+/Tx: TotalMonthly.2
+/Tx: TotalMonthly.3
+Unknown: TotalAnnual
+/Tx: TotalAnnual.0
+/Tx: TotalAnnual.1
+/Tx: TotalAnnual.2
+/Tx: TotalAnnual.3
+/Tx: TotalAnnual.9
+/Tx: TotalAnnual.10
+/Tx: LaundryUnits
+/Tx: LaundryRate
+/Tx: LaundryTotal
+/Tx: Total1
+/Tx: Otherincome1
+/Tx: Otherincome2
+/Tx: VCL
+/Tx: TotalGross
+/Tx: VCLDollar
+/Tx: Subtotal1
+/Tx: ParkInterior
+/Tx: PIRent
+/Tx: PITotal
+/Tx: PIOcc
+/Tx: PITotal2
+/Tx: ParkExterior
+/Tx: PERent
+/Tx: PETotal
+/Tx: PEOcc
+/Tx: PETotal2
+/Tx: EGI
+Unknown: Expense
+/Tx: Expense.0
+/Tx: Expense.1
+/Tx: Expense.2
+/Tx: Expense.3
+/Tx: Expense.4
+/Tx: Expense.5
+/Tx: Expense.6
+/Tx: Expense.7
+/Tx: Expense.8
+/Tx: Expense.9
+/Tx: Expense.10
+/Tx: Expense.11
+/Tx: Expense.12
+/Tx: Expense.13
+/Tx: Expense.14
+/Tx: Expense.15
+/Tx: Expense.16
+Unknown: IPU
+/Tx: IPU.0
+/Tx: IPU.1
+/Tx: IPU.2
+/Tx: IPU.3
+/Tx: IPU.4
+/Tx: IPU.5
+/Tx: IPU.6
+/Tx: IPU.7
+/Tx: IPU.8
+/Tx: IPU.9
+/Tx: IPU.10
+/Tx: IPU.11
+/Tx: IPU.12
+/Tx: IPU.13
+/Tx: IPU.14
+/Tx: IPU.15
+/Tx: IPU.16
+Unknown: SQSM
+/Tx: SQSM.0
+/Tx: SQSM.1
+/Tx: SQSM.2
+/Tx: SQSM.3
+/Tx: SQSM.4
+/Tx: SQSM.5
+/Tx: SQSM.6
+/Tx: SQSM.7
+/Tx: SQSM.8
+/Tx: SQSM.9
+/Tx: SQSM.10
+/Tx: SQSM.11
+/Tx: SQSM.12
+/Tx: SQSM.13
+/Tx: SQSM.14
+/Tx: SQSM.15
+/Tx: SQSM.16
+Unknown: PercentOGI
+/Tx: PercentOGI.0
+/Tx: PercentOGI.1
+/Tx: PercentOGI.2
+/Tx: PercentOGI.3
+/Tx: PercentOGI.4
+/Tx: PercentOGI.5
+/Tx: PercentOGI.6
+/Tx: PercentOGI.7
+/Tx: PercentOGI.8
+/Tx: PercentOGI.9
+/Tx: PercentOGI.10
+/Tx: PercentOGI.11
+/Tx: PercentOGI.12
+/Tx: PercentOGI.13
+/Tx: PercentOGI.14
+/Tx: PercentOGI.15
+/Tx: PercentOGI.16
+/Tx: Expenseblank1
+/Tx: Expenseblank2
+/Tx: NET INCOME TOTAL EXPENSES
+/Tx: TotalAE
+/Tx: NOI
+/Tx: Cap Rate
+/Tx: NOIValue
+/Tx: IAComment
+/Tx: NOIValuerounded
+/Tx: ANALYSESCOMMENTS
+/Btn: ELECTRICITY_3
+/Btn: GARBAGE COLLECTION_3
+/Btn: PARKING_2
+/Tx: MRInclude2
+/Btn: REFRIDGERATOR_2
+/Btn: Check Box471
+/Tx: MRInclude3
+/Btn: STOVE_2
+/Btn: HOT WATER_2
+/Btn: CABLE TV  SATELITE_2
+/Btn: Check Box469
+/Tx: MRInclude1
+/Btn: WATER LEVIES_2
+/Btn: Check Box470
+/Btn: Check Box472
+/Tx: MRInclude4
+/Btn: Leases Verified
+/Btn: Add More Photos
+/Btn: Floorplan Sketch
+/Btn: AddSales
+/Btn: ZoningMap
+/Ch: Subject 1 Source Dropdown
+/Ch: DropdownAdjustment1comp1-3
+/Ch: DropdownAdjustment2comp1-3
+/Tx: LFA PSF ADJ
+/Ch: AICComp1DS
+/Ch: AICComp3DS
+/Tx: Site Comments
+/Tx: Reconciliation
+/Tx: Scope
+/Ch: AddendumDropdown
+/Tx: Comp 1
+/Tx: Comp 2
+/Tx: Comp 3
+/Tx: Comp 1 Date of Sale
+/Tx: Comp 2 Date of Sale
+/Tx: Comp 3 Date of Sale
+/Tx: Comp 1 Sale Price
+/Tx: Comp 2 Sale Price
+/Tx: Comp 3 Sale Price
+/Tx: Comp 1 Market
+/Tx: Comp 2 Market
+/Tx: Comp 3 Market
+/Tx: Comp1blank1
+/Tx: Comp2blank2
+/Tx: Comp3blank1
+/Tx: Comp1blank2
+/Tx: Comp3blank2
+/Tx: Comp 1 Location
+/Tx: Comp 2 Location
+/Tx: Comp 3 Location
+/Tx: Comp 1 Site Size
+/Tx: Comp 2 Site Size
+/Tx: Comp 3 Site Size
+/Ch: AIComp1PT
+/Ch: AIComp2PT
+/Ch: AIComp3PT
+/Ch: AIComp2DS
+/Tx: Comp 1 Age
+/Ch: AIComp1Condition
+/Tx: Comp 2 Age
+/Ch: AIComp2Condition
+/Tx: Comp 3 Age
+/Ch: AIComp3Condition
+/Tx: Comp 1 Floor Area
+/Tx: Comp 2 Floor Area
+/Tx: Comp 3 Floor Area
+/Tx: Comp 1 Rooms
+/Tx: Comp 1 Bdrms
+/Tx: Comp 2 Rooms
+/Tx: Comp 2 Bdrms
+/Tx: Comp 3 Rooms
+/Tx: Comp 3 Bdrms
+/Tx: Comp 1 Bath
+/Tx: Comp 2 Bath
+/Tx: Comp 3 Bath
+/Tx: Comp1GrossPercent
+/Tx: Comp1Net
+/Tx: Comp2GrossPercent
+/Tx: Comp2Net
+/Tx: Comp3GrossPercent
+/Tx: Comp3Net
+/Tx: Comp 1 Source
+/Tx: Comp 2 Source
+/Tx: Comp 3 Source
+/Tx: Subject Rooms
+/Tx: Subject Bdrms
+/Tx: SubjectFB
+/Tx: Comparable Analysis and Comments1-3
+/Tx: Exposure As If
+/Tx: Direct Comparison Value As If Complete
+/Tx: DateTransmittal
+/Btn: AppraiserLogo
+/Tx: Client Name
+/Tx: LetterBody
+/Tx: LetterBody2
+/Tx: Construction Complete
+/Tx: Additions Complete
+/Tx: Improvement As Is
+/Sig: Signature1Transmittal
+/Sig: Signature2Transmittal
+/Ch: InteriorFinishOther
+/Ch: Flooring1
+/Ch: Flooring2
+/Ch: Flooring3
+/Tx: Flooring
+/Tx: Energycomments
+/Ch: DetrimentalSite
+/Ch: DetrimentalImprovements
+/Tx: Municipality and District
+/Tx: Other Water Supply
+/Tx: Landscaping Blank
+/Ch: Unit of Measurement
+/Ch: DropdownIntendedUse
+/Ch: Land Use Controls
+/Ch: Hypotheticaldropdown
+/Ch: ExtraordinaryItemsdropdown
+/Ch: IntendedUsers
+/Tx: Membership1
+/Tx: Membership2
+/Btn: U Holding
+/Ch: DropdownSourceMeasure
+/Ch: ALEVEL
+/Ch: CLEVEL
+/Ch: BLEVEL
+/Ch: Garagestalls
+/Btn: Photo3
+/Btn: Photo2
+/Btn: Photo1
+/Tx: Photocaption1
+/Tx: Photocaption2
+/Tx: Photocaption3
+/Tx: Comp1Photo
+/Tx: Comp2Photo
+/Btn: Comp1photobox
+/Btn: Comp2photobox
+/Btn: Comp3photobox
+/Tx: Comp3Photo
+/Ch: EnergyLabel
+/Tx: EnergyRating
+/Ch: ZoningDesignation
+/Tx: SubjectList
+/Btn: Photo4
+/Ch: Photocaption4
+/Btn: Photo5
+/Ch: Photocaption5
+/Btn: Photo6
+/Ch: Photocaption6
+/Btn: Photo7
+/Ch: Photocaption7
+/Btn: Photo8
+/Ch: Photocaption8
+/Btn: Photo9
+/Ch: Photocaption9
+/Btn: Photo10
+/Btn: Photo11
+/Ch: Photocaption10
+/Ch: Photocaption11
+/Btn: Photo12
+/Ch: Photocaption12
+/Btn: Photo13
+/Ch: Photocaption13
+/Btn: Photo14
+/Ch: Photocaption14
+/Btn: Photo15
+/Ch: Photocaption15
+/Ch: Occupiedby
+/Btn: AerialMap
+/Ch: AddendumDropdown4
+/Btn: Drive Private
+/Btn: Drive Mutual
+/Btn: Drive Underground
+/Btn: Drive Laneway
+/Btn: Drive Other
+/Tx: Other Driveway
+/Btn: Drive None
+/Btn: Drive Single
+/Btn: Drive Double
+/Btn: Parking Garage
+/Btn: Parking Carport
+/Btn: Parking Driveway
+/Tx: HistorySaleprice
+/Tx: REL
+/Tx: PendingPrice
+/Tx: HistoryCurrentList
+/Tx: CADEP
+/Tx: FODep
+/Tx: PDDep
+/Tx: EODep
+/Btn: To Estimate MR
+/Ch: AssessmentPhase
+/Ch: PIN
+/Tx: Range comment
+/Tx: Trends
+/Btn: Feature Gravel
+/Btn: Feature Paved
+/Btn: Feature Lane
+/Btn: Feature Sidewalk
+/Btn: Feature Curbs
+/Btn: Garagesingle
+/Btn: Garagedouble
+/Btn: GarageInt
+/Btn: GarageDet
+/Btn: Garagetriple
+/Btn: GarageOther
+/Ch: GarageDrop
+/Btn: GarageAtt
+/Btn: Garage2
+/Btn: Garage3
+/Ch: Garagedrop3
+/Ch: Garagedrop2
+/Tx: Site Improvements
+/Ch: Other Features dropdown
+/Ch: OtherElectrical
+/Btn: Parking Street
+/Btn: Parking Other
+/Ch: OtherParking
+/Tx: HistoryPriorList
+/Tx: HistorySaledate
+/Ch: MRSubjectDS
+/Ch: Rentmonthoryear
+/Ch: MRDrop1
+/Ch: Rentsubject
+/Ch: BuiltOther2
+/Ch: Fireplacedropdown
+/Ch: Heating System
+/Ch: Cooling System
+/Tx: Basementcomments
+/Ch: DropdownInspection
+/Tx: Land Value
+/Tx: Rent Date
+/Tx: Comp 1 Rent Date
+/Tx: Comp 2 Rent Date
+/Tx: Comp 3 Rent Date
+/Ch: AddendumDropdown5
+/Ch: Inspection Type List
+/Ch: Inspection Type List2
+/Btn: Check Box2
+/Btn: Check Box3
+/Btn: Group2
+/Ch: Comp 1 Basement
+/Ch: Comp 2 Basement
+/Ch: Comp 3 Basement
+/Ch: Comp 1 Parking
+/Ch: Comp 2 Parking
+/Ch: Comp 3 Parking
+/Tx: Comp 1 Basement 1
+/Tx: Comp 2 Basement 1
+/Tx: Comp 3 Basement 1
+/Tx: Comp 1 Parking 1
+/Tx: Comp 2 Parking 1
+/Tx: Comp 3 Parking 1
