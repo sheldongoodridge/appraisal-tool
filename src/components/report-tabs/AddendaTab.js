@@ -1,5 +1,6 @@
-import { useMemo } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import ResponsePicker from './ResponsePicker';
+import { uploadPhoto } from '../../services/api';
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
 
@@ -76,13 +77,53 @@ function AddendaItem({ icon, title, required, autoIncluded, included, onToggle, 
   );
 }
 
-function UploadPlaceholder({ label, hint }) {
+function FileUploadField({ label, hint, url, onUrl, inspectionId, room }) {
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState('');
+  const fileRef = useRef(null);
+
+  const isPdf = url && url.toLowerCase().includes('.pdf');
+
+  async function handleFile(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 10 * 1024 * 1024) {
+      setError('File must be under 10MB');
+      e.target.value = '';
+      return;
+    }
+    setError('');
+    setUploading(true);
+    try {
+      const result = await uploadPhoto(inspectionId, file, room);
+      onUrl(result.file_path);
+    } catch {
+      setError('Upload failed. Please try again.');
+    } finally {
+      setUploading(false);
+      e.target.value = '';
+    }
+  }
+
+  if (url) {
+    return (
+      <div className="add-file-preview">
+        {isPdf
+          ? <div className="add-file-pdf">📄 <span>{url.split('/').pop()}</span></div>
+          : <img src={url} alt={label} className="add-file-img" />
+        }
+        <button type="button" className="add-remove-btn" onClick={() => onUrl('')}>Remove</button>
+      </div>
+    );
+  }
+
   return (
-    <div className="add-upload-area">
-      <div className="add-upload-icon">📁</div>
-      <div className="add-upload-label">{label}</div>
-      {hint && <div className="add-upload-hint">{hint}</div>}
-      <p className="add-coming-tag">Upload integration coming soon</p>
+    <div className="add-upload-area" onClick={() => !uploading && fileRef.current?.click()} style={{ cursor: uploading ? 'default' : 'pointer' }}>
+      <input ref={fileRef} type="file" accept=".jpg,.jpeg,.png,.pdf" style={{ display: 'none' }} onChange={handleFile} />
+      <div className="add-upload-icon">{uploading ? '⏳' : '📎'}</div>
+      <div className="add-upload-label">{uploading ? 'Uploading…' : label}</div>
+      {hint && !uploading && <div className="add-upload-hint">{hint}</div>}
+      {error && <div style={{ color: '#dc2626', fontSize: 12, marginTop: 6 }}>{error}</div>}
     </div>
   );
 }
@@ -566,6 +607,8 @@ export default function AddendaTab({
   incomeApproach, onIncomeApproachChange,
   addenda, onAddendaChange,
   fullReport,
+  inspectionId,
+  onNavigate,
 }) {
   const add  = addenda ?? {};
   const impr = fullReport?.improvements ?? {};
@@ -599,7 +642,7 @@ export default function AddendaTab({
       {/* 2. Photographs */}
       <AddendaItem icon="📷" title="Photographs" required>
         <p className="rt-hint" style={{ marginBottom: 10 }}>Photographs are managed in the Photos tab (Tab 11).</p>
-        <button type="button" className="add-goto-btn" onClick={() => {}}>
+        <button type="button" className="add-goto-btn" onClick={() => onNavigate?.('photos')}>
           Go to Photos →
         </button>
       </AddendaItem>
@@ -725,7 +768,14 @@ export default function AddendaTab({
         included={add.building_sketch ?? false}
         onToggle={() => toggle('building_sketch')}
       >
-        <UploadPlaceholder label="Upload Sketch / Floor Plan" hint="Accepts JPG, PNG, PDF" />
+        <FileUploadField
+          label="Upload Sketch / Floor Plan"
+          hint="Accepts JPG, PNG, PDF · Max 10MB"
+          url={add.sketch_url ?? ''}
+          onUrl={url => onAddendaChange({ ...add, sketch_url: url })}
+          inspectionId={inspectionId}
+          room="report-sketch"
+        />
       </AddendaItem>
 
       {/* 11. Maps */}
@@ -734,13 +784,24 @@ export default function AddendaTab({
         included={add.maps ?? false}
         onToggle={() => toggle('maps')}
       >
-        {[['Zoning Map','Upload zoning map'],['Aerial Map','Upload aerial/satellite image'],['Site Map','Upload site map']].map(([lbl,hint]) => (
-          <div key={lbl} style={{ marginBottom: 16 }}>
-            <p className="rt-section-title" style={{ marginBottom: 8 }}>{lbl}</p>
-            <UploadPlaceholder label={lbl} hint={hint} />
+        {[
+          { label: 'Zoning Map',  urlKey: 'zoning_map_url', hint: 'JPG, PNG, PDF · Max 10MB', room: 'report-zoning-map'  },
+          { label: 'Aerial Map',  urlKey: 'aerial_map_url', hint: 'JPG, PNG, PDF · Max 10MB', room: 'report-aerial-map'  },
+          { label: 'Site Map',    urlKey: 'site_map_url',   hint: 'JPG, PNG, PDF · Max 10MB', room: 'report-site-map'    },
+        ].map(({ label, urlKey, hint, room }) => (
+          <div key={urlKey} style={{ marginBottom: 20 }}>
+            <p className="rt-section-title" style={{ marginBottom: 8 }}>{label}</p>
+            <FileUploadField
+              label={`Upload ${label}`}
+              hint={hint}
+              url={add[urlKey] ?? ''}
+              onUrl={url => onAddendaChange({ ...add, [urlKey]: url })}
+              inspectionId={inspectionId}
+              room={room}
+            />
           </div>
         ))}
-        <div className="rt-field" style={{ marginTop: 12 }}>
+        <div className="rt-field" style={{ marginTop: 4 }}>
           <label>Additional Map Type</label>
           <select value={add.addendum_dropdown5 ?? ''} onChange={ev => onAddendaChange({ ...add, addendum_dropdown5: ev.target.value })}>
             {['','Agricultural Land Reserve','Elevation Profile Addendum','Flood Map Addendum','Google Earth Addendum','Official Community Plan Map','Plot Map Addendum','Site Map Addendum','Other (specify)']

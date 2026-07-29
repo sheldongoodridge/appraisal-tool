@@ -1266,3 +1266,34 @@
   border-radius: 6px;
   padding: 6px 12px;
 }
+
+/* File upload preview */
+.add-file-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.add-file-img {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  object-fit: contain;
+  background: #f9fafb;
+}
+.add-file-pdf {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #374151;
+  background: #f3f4f6;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+.add-file-pdf span {
+  font-weight: 600;
+  word-break: break-all;
+}

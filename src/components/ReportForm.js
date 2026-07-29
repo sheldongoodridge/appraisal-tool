@@ -485,6 +485,8 @@ export default function ReportForm({ inspection, currentUser, onBack, onSave }) 
             addenda={reportData.addenda}
             onAddendaChange={d => updateSection('addenda', d)}
             fullReport={reportData}
+            inspectionId={inspection.id}
+            onNavigate={setActiveTab}
           />
         );
       case 'generate':

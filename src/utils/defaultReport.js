@@ -302,7 +302,9 @@ export const DEFAULT_REPORT = {
     addendum_dropdown4: "", addenda_dropdown2: "",
     addenda_dropdown3: "", addenda_dropdown4: "",
     addendum_dropdown5: "",
-    additional_sales_notes: ""
+    additional_sales_notes: "",
+    sketch_url: "",
+    zoning_map_url: "", aerial_map_url: "", site_map_url: ""
   },
   photos: {
     mandatory: { front: null, rear: null, street: null },
