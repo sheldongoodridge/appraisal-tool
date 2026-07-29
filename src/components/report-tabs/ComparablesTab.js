@@ -10,11 +10,11 @@ const PROPERTY_TYPES = [
   'Mobile/Manufactured', 'Other (specify)', 'Row/Townhouse',
   'Semi-Detached', 'Stacked', 'Triplex/Duplex',
 ];
-const BASEMENT_OPTS  = [
+const BASEMENT_OPTS = [
   'None', 'Full Finished', 'Full Unfinished', 'Full Partially Finished',
   'Partial Finished', 'Partial Unfinished', 'Crawl Space', 'Other',
 ];
-const PARKING_OPTS   = [
+const PARKING_OPTS = [
   'None', 'Attached Garage', 'Detached Garage', 'Built-In Garage',
   'Carport', 'Driveway', 'Street', 'Underground', 'Laneway', 'Other',
 ];
@@ -26,53 +26,80 @@ const GROUPS = [
   { label: 'Comps 10–12', offset: 9 },
 ];
 
-// Row definitions — drive both the table structure and subject cell logic
+// noAdj: true  — no Adj $ cell (address, age, computed rows)
+// addrSpan: true — desc cell colSpan=2 (address only)
+// noSubject: true — subject shows "—"
 const ROWS = [
-  { key: 'address',             label: 'Address',          type: 'textarea' },
-  { key: 'data_source',         label: 'Data Source',      type: 'dropdown', opts: DATA_SOURCES },
-  { key: 'date_of_sale',        label: 'Date of Sale',     type: 'text' },
-  { key: 'sale_price',          label: 'Sale Price',       type: 'text' },
-  { key: 'days_on_market',      label: 'Days on Market',   type: 'text',     noSubject: true },
-  { key: 'list_price',          label: 'List Price',       type: 'text',     noSubject: true },
-  { key: 'km_from_subject',     label: 'Km from Subject',  type: 'text',     noSubject: true },
-  { key: 'div_details',         label: 'Property Details', type: 'divider' },
-  { key: 'location',            label: 'Location',         type: 'text',     noSubject: true },
-  { key: 'site_dimensions',     label: 'Site Dimensions',  type: 'text' },
-  { key: 'lot_size',            label: 'Lot Size',         type: 'text' },
-  { key: 'property_type',       label: 'Property Type',    type: 'dropdown', opts: PROPERTY_TYPES },
-  { key: 'design_style',        label: 'Design/Style',     type: 'text' },
-  { key: 'age',                 label: 'Age',              type: 'text' },
-  { key: 'condition',           label: 'Condition',        type: 'text' },
-  { key: 'floor_area',          label: 'Floor Area',       type: 'floor_area' },
-  { key: 'room_count_total',    label: 'Rooms (Total)',    type: 'text' },
-  { key: 'room_count_bedrooms', label: 'Bedrooms',         type: 'text' },
-  { key: 'bathrooms_full',      label: 'Full Baths',       type: 'text' },
-  { key: 'bathrooms_partial',   label: 'Partial Baths',    type: 'text' },
-  { key: 'basement',            label: 'Basement',         type: 'dropdown', opts: BASEMENT_OPTS },
-  { key: 'parking',             label: 'Parking',          type: 'dropdown', opts: PARKING_OPTS },
-  { key: 'div_adj',             label: 'Adjustments',      type: 'divider' },
-  { key: 'adj_0', label: 'Adj. 1', type: 'adj', adjIndex: 0 },
-  { key: 'adj_1', label: 'Adj. 2', type: 'adj', adjIndex: 1 },
-  { key: 'adj_2', label: 'Adj. 3', type: 'adj', adjIndex: 2 },
-  { key: 'adj_3', label: 'Adj. 4', type: 'adj', adjIndex: 3 },
-  { key: 'adj_4', label: 'Adj. 5', type: 'adj', adjIndex: 4 },
-  { key: 'div_results',     label: 'Results',         type: 'divider' },
-  { key: 'net_dollar',      label: 'Net $',           type: 'computed' },
-  { key: 'gross_pct',       label: 'Gross %',         type: 'computed' },
-  { key: 'adjusted_value',  label: 'Adjusted Value',  type: 'computed' },
+  { key: 'address',         label: 'Address',           type: 'textarea',   noAdj: true, addrSpan: true },
+  { key: 'data_source',     label: 'Data Source',       type: 'dropdown',   opts: DATA_SOURCES },
+  { key: 'date_of_sale',    label: 'Date of Sale',      type: 'text' },
+  { key: 'sale_price',      label: 'Sale Price',        type: 'text' },
+  { key: 'days_on_market',  label: 'Days on Market',    type: 'text',       noSubject: true },
+  { key: 'list_price',      label: 'List Price',        type: 'text',       noSubject: true },
+  { key: 'km_from_subject', label: 'Approx KMs',        type: 'text',       noSubject: true },
+  { key: 'location',        label: 'Location',          type: 'text',       noSubject: true },
+  { key: 'site_dimensions', label: 'Site Dims',         type: 'text' },
+  { key: 'property_type',   label: 'Property Type',     type: 'dropdown',   opts: PROPERTY_TYPES },
+  { key: 'design_style',    label: 'Design/Style',      type: 'text' },
+  { key: 'age',             label: 'Age',               type: 'text',       noAdj: true },
+  { key: 'condition',       label: 'Condition',         type: 'text' },
+  { key: 'floor_area',      label: 'Floor Area',        type: 'floor_area' },
+  { key: 'room_count',      label: 'Room Count',        type: 'room_count' },
+  { key: 'bathrooms',       label: 'Bathrooms',         type: 'bathrooms' },
+  { key: 'basement',        label: 'Basement',          type: 'dropdown',   opts: BASEMENT_OPTS },
+  { key: 'parking',         label: 'Parking',           type: 'dropdown',   opts: PARKING_OPTS },
+  { key: 'lot_orient',      label: 'Lot Orientation',   type: 'text',       noSubject: true },
+  { key: 'hvac_fp',         label: 'HVAC / Fireplace',  type: 'text',       noSubject: true },
+  { key: 'energy_eff',      label: 'Energy Efficiency', type: 'text',       noSubject: true },
+  { key: 'landscaping',     label: 'Landscaping',       type: 'text',       noSubject: true },
+  { key: 'adj_per_sqft',    label: 'Adj $/SqFt',        type: 'text',       noSubject: true },
+  { key: 'custom_0',        label: '',                  type: 'custom',     customIndex: 0 },
+  { key: 'custom_1',        label: '',                  type: 'custom',     customIndex: 1 },
+  { key: 'custom_2',        label: '',                  type: 'custom',     customIndex: 2 },
+  { key: 'custom_3',        label: '',                  type: 'custom',     customIndex: 3 },
+  { key: 'custom_4',        label: '',                  type: 'custom',     customIndex: 4 },
+  { key: 'gross_net',       label: 'Gross% / Net $',    type: 'gross_net',  noAdj: true },
+  { key: 'adjusted_value',  label: 'Adjusted Value',    type: 'adj_value',  noAdj: true },
+];
+
+// Keys whose _adj fields contribute to net/gross calculations
+const ADJ_KEYS = [
+  'data_source', 'date_of_sale', 'sale_price', 'days_on_market',
+  'list_price', 'km_from_subject', 'location', 'site_dimensions',
+  'property_type', 'design_style', 'condition', 'floor_area',
+  'room_count', 'bathrooms', 'basement', 'parking',
+  'lot_orient', 'hvac_fp', 'energy_eff', 'landscaping', 'adj_per_sqft',
 ];
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
 
 function createEmptyComp(number) {
   return {
-    number, address: '', data_source: '', date_of_sale: '',
-    sale_price: '', days_on_market: '', list_price: '', km_from_subject: '',
-    location: '', site_dimensions: '', lot_size: '', property_type: '',
-    design_style: '', age: '', condition: '', floor_area: '',
-    floor_area_unit: 'SqFt', room_count_total: '', room_count_bedrooms: '',
-    bathrooms_full: '', bathrooms_partial: '', basement: '', parking: '',
-    adjustments: Array.from({ length: 5 }, () => ({ description: '', adjustment: '' })),
+    number,
+    address: '',
+    data_source: '',     data_source_adj: '',
+    date_of_sale: '',    date_of_sale_adj: '',
+    sale_price: '',      sale_price_adj: '',
+    days_on_market: '',  days_on_market_adj: '',
+    list_price: '',      list_price_adj: '',
+    km_from_subject: '', km_from_subject_adj: '',
+    location: '',        location_adj: '',
+    site_dimensions: '', site_dimensions_adj: '',
+    property_type: '',   property_type_adj: '',
+    design_style: '',    design_style_adj: '',
+    age: '',
+    condition: '',       condition_adj: '',
+    floor_area: '',      floor_area_unit: 'SqFt', floor_area_adj: '',
+    room_count_total: '', room_count_bedrooms: '', room_count_adj: '',
+    bathrooms_full: '',   bathrooms_partial: '',   bathrooms_adj: '',
+    basement: '',        basement_adj: '',
+    parking: '',         parking_adj: '',
+    lot_orient: '',      lot_orient_adj: '',
+    hvac_fp: '',         hvac_fp_adj: '',
+    energy_eff: '',      energy_eff_adj: '',
+    landscaping: '',     landscaping_adj: '',
+    adj_per_sqft: '',    adj_per_sqft_adj: '',
+    custom_rows: Array.from({ length: 5 }, () => ({ label: '', adj: '' })),
   };
 }
 
@@ -82,20 +109,22 @@ function ensureComps(comparables) {
   return result;
 }
 
+function parseAdj(str) {
+  const v = parseFloat((str || '').replace(/[$,]/g, ''));
+  return isNaN(v) ? 0 : v;
+}
+
 function calcNet(comp) {
-  return (comp.adjustments || []).reduce((acc, adj) => {
-    const v = parseFloat(adj.adjustment);
-    return acc + (isNaN(v) ? 0 : v);
-  }, 0);
+  let total = ADJ_KEYS.reduce((acc, k) => acc + parseAdj(comp[`${k}_adj`]), 0);
+  (comp.custom_rows || []).forEach(r => { total += parseAdj(r.adj); });
+  return total;
 }
 
 function calcGross(comp) {
   const price = parseFloat((comp.sale_price || '').replace(/[$,]/g, ''));
-  if (!price) return '';
-  const gross = (comp.adjustments || []).reduce((acc, adj) => {
-    const v = parseFloat(adj.adjustment);
-    return acc + (isNaN(v) ? 0 : Math.abs(v));
-  }, 0);
+  if (!price) return null;
+  let gross = ADJ_KEYS.reduce((acc, k) => acc + Math.abs(parseAdj(comp[`${k}_adj`])), 0);
+  (comp.custom_rows || []).forEach(r => { gross += Math.abs(parseAdj(r.adj)); });
   return (gross / price * 100).toFixed(1);
 }
 
@@ -111,27 +140,26 @@ function fmtCurrency(n) {
 }
 
 function buildSubjectCol(fullReport) {
-  const s  = fullReport?.subject ?? {};
-  const h  = fullReport?.history ?? {};
-  const si = fullReport?.site ?? {};
+  const s  = fullReport?.subject  ?? {};
+  const h  = fullReport?.history  ?? {};
+  const si = fullReport?.site     ?? {};
   const im = fullReport?.improvements ?? {};
   const ra = fullReport?.room_allocation?.above_grade_totals ?? {};
   return {
-    address:             s.address ?? '',
-    date_of_sale:        h.sale_date ?? '',
-    sale_price:          h.sale_price ?? '',
-    site_dimensions:     si.dimensions ?? '',
-    lot_size:            [si.lot_size, si.lot_size_unit].filter(Boolean).join(' '),
-    property_type:       im.property_type ?? '',
-    design_style:        im.design_style ?? '',
-    age:                 im.effective_age ?? '',
+    address:             s.address          ?? '',
+    date_of_sale:        h.sale_date        ?? '',
+    sale_price:          h.sale_price       ?? '',
+    site_dimensions:     si.dimensions      ?? '',
+    property_type:       im.property_type   ?? '',
+    design_style:        im.design_style    ?? '',
+    age:                 im.effective_age   ?? '',
     condition:           im.overall_condition ?? '',
-    floor_area:          ra.area ?? '',
-    room_count_total:    ra.room_total ?? '',
-    room_count_bedrooms: ra.bedrooms ?? '',
-    bathrooms_full:      ra.full_bath ?? '',
-    bathrooms_partial:   ra.part_bath ?? '',
-    basement:            im.basement_type ?? '',
+    floor_area:          ra.area            ?? '',
+    room_count_total:    ra.room_total      ?? '',
+    room_count_bedrooms: ra.bedrooms        ?? '',
+    bathrooms_full:      ra.full_bath       ?? '',
+    bathrooms_partial:   ra.part_bath       ?? '',
+    basement:            im.basement_type   ?? '',
   };
 }
 
@@ -184,103 +212,141 @@ export default function ComparablesTab({
   const offset    = GROUPS[activePage].offset;
   const pageComps = [comps[offset], comps[offset + 1], comps[offset + 2]];
 
-  // ── Cell renderers ──────────────────────────────────────────────────────────
+  // ── Subject cell ────────────────────────────────────────────────────────────
 
   function renderSubjectCell(row) {
-    if (row.type === 'divider')  return <td className="ct-divider-cell" />;
-    if (row.type === 'computed') return <td className="ct-subject-cell ct-muted">—</td>;
-    if (row.type === 'adj')      return <td className="ct-subject-cell ct-muted">—</td>;
-    if (row.noSubject)           return <td className="ct-subject-cell ct-muted">—</td>;
-    const val = subject[row.key] ?? '';
-    return <td className="ct-subject-cell">{val || <span className="ct-muted">—</span>}</td>;
+    if (row.noSubject || row.type === 'gross_net' || row.type === 'adj_value' || row.type === 'custom') {
+      return <td className="ct-subject-cell ct-muted">—</td>;
+    }
+    let content;
+    if (row.key === 'room_count') {
+      content = subject.room_count_total
+        ? `${subject.room_count_total}T / ${subject.room_count_bedrooms || 0}B`
+        : '';
+    } else if (row.key === 'bathrooms') {
+      content = subject.bathrooms_full
+        ? `${subject.bathrooms_full}F ${subject.bathrooms_partial || 0}P`
+        : '';
+    } else if (row.key === 'floor_area') {
+      content = subject.floor_area ? `${subject.floor_area} SqFt` : '';
+    } else {
+      content = subject[row.key] ?? '';
+    }
+    return (
+      <td className="ct-subject-cell">
+        {content || <span className="ct-muted">—</span>}
+      </td>
+    );
   }
 
-  function renderCompCell(row, comp, compIndex) {
-    const gi = Math.floor((offset + compIndex) / 3);
-    if (!enabled.has(gi)) return <td className="ct-disabled-cell" />;
+  // ── Comp cells — returns array of <td> elements ──────────────────────────────
 
+  function renderCompCells(row, comp, compIndex) {
     const globalIndex = offset + compIndex;
+    const gi = Math.floor(globalIndex / 3);
+    const n  = comp.number;
 
-    function upd(patch) {
-      updateComp(globalIndex, { ...comp, ...patch });
-    }
-    function updAdj(ai, patch) {
-      const next = comp.adjustments.map((a, i) => i === ai ? { ...a, ...patch } : a);
-      updateComp(globalIndex, { ...comp, adjustments: next });
-    }
-
-    if (row.type === 'divider') return <td className="ct-divider-cell" />;
-
-    if (row.type === 'computed') {
-      let display = '—';
-      if (row.key === 'net_dollar') {
-        const n = calcNet(comp);
-        if (comp.sale_price) display = fmtCurrency(n);
-      } else if (row.key === 'gross_pct') {
-        const g = calcGross(comp);
-        if (g) display = `${g}%`;
-      } else if (row.key === 'adjusted_value') {
-        const a = calcAdjusted(comp);
-        if (a != null) display = fmtCurrency(a);
-      }
-      const isFinal = row.key === 'adjusted_value';
-      return <td className={`ct-computed-cell${isFinal ? ' ct-computed-cell--final' : ''}`}>{display}</td>;
+    if (!enabled.has(gi)) {
+      return row.noAdj || row.addrSpan
+        ? [<td key={`${n}-d`} className="ct-disabled-cell ct-desc-cell" colSpan={row.addrSpan ? 2 : 1} />,
+           ...(!row.addrSpan && !row.noAdj ? [<td key={`${n}-a`} className="ct-disabled-cell ct-adj-cell-narrow" />] : [])]
+        : [<td key={`${n}-d`} className="ct-disabled-cell ct-desc-cell" />,
+           <td key={`${n}-a`} className="ct-disabled-cell ct-adj-cell-narrow" />];
     }
 
-    if (row.type === 'adj') {
-      const ai  = row.adjIndex;
-      const adj = comp.adjustments[ai] ?? { description: '', adjustment: '' };
-      return (
-        <td className="ct-adj-cell">
-          <input
-            type="text"
-            className="ct-adj-desc"
-            placeholder="Description"
-            value={adj.description}
-            onChange={e => updAdj(ai, { description: e.target.value })}
-          />
-          <input
-            type="text"
-            className="ct-adj-val"
-            placeholder="$0"
-            value={adj.adjustment}
-            onChange={e => updAdj(ai, { adjustment: e.target.value })}
-          />
-        </td>
-      );
+    function upd(patch) { updateComp(globalIndex, { ...comp, ...patch }); }
+    function updCustom(ci, patch) {
+      const next = (comp.custom_rows || []).map((r, i) => i === ci ? { ...r, ...patch } : r);
+      upd({ custom_rows: next });
     }
 
+    const adjKey = `${row.key}_adj`;
+
+    // Address — textarea spanning both sub-columns
     if (row.type === 'textarea') {
-      return (
-        <td className="ct-input-cell">
+      return [(
+        <td key={`${n}-d`} className="ct-desc-cell" colSpan={2}>
           <textarea
             className="ct-input ct-textarea"
             rows={2}
-            value={comp[row.key] ?? ''}
-            onChange={e => upd({ [row.key]: e.target.value })}
+            value={comp.address ?? ''}
+            onChange={e => upd({ address: e.target.value })}
           />
         </td>
-      );
+      )];
     }
 
-    if (row.type === 'dropdown') {
-      return (
-        <td className="ct-input-cell">
-          <select
-            className="ct-input ct-select"
-            value={comp[row.key] ?? ''}
-            onChange={e => upd({ [row.key]: e.target.value })}
-          >
-            <option value="" />
-            {row.opts.map(o => <option key={o} value={o}>{o}</option>)}
-          </select>
+    // Gross% / Net $ — computed, spans both sub-columns
+    if (row.type === 'gross_net') {
+      const net   = calcNet(comp);
+      const gross = calcGross(comp);
+      return [(
+        <td key={`${n}-d`} className="ct-computed-cell ct-gross-net-cell" colSpan={2}>
+          {comp.sale_price
+            ? <div className="ct-gross-net-inner">
+                <span className="ct-gross">{gross ?? '0'}%</span>
+                <span className="ct-net">{fmtCurrency(net)}</span>
+              </div>
+            : <span className="ct-muted">—</span>}
         </td>
-      );
+      )];
     }
 
+    // Adjusted Value — computed, spans both sub-columns
+    if (row.type === 'adj_value') {
+      const a = calcAdjusted(comp);
+      return [(
+        <td key={`${n}-d`} className="ct-computed-cell ct-adj-value-cell" colSpan={2}>
+          {a != null ? fmtCurrency(a) : <span className="ct-muted">—</span>}
+        </td>
+      )];
+    }
+
+    // Custom blank rows — free-text label in desc, adj $ in adj
+    if (row.type === 'custom') {
+      const ci = row.customIndex;
+      const cr = (comp.custom_rows || [])[ci] ?? { label: '', adj: '' };
+      return [
+        <td key={`${n}-d`} className="ct-desc-cell">
+          <input
+            type="text"
+            className="ct-input"
+            placeholder="Item label…"
+            value={cr.label}
+            onChange={e => updCustom(ci, { label: e.target.value })}
+          />
+        </td>,
+        <td key={`${n}-a`} className="ct-adj-cell-narrow">
+          <input
+            type="text"
+            className="ct-input ct-adj-input"
+            placeholder="$"
+            value={cr.adj}
+            onChange={e => updCustom(ci, { adj: e.target.value })}
+          />
+        </td>,
+      ];
+    }
+
+    // Age — text input, empty adj cell (no adj for this field)
+    if (row.key === 'age') {
+      return [
+        <td key={`${n}-d`} className="ct-desc-cell">
+          <input
+            type="text"
+            className="ct-input ct-age-input"
+            value={comp.age ?? ''}
+            onChange={e => upd({ age: e.target.value })}
+          />
+        </td>,
+        <td key={`${n}-a`} className="ct-adj-cell-narrow ct-no-adj" />,
+      ];
+    }
+
+    // Floor area — value + unit in desc, adj $ in adj
     if (row.type === 'floor_area') {
-      return (
-        <td className="ct-input-cell">
+      return [
+        <td key={`${n}-d`} className="ct-desc-cell">
           <div className="ct-floor-area-wrap">
             <input
               type="text"
@@ -296,21 +362,130 @@ export default function ComparablesTab({
               {FLOOR_AREA_UNITS.map(u => <option key={u}>{u}</option>)}
             </select>
           </div>
-        </td>
-      );
+        </td>,
+        <td key={`${n}-a`} className="ct-adj-cell-narrow">
+          <input
+            type="text"
+            className="ct-input ct-adj-input"
+            placeholder="$"
+            value={comp.floor_area_adj ?? ''}
+            onChange={e => upd({ floor_area_adj: e.target.value })}
+          />
+        </td>,
+      ];
     }
 
-    // Default: text
-    return (
-      <td className="ct-input-cell">
+    // Room count — Tot + Bed inline inputs in desc, adj $ in adj
+    if (row.type === 'room_count') {
+      return [
+        <td key={`${n}-d`} className="ct-desc-cell">
+          <div className="ct-inline-fields">
+            <span className="ct-inline-label">Tot</span>
+            <input
+              type="text"
+              className="ct-input ct-small-input"
+              value={comp.room_count_total ?? ''}
+              onChange={e => upd({ room_count_total: e.target.value })}
+            />
+            <span className="ct-inline-label">Bed</span>
+            <input
+              type="text"
+              className="ct-input ct-small-input"
+              value={comp.room_count_bedrooms ?? ''}
+              onChange={e => upd({ room_count_bedrooms: e.target.value })}
+            />
+          </div>
+        </td>,
+        <td key={`${n}-a`} className="ct-adj-cell-narrow">
+          <input
+            type="text"
+            className="ct-input ct-adj-input"
+            placeholder="$"
+            value={comp.room_count_adj ?? ''}
+            onChange={e => upd({ room_count_adj: e.target.value })}
+          />
+        </td>,
+      ];
+    }
+
+    // Bathrooms — Full + Partial inline inputs in desc, adj $ in adj
+    if (row.type === 'bathrooms') {
+      return [
+        <td key={`${n}-d`} className="ct-desc-cell">
+          <div className="ct-inline-fields">
+            <span className="ct-inline-label">F</span>
+            <input
+              type="text"
+              className="ct-input ct-small-input"
+              value={comp.bathrooms_full ?? ''}
+              onChange={e => upd({ bathrooms_full: e.target.value })}
+            />
+            <span className="ct-inline-label">P</span>
+            <input
+              type="text"
+              className="ct-input ct-small-input"
+              value={comp.bathrooms_partial ?? ''}
+              onChange={e => upd({ bathrooms_partial: e.target.value })}
+            />
+          </div>
+        </td>,
+        <td key={`${n}-a`} className="ct-adj-cell-narrow">
+          <input
+            type="text"
+            className="ct-input ct-adj-input"
+            placeholder="$"
+            value={comp.bathrooms_adj ?? ''}
+            onChange={e => upd({ bathrooms_adj: e.target.value })}
+          />
+        </td>,
+      ];
+    }
+
+    // Dropdown
+    if (row.type === 'dropdown') {
+      return [
+        <td key={`${n}-d`} className="ct-desc-cell">
+          <select
+            className="ct-input ct-select"
+            value={comp[row.key] ?? ''}
+            onChange={e => upd({ [row.key]: e.target.value })}
+          >
+            <option value="" />
+            {row.opts.map(o => <option key={o} value={o}>{o}</option>)}
+          </select>
+        </td>,
+        <td key={`${n}-a`} className="ct-adj-cell-narrow">
+          <input
+            type="text"
+            className="ct-input ct-adj-input"
+            placeholder="$"
+            value={comp[adjKey] ?? ''}
+            onChange={e => upd({ [adjKey]: e.target.value })}
+          />
+        </td>,
+      ];
+    }
+
+    // Default: text input
+    return [
+      <td key={`${n}-d`} className="ct-desc-cell">
         <input
           type="text"
           className="ct-input"
           value={comp[row.key] ?? ''}
           onChange={e => upd({ [row.key]: e.target.value })}
         />
-      </td>
-    );
+      </td>,
+      <td key={`${n}-a`} className="ct-adj-cell-narrow">
+        <input
+          type="text"
+          className="ct-input ct-adj-input"
+          placeholder="$"
+          value={comp[adjKey] ?? ''}
+          onChange={e => upd({ [adjKey]: e.target.value })}
+        />
+      </td>,
+    ];
   }
 
   // ── Render ──────────────────────────────────────────────────────────────────
@@ -334,10 +509,7 @@ export default function ComparablesTab({
             >
               <button
                 className="ct-group-btn"
-                onClick={() => {
-                  if (!isEnabled) toggleGroup(gi);
-                  else setActivePage(gi);
-                }}
+                onClick={() => { if (!isEnabled) toggleGroup(gi); else setActivePage(gi); }}
               >
                 {gi > 0 && !isEnabled && <span className="ct-group-add">+</span>}
                 {g.label}
@@ -347,9 +519,7 @@ export default function ComparablesTab({
                   className="ct-group-remove"
                   title="Remove this group"
                   onClick={() => toggleGroup(gi)}
-                >
-                  ×
-                </button>
+                >×</button>
               )}
             </div>
           );
@@ -360,24 +530,33 @@ export default function ComparablesTab({
       <div className="ct-grid-wrap">
         <table className="ct-grid">
           <thead>
-            <tr>
-              <th className="ct-label-th">Field</th>
-              <th className="ct-subject-th">Subject</th>
+            <tr className="ct-thead-top">
+              <th className="ct-label-th" rowSpan={2}>Field</th>
+              <th className="ct-subject-th" rowSpan={2}>Subject</th>
               {pageComps.map(c => (
-                <th key={c.number} className="ct-comp-th">Comp {c.number}</th>
+                <th key={c.number} className="ct-comp-th" colSpan={2}>Comp {c.number}</th>
               ))}
+            </tr>
+            <tr className="ct-thead-sub">
+              {pageComps.flatMap(c => [
+                <th key={`${c.number}-d`} className="ct-desc-th">Description</th>,
+                <th key={`${c.number}-a`} className="ct-adj-th">Adj $</th>,
+              ])}
             </tr>
           </thead>
           <tbody>
             {ROWS.map(row => (
-              <tr key={row.key} className={row.type === 'divider' ? 'ct-divider-row' : ''}>
-                <td className="ct-label-cell">
-                  {row.type === 'divider'
-                    ? <span className="ct-section-label">{row.label}</span>
-                    : row.label}
-                </td>
+              <tr
+                key={row.key}
+                className={
+                  row.type === 'adj_value' ? 'ct-adjval-row'
+                  : row.type === 'gross_net' ? 'ct-grossnet-row'
+                  : ''
+                }
+              >
+                <td className="ct-label-cell">{row.label}</td>
                 {renderSubjectCell(row)}
-                {pageComps.map((comp, ci) => renderCompCell(row, comp, ci))}
+                {pageComps.flatMap((comp, ci) => renderCompCells(row, comp, ci))}
               </tr>
             ))}
           </tbody>
@@ -391,9 +570,7 @@ export default function ComparablesTab({
           <ResponsePicker
             category="comparables"
             onInsert={text =>
-              onCompAnalysesChange(
-                compAnalyses ? `${compAnalyses}\n\n${text}` : text
-              )
+              onCompAnalysesChange(compAnalyses ? `${compAnalyses}\n\n${text}` : text)
             }
           />
         </div>
