@@ -408,6 +408,141 @@
 }
 .rt-warn-btn:hover { background: #1e3f73; }
 
+/* sub-label (Utilities, Water Supply, etc.) */
+.rt-sub-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #9ca3af;
+  margin-bottom: 8px;
+}
+
+/* label row with inline action button */
+.rt-field-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.rt-field-label-row label { margin-bottom: 0; }
+
+/* radio row (Supply / Demand / Trends) */
+.rt-radio-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+.rt-radio-row:last-child { border-bottom: none; }
+.rt-radio-row-label {
+  width: 110px;
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* ─── RESPONSE PICKER ────────────────────────────────────────────────────────── */
+
+.rp-wrap { position: relative; display: inline-block; }
+
+.rp-trigger {
+  background: none;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #374151;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+}
+.rp-trigger:hover { background: #f3f4f6; border-color: #9ca3af; }
+
+.rp-panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  width: 360px;
+  max-width: 90vw;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  z-index: 200;
+  overflow: hidden;
+}
+
+.rp-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.rp-search {
+  flex: 1;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  outline: none;
+}
+.rp-search:focus { border-color: #13294B; }
+
+.rp-close {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+}
+.rp-close:hover { color: #374151; }
+
+.rp-list {
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.rp-empty {
+  padding: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.rp-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #f3f4f6;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.rp-item:last-child { border-bottom: none; }
+.rp-item:hover { background: #f0f4ff; }
+
+.rp-item-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 2px;
+}
+.rp-item-preview {
+  font-size: 11px;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
 /* ─── PLACEHOLDERS ───────────────────────────────────────────────────────────── */
 
 .rf-center-placeholder {
@@ -442,4 +577,127 @@
   .rf-header-address { font-size: 13px; }
   .rf-body          { padding: 16px; }
   .rf-generate-btn  { display: none; }
+}
+
+/* ─── ROOM ALLOCATION TABLE ─────────────────────────────────────────────────── */
+
+.rt-room-table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.rt-room-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  min-width: 900px;
+}
+
+.rt-room-table th {
+  background: #13294B;
+  color: #fff;
+  padding: 6px 4px;
+  text-align: center;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.rt-room-label-th {
+  text-align: left !important;
+  padding-left: 10px !important;
+  min-width: 72px;
+}
+
+.rt-room-label {
+  padding: 4px 8px 4px 10px;
+  font-weight: 600;
+  font-size: 11px;
+  color: #374151;
+  background: #f9fafb;
+  white-space: nowrap;
+  border-right: 1px solid #e5e7eb;
+}
+
+.rt-room-table td {
+  border-bottom: 1px solid #f3f4f6;
+  padding: 2px;
+}
+
+.rt-room-table tbody tr:hover td { background: #f8f9ff; }
+
+.rt-room-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: center;
+  font-size: 12px;
+  padding: 4px 2px;
+  outline: none;
+}
+.rt-room-input:focus {
+  background: #eef2ff;
+  border-radius: 3px;
+}
+
+.rt-room-total-row td {
+  background: #f0f4ff;
+  border-top: 2px solid #c7d2fe;
+}
+
+.rt-room-computed {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4338ca;
+  padding: 4px 2px;
+}
+
+.rt-room-toggle-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.rt-room-toggle-btn {
+  font-size: 12px;
+  padding: 4px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background: #fff;
+  color: #374151;
+  cursor: pointer;
+}
+.rt-room-toggle-btn:hover { background: #f3f4f6; }
+
+/* ─── SUFFIX INPUT ───────────────────────────────────────────────────────────── */
+
+.rt-suffix-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+}
+.rt-suffix-input input {
+  flex: 1;
+  border: none;
+  padding: 7px 10px;
+  font-size: 14px;
+  background: transparent;
+  outline: none;
+  min-width: 0;
+}
+.rt-suffix {
+  padding: 0 10px;
+  font-size: 13px;
+  color: #6b7280;
+  background: #f9fafb;
+  border-left: 1px solid #d1d5db;
+  white-space: nowrap;
+  line-height: 36px;
 }

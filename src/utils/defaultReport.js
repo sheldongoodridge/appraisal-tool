@@ -1,11 +1,33 @@
 export const DEFAULT_REPORT = {
   version: 1,
+  subject: {
+    address: "", city: "", province: "", postal_code: "",
+    municipality: "", legal_description: "",
+    property_id_type: "PIN/PID", property_id: "",
+    assessed_value: "", assessment_phase: "", assessment_date: null,
+    tax_year: "", taxes: "",
+    existing_use: "", other_uses: "", occupied_by: "",
+    rights_fee_simple: true, rights_leasehold: false,
+    rights_condo: false, rights_other: false,
+    property_rights_other_type: "",
+    maintenance_fee: "", maintenance_period: "Monthly",
+    maintenance_source: "", special_assessment: "", condo_name: "",
+    applicant_name: "", applicant_name_type: "Applicant"
+  },
   meta: {
     report_date: null, effective_date: null,
     inspection_date: null, inspection_type: "",
     is_update: false, original_file_number: "",
     original_effective_date: null,
-    approaches_used: { dca: true, cost: false, income: false }
+    approaches_used: { dca: true, cost: false, income: false },
+    purpose_mv: true, purpose_mr: false,
+    purpose_other: false, purpose_other_text: "",
+    intended_use: "", intended_use_add: "", intended_use_other: "",
+    intended_user: "",
+    requested_by: "client", requested_by_other: "",
+    value_type: "current",
+    has_extraordinary: false, extraordinary_type: "",
+    has_hypothetical: false, hypothetical_type: ""
   },
   cover: {
     letter_body: "", letter_body2: "",
@@ -52,12 +74,14 @@ export const DEFAULT_REPORT = {
     lot_size_unit: "Sq Ft", source: "",
     topography: "", configuration: "",
     zoning_code: "", zoning_source: "",
-    other_land_use_controls: false,
+    other_land_use_controls: null,
     other_land_use_text: "",
     existing_use_conforms: true,
     existing_use_text: "",
-    in_floodplain: false, flood_map_date: "",
+    in_floodplain: null, flood_map_date: "",
+    floodplain_unknown: false,
     easements: "Assumed Typical",
+    land_value_comment: "",
     detrimental_observed: false,
     detrimental_type: "",
     utilities: {
@@ -120,6 +144,7 @@ export const DEFAULT_REPORT = {
     roofing_notes: "", exterior_finish: "",
     exterior_condition: "", exterior_notes: "",
     energy_label: "", energy_rating: "",
+    energy_comments: "",
     ev_charger: "", solar_panels: "",
     electrical_fuses: false,
     electrical_breakers: false,
@@ -146,10 +171,12 @@ export const DEFAULT_REPORT = {
     extras: {
       security_system: false, fireplace: false,
       fireplace_type: "", hr_ventilator: false,
-      pool: false, smart_home: "",
-      other1: "", other2: ""
+      pool: false, smart_home_enabled: false,
+      smart_home: "", other_drop: "",
+      other_drop2: ""
     },
     overall_condition: "",
+    source_of_interior: "",
     detrimental_observed: false,
     detrimental_type: "",
     garage: {
@@ -233,6 +260,7 @@ export const DEFAULT_REPORT = {
     total_area: "", unit_sqft: true
   },
   comparables: [],
+  comparables_groups_enabled: [0],
   comp_analyses: "",
   dca_estimated_value: "",
   history: {

@@ -1,8 +1,14 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { DEFAULT_REPORT } from '../utils/defaultReport';
 import './ReportForm.css';
-import CoverTab from './report-tabs/CoverTab';
-import { getClients } from '../services/api';
+import CoverTab          from './report-tabs/CoverTab';
+import ClientTab         from './report-tabs/ClientTab';
+import SubjectTab        from './report-tabs/SubjectTab';
+import NeighbourhoodTab  from './report-tabs/NeighbourhoodTab';
+import SiteTab           from './report-tabs/SiteTab';
+import ImprovementsTab   from './report-tabs/ImprovementsTab';
+import ComparablesTab    from './report-tabs/ComparablesTab';
+import { getLenders, getProfile } from '../services/api';
 
 const API_BASE = 'https://spokeappraisal.com/api';
 
@@ -67,6 +73,20 @@ function buildAutoFill(inspection, currentUser) {
       panel_capacity:   systems.electrical_amps ?? '',
       cooling_system:   systems.cooling         ?? '',
     },
+    subject: {
+      address:          inspection?.property_data?.address        ?? '',
+      city:             inspection?.property_data?.city           ?? '',
+      province:         inspection?.property_data?.province       ?? '',
+      postal_code:      inspection?.property_data?.postalCode     ?? '',
+      municipality:     wd.property?.municipality                 ?? '',
+      legal_description: wd.property?.legal_description          ?? '',
+      property_id_type: wd.property?.property_id_type            ?? 'PIN/PID',
+      property_id:      wd.property?.property_id                 ?? '',
+      assessed_value:   wd.property?.assessed_value              ?? '',
+      taxes:            wd.property?.taxes                       ?? '',
+      applicant_name:   wd.contacts?.applicant?.name             ?? '',
+      intended_user:    '', // filled from client name async
+    },
     parties: {
       appraiser: {
         name:              currentUser?.full_name         ?? '',
@@ -82,12 +102,94 @@ function buildAutoFill(inspection, currentUser) {
   };
 }
 
-function isReportEmpty(report) {
-  return (
-    !report.meta?.inspection_date &&
-    !report.site?.dimensions &&
-    !report.improvements?.design_style
+
+// ─── ROOM ALLOCATION AUTO-FILL ───────────────────────────────────────────────
+
+const ROOM_LABEL_MAP = {
+  'Bedroom':           'bedrooms',
+  'Master Bedroom':    'bedrooms',
+  'Full Bathroom':     'full_bath',
+  'Full Bath':         'full_bath',
+  'Bathroom':          'full_bath',
+  'Partial Bathroom':  'part_bath',
+  'Half Bathroom':     'part_bath',
+  'Half Bath':         'part_bath',
+  'Powder Room':       'part_bath',
+  'Kitchen':           'kitchen',
+  'Living Room':       'living',
+  'Living':            'living',
+  'Dining Room':       'dining',
+  'Dining':            'dining',
+  'Family Room':       'family',
+  'Family':            'family',
+  'Den':               'den',
+  'Office':            'den',
+  'Study':             'den',
+  'Laundry':           'laundry',
+  'Laundry Room':      'laundry',
+  'Entrance':          'entrance',
+  'Foyer':             'entrance',
+  'Entry':             'entrance',
+  'Mudroom':           'entrance',
+};
+
+const FLOOR_KEY_MAP = {
+  'main':      'main',
+  'second':    'second',
+  'third':     'third',
+  'fourth':    'fourth',
+  'fifth':     'fifth',
+  'basement':  'basement',
+  'basement2': 'basement2',
+  'bsmt':      'basement',
+  'upper':     'second',
+  'lower':     'basement',
+  'ground':    'main',
+};
+
+const RA_COUNTABLE = ['entrance','living','dining','kitchen','family','bedrooms','den','full_bath','part_bath','laundry'];
+
+function buildRoomAllocation(inspection) {
+  const floors = inspection?.workfile_data?.inspections?.[0]?.floors ?? {};
+
+  // Diagnostic — logs room counts per floor so we can confirm data is reaching here
+  console.log('[buildRoomAllocation] floors available:', Object.keys(floors));
+  Object.entries(floors).forEach(([k, v]) =>
+    console.log(`  ${k}: ${v?.rooms?.length ?? 0} rooms, ${v?.photos?.length ?? 0} floor-photos`)
   );
+
+  const result = {};
+
+  for (const [floorKey, floorData] of Object.entries(floors)) {
+    const raKey = FLOOR_KEY_MAP[floorKey.toLowerCase()];
+    if (!raKey || !floorData) continue;
+
+    // Rooms are { label: "Bedroom", photos: [...] } objects — NOT the floor.photos array.
+    // floor.photos contains unlabelled floor-level shots; floor.rooms has the labelled rooms.
+    const rooms = Array.isArray(floorData.rooms) ? floorData.rooms : [];
+    const counts = {};
+
+    for (const room of rooms) {
+      const label = room?.label ?? '';
+      const field = ROOM_LABEL_MAP[label];
+      if (!field) continue;
+      // Each photo = one room instance (FloorScreen merges same-label photos into one object)
+      counts[field] = (counts[field] || 0) + Math.max(room.photos?.length ?? 1, 1);
+    }
+
+    if (Object.keys(counts).length > 0) {
+      const row = {};
+      for (const [field, count] of Object.entries(counts)) {
+        row[field] = String(count);
+      }
+      const total = RA_COUNTABLE.reduce((s, k) => s + (parseInt(row[k]) || 0), 0);
+      if (total > 0) row.room_total = String(total);
+      result[raKey] = row;
+      console.log(`  → mapped ${floorKey} →`, row);
+    }
+  }
+
+  return result;
 }
 
 // ─── MERGE ────────────────────────────────────────────────────────────────────
@@ -97,9 +199,12 @@ function mergeReport(saved) {
   const merged = { ...DEFAULT_REPORT };
   for (const key of Object.keys(DEFAULT_REPORT)) {
     if (saved[key] === undefined) continue;
-    merged[key] = Array.isArray(DEFAULT_REPORT[key])
-      ? saved[key]
-      : { ...DEFAULT_REPORT[key], ...saved[key] };
+    const def = DEFAULT_REPORT[key];
+    if (Array.isArray(def) || def === null || typeof def !== 'object') {
+      merged[key] = saved[key]; // primitives and arrays: use saved value as-is
+    } else {
+      merged[key] = { ...def, ...saved[key] };
+    }
   }
   return merged;
 }
@@ -129,24 +234,6 @@ export default function ReportForm({ inspection, currentUser, onBack, onSave }) 
   const saveTimer   = useRef(null);
   const toastTimer  = useRef(null);
 
-  // Auto-populate once on first open if report is empty
-  useEffect(() => {
-    if (autoFillRan.current) return;
-    autoFillRan.current = true;
-    if (!isReportEmpty(reportData)) return;
-
-    const fills = buildAutoFill(inspection, currentUser);
-    setReportData(prev => {
-      const next = { ...prev };
-      for (const [key, vals] of Object.entries(fills)) {
-        next[key] = { ...prev[key], ...vals };
-      }
-      return next;
-    });
-    setShowToast(true);
-    toastTimer.current = setTimeout(() => setShowToast(false), 4000);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
   // Re-initialize when a different workfile is loaded
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -154,28 +241,99 @@ export default function ReportForm({ inspection, currentUser, onBack, onSave }) 
     setReportData(mergeReport(inspection?.workfile_data?.report));
   }, [inspection?.id]);
 
-  // Async: fetch the linked orderer client and populate parties.client
+  // Auto-fill workfile data — runs once per workfile load.
+  // Subject/site/improvements: skipped if address already set (existing workfile).
+  // Room allocation: always attempted if main floor is still empty.
+  useEffect(() => {
+    if (autoFillRan.current) return;
+    autoFillRan.current = true;
+
+    setReportData(prev => {
+      let next = { ...prev };
+      let changed = false;
+
+      if (!prev.subject?.address) {
+        const fills = buildAutoFill(inspection);
+        for (const [key, vals] of Object.entries(fills)) {
+          if (key !== 'parties') next[key] = { ...prev[key], ...vals };
+        }
+        changed = true;
+      }
+
+      // Room allocation runs even for existing workfiles — only skips if already has data
+      const raEmpty = !prev.room_allocation?.main?.bedrooms
+        && !prev.room_allocation?.main?.living
+        && !prev.room_allocation?.second?.bedrooms
+        && !prev.room_allocation?.basement?.bedrooms;
+
+      if (raEmpty) {
+        const roomAlloc = buildRoomAllocation(inspection);
+        if (Object.keys(roomAlloc).length > 0) {
+          next.room_allocation = { ...prev.room_allocation, ...roomAlloc };
+          changed = true;
+        }
+      }
+
+      return changed ? next : prev;
+    });
+    setShowToast(true);
+    toastTimer.current = setTimeout(() => setShowToast(false), 4000);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Async: fetch fresh appraiser profile from API — bypasses stale localStorage
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    const orderer_id = inspection?.workfile_data?.order?.orderer_id;
-    if (!orderer_id) return;
-
-    getClients().then(clients => {
-      const match = clients.find(c => c.id === Number(orderer_id));
-      if (!match) return;
+    getProfile().then(profile => {
       setReportData(prev => {
-        if (prev.parties?.client?.name) return prev; // already filled — don't clobber
+        if (prev.parties?.appraiser?.name) return prev; // don't overwrite manual edits
+        const next = {
+          ...prev,
+          parties: {
+            ...prev.parties,
+            appraiser: {
+              ...prev.parties.appraiser,
+              name:              profile.full_name         || '',
+              company:           profile.company           || '',
+              address:           profile.address           || '',
+              email:             profile.email             || '',
+              phone:             profile.phone             || '',
+              fax:               profile.fax               || '',
+              designation:       profile.aic_designation   || '',
+              membership_number: profile.membership_number || '',
+            },
+          },
+        };
+        triggerSave(next);
+        return next;
+      });
+    }).catch(() => {});
+  }, [inspection?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Async: fetch the linked lender (intended_user) and populate parties.client
+  // The lender is the "client" on the AIC form 95% of the time
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    const lender_id = inspection?.workfile_data?.order?.intended_user;
+    if (!lender_id) return;
+
+    getLenders().then(lenders => {
+      const match = lenders.find(l => l.id === Number(lender_id));
+      if (!match) return;
+      const addressParts = [match.address, match.city, match.province, match.postal_code]
+        .filter(Boolean).join(', ');
+      setReportData(prev => {
+        if (prev.parties?.client?.name) return prev; // don't overwrite manual edits
         const next = {
           ...prev,
           parties: {
             ...prev.parties,
             client: {
               ...prev.parties.client,
-              name:      match.company_name  ?? '',
-              attention: match.contact_name  ?? '',
-              address:   match.address       ?? '',
-              email:     match.email         ?? '',
-              phone:     match.phone         ?? '',
+              name:      match.company_name || '',
+              attention: match.contact_name || '',
+              address:   addressParts,
+              email:     match.email        || '',
+              phone:     match.phone        || '',
             },
           },
         };
@@ -225,6 +383,59 @@ export default function ReportForm({ inspection, currentUser, onBack, onSave }) 
             fullReport={reportData}
             onCoverChange={d   => updateSection('cover',   d)}
             onSummaryChange={d => updateSection('summary', d)}
+          />
+        );
+      case 'client':
+        return (
+          <ClientTab
+            parties={reportData.parties}
+            onPartiesChange={d => updateSection('parties', d)}
+          />
+        );
+      case 'subject':
+        return (
+          <SubjectTab
+            meta={reportData.meta}
+            subject={reportData.subject}
+            onMetaChange={d    => updateSection('meta',    d)}
+            onSubjectChange={d => updateSection('subject', d)}
+          />
+        );
+      case 'neighbourhood':
+        return (
+          <NeighbourhoodTab
+            neighbourhood={reportData.neighbourhood}
+            onChange={d => updateSection('neighbourhood', d)}
+          />
+        );
+      case 'site':
+        return (
+          <SiteTab
+            site={reportData.site}
+            onChange={d => updateSection('site', d)}
+          />
+        );
+      case 'improvements':
+        return (
+          <ImprovementsTab
+            improvements={reportData.improvements}
+            roomAllocation={reportData.room_allocation}
+            onChange={d => updateSection('improvements', d)}
+            onRoomAllocationChange={d => updateSection('room_allocation', d)}
+          />
+        );
+      case 'comparables':
+        return (
+          <ComparablesTab
+            comparables={reportData.comparables}
+            onComparablesChange={d => updateSection('comparables', d)}
+            compAnalyses={reportData.comp_analyses}
+            onCompAnalysesChange={d => updateSection('comp_analyses', d)}
+            dcaEstimatedValue={reportData.dca_estimated_value}
+            onDcaChange={d => updateSection('dca_estimated_value', d)}
+            enabledGroups={reportData.comparables_groups_enabled}
+            onEnabledGroupsChange={d => updateSection('comparables_groups_enabled', d)}
+            fullReport={reportData}
           />
         );
       case 'generate':
