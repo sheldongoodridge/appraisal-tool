@@ -8,6 +8,8 @@ import NeighbourhoodTab  from './report-tabs/NeighbourhoodTab';
 import SiteTab           from './report-tabs/SiteTab';
 import ImprovementsTab   from './report-tabs/ImprovementsTab';
 import ComparablesTab    from './report-tabs/ComparablesTab';
+import HistoryTab        from './report-tabs/HistoryTab';
+import CertificationTab  from './report-tabs/CertificationTab';
 import { getLenders, getProfile } from '../services/api';
 
 const API_BASE = 'https://spokeappraisal.com/api';
@@ -435,6 +437,32 @@ export default function ReportForm({ inspection, currentUser, onBack, onSave }) 
             onDcaChange={d => updateSection('dca_estimated_value', d)}
             enabledGroups={reportData.comparables_groups_enabled}
             onEnabledGroupsChange={d => updateSection('comparables_groups_enabled', d)}
+            fullReport={reportData}
+          />
+        );
+      case 'history':
+        return (
+          <HistoryTab
+            history={reportData.history}
+            onHistoryChange={d => updateSection('history', d)}
+            exposure={reportData.exposure}
+            onExposureChange={d => updateSection('exposure', d)}
+            reconciliation={reportData.reconciliation}
+            onReconciliationChange={d => updateSection('reconciliation', d)}
+            scope={reportData.scope}
+            onScopeChange={d => updateSection('scope', d)}
+            fullReport={reportData}
+          />
+        );
+      case 'certification':
+        return (
+          <CertificationTab
+            certification={reportData.certification}
+            onCertificationChange={d => updateSection('certification', d)}
+            addenda={reportData.addenda}
+            onAddendaChange={d => updateSection('addenda', d)}
+            parties={reportData.parties}
+            onPartiesChange={d => updateSection('parties', d)}
             fullReport={reportData}
           />
         );

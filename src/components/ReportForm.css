@@ -700,3 +700,235 @@
   white-space: nowrap;
   line-height: 36px;
 }
+
+/* ─── HISTORY TAB (ht-*) ──────────────────────────────────────────────────── */
+
+.ht-section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.ht-section-header .rt-section-title { margin: 0; }
+
+.ht-final-box {
+  margin-top: 20px;
+  border: 2px solid #13294B;
+  border-radius: 10px;
+  padding: 20px 24px;
+  background: #f8fafc;
+}
+
+.ht-final-statement {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #374151;
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+
+.ht-value-input {
+  border: 2px solid #b45309 !important;
+}
+
+.ht-value-input:focus-within {
+  border-color: #92400e !important;
+  box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.12) !important;
+}
+
+.ht-value-number {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  font-family: monospace !important;
+  color: #1f2937 !important;
+}
+
+.ht-years-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ht-years-row input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #111827;
+  background: #fff;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.ht-years-row input:focus {
+  outline: none;
+  border-color: #13294B;
+  box-shadow: 0 0 0 2px rgba(19,41,75,0.08);
+}
+
+.ht-years-label {
+  font-size: 13px;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+/* ─── CERTIFICATION TAB (cert-*) ──────────────────────────────────────────── */
+
+.cert-collapsible {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px 16px;
+  background: #f9fafb;
+}
+
+.cert-collapsed-hint {
+  margin: 6px 0 0 20px;
+  font-size: 12px;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.cert-boilerplate-body {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 14px;
+  margin-top: 4px;
+}
+
+.cert-boilerplate-list {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cert-boilerplate-list li {
+  font-size: 12px;
+  color: #374151;
+  line-height: 1.55;
+}
+
+.cert-final-stmt {
+  border: 2px solid #13294B;
+  border-radius: 10px;
+  padding: 20px;
+  background: #f8fafc;
+}
+
+.cert-final-preamble {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #374151;
+  margin: 0 0 14px;
+  line-height: 1.5;
+}
+
+.cert-final-line {
+  font-size: 13px;
+  color: #374151;
+  margin: 0 0 8px;
+  line-height: 1.5;
+}
+
+.cert-final-value {
+  font-size: 18px;
+  font-family: monospace;
+  color: #13294B;
+}
+
+.cert-sig-block {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 16px 20px;
+  background: #fff;
+}
+
+.cert-sig-block-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #13294B;
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #13294B;
+}
+
+.cert-designation-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #f9fafb;
+}
+
+.cert-sig-placeholder {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.cert-sig-area {
+  height: 80px;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafb;
+}
+
+.cert-sig-hint {
+  font-size: 12px;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.cert-addenda-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.cert-addenda-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #374151;
+  cursor: pointer;
+  user-select: none;
+  padding: 6px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.cert-addenda-item input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  accent-color: #13294B;
+  flex-shrink: 0;
+}
+
+.cert-addenda-auto {
+  background: #f9fafb;
+  cursor: default;
+  color: #6b7280;
+}
+
+.cert-auto-badge {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
