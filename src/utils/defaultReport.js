@@ -301,7 +301,8 @@ export const DEFAULT_REPORT = {
     addendum_dropdown: "", addendum_dropdown2: "",
     addendum_dropdown4: "", addenda_dropdown2: "",
     addenda_dropdown3: "", addenda_dropdown4: "",
-    addendum_dropdown5: ""
+    addendum_dropdown5: "",
+    additional_sales_notes: ""
   },
   photos: {
     mandatory: { front: null, rear: null, street: null },
@@ -312,17 +313,14 @@ export const DEFAULT_REPORT = {
     }
   },
   cost_approach: {
-    land_value: "", source_of_cost_data: "",
-    source_of_cost_data_other: "",
+    land_value: "", source_of_land_data: "",
+    source_of_cost_data: "", source_of_cost_data_other: "",
     items: [],
-    total_replacement_cost: "",
     physical_deterioration: "",
     functional_obsolescence: "",
     external_obsolescence: "",
-    total_depreciation_pct: "",
-    total_depreciation_dollar: "",
-    depreciated_value: "", estimated_value: "",
-    comments: ""
+    depreciation_comments: "",
+    estimated_value: "", comments: ""
   },
   market_rent: {
     included: false, use_conforms: null,
@@ -344,7 +342,7 @@ export const DEFAULT_REPORT = {
     hypothetical_text: ""
   },
   narrative: {
-    included: false, content: "", content2: ""
+    included: false, content: "", content2: "", extra_pages: []
   },
   parties: {
     client: {

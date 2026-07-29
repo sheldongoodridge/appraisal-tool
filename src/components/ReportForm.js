@@ -10,6 +10,7 @@ import ImprovementsTab   from './report-tabs/ImprovementsTab';
 import ComparablesTab    from './report-tabs/ComparablesTab';
 import HistoryTab        from './report-tabs/HistoryTab';
 import CertificationTab  from './report-tabs/CertificationTab';
+import AddendaTab        from './report-tabs/AddendaTab';
 import { getLenders, getProfile } from '../services/api';
 
 const API_BASE = 'https://spokeappraisal.com/api';
@@ -463,6 +464,26 @@ export default function ReportForm({ inspection, currentUser, onBack, onSave }) 
             onAddendaChange={d => updateSection('addenda', d)}
             parties={reportData.parties}
             onPartiesChange={d => updateSection('parties', d)}
+            fullReport={reportData}
+          />
+        );
+      case 'addenda':
+        return (
+          <AddendaTab
+            scope={reportData.scope}
+            onScopeChange={d => updateSection('scope', d)}
+            extraordinaryItems={reportData.extraordinary_items}
+            onExtraordinaryItemsChange={d => updateSection('extraordinary_items', d)}
+            narrative={reportData.narrative}
+            onNarrativeChange={d => updateSection('narrative', d)}
+            costApproach={reportData.cost_approach}
+            onCostApproachChange={d => updateSection('cost_approach', d)}
+            marketRent={reportData.market_rent}
+            onMarketRentChange={d => updateSection('market_rent', d)}
+            incomeApproach={reportData.income_approach}
+            onIncomeApproachChange={d => updateSection('income_approach', d)}
+            addenda={reportData.addenda}
+            onAddendaChange={d => updateSection('addenda', d)}
             fullReport={reportData}
           />
         );
