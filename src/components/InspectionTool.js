@@ -12,12 +12,30 @@ const API_BASE = 'https://spokeappraisal.com/api';
 
 async function patchSection(id, section, data) {
   const token = localStorage.getItem('authToken');
+  const payload = { section, data };
+
+  // ── Diagnostic logging — shows exactly what is sent and what the server returns ──
+  console.log(`[PATCH workfile] section='${section}' id=${id} payload_chars=${JSON.stringify(payload).length}`);
+  if (section === 'inspections' && Array.isArray(data) && data[0]) {
+    const insp = data[0];
+    const floorSummary = Object.entries(insp.floors ?? {}).map(
+      ([k, v]) => `${k}: ${v.rooms?.length ?? 0} rooms / ${v.photos?.length ?? 0} photos`
+    );
+    console.log('[PATCH inspections] status:', insp.status);
+    console.log('[PATCH inspections] floors:', floorSummary);
+  }
+
   const res = await fetch(`${API_BASE}/inspections/${id}/workfile`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-    body: JSON.stringify({ section, data }),
+    body: JSON.stringify(payload),
   });
-  if (!res.ok) throw new Error('Inspection save failed');
+
+  let body;
+  try { body = await res.json(); } catch { body = null; }
+  console.log(`[PATCH workfile] response ${res.status}:`, body);
+
+  if (!res.ok) throw new Error(`Inspection save failed: ${res.status} — ${JSON.stringify(body)}`);
 }
 
 function replacePhotoUrl(data, localId, spacesUrl) {
